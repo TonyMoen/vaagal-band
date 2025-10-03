@@ -1,9 +1,9 @@
 type Youtube = {
   url: string;
   title: string;
-  start: number;
-  controls: boolean;
-  autoplay: boolean;
+  start?: number;
+  controls?: boolean;
+  autoplay?: boolean;
 };
 
 function getYouTubeId(rawUrl: string): string | null {

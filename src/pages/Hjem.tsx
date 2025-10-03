@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import heroImg from "../assets/hero-1920.jpg";
 import SpotifyEmbed from "../components/SpotifyWidget";
 import BandsintownWidget from "../components/BandsintownWidget";
 import YouTubeEmbed from "../components/YoutubeWidget";
@@ -7,7 +8,7 @@ export default function Hjem() {
   return (
     <>
       <section className="full-bleed">
-        <Hero />
+        <Hero src={heroImg} alt="Bandbilde av Vågal" overlay={true} />
       </section>
 
       <section className="container-page py-10 md:py-14">
@@ -17,7 +18,7 @@ export default function Hjem() {
           </div>
 
           <aside className="self-start">
-            <div className="overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <div className="card-surface">
               <SpotifyEmbed
                 url="https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9?si=CPT7wksQQI22VfUK42qozA"
                 title="Vågal på Spotify"

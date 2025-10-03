@@ -3,7 +3,7 @@ import heroImg from "../assets/hero-1920.jpg";
 type Props = {
   src: string;
   alt: string;
-  overlay?: boolean;
+  overlay: boolean;
 };
 
 export default function Hero({
