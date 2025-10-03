@@ -1,75 +1,79 @@
 import React from "react";
 import BandMember from "../components/BandMember";
+import sondreImg from "../assets/sondre.jpg";
+import mariusImg from "../assets/marius.jpg";
+import torsteinImg from "../assets/torstein.jpg";
+import tonyImg from "../assets/tony.jpg";
+import trulsImg from "../assets/truls.jpg";
 
-/* Placeholder image - Add image for each member */
-import personImg from "../assets/person.jpg";
-
-/* Facts for each band members */
 const members = [
+  {
+    name: "Marius Presthaug",
+    alias: "Marius Presthaug",
+    instrument: "Vokalist",
+    inspiration: "Hellbillies, Plumbo",
+    interest: { hobby: "Maling", food: "Fisk" },
+    image: mariusImg,
+  },
+
   {
     name: "Sondre Gautefald",
     alias: "Mr Caravan",
     instrument: "Multiinstrument",
     inspiration: "Iron Maiden",
-    interest: {
-      hobby: "Ski",
-      food: "Taco",
-    },
-    image: personImg,
+    interest: { hobby: "Ski", food: "Taco" },
+    image: sondreImg,
   },
-  {
-    name: "Marius Presthaug",
-    alias: "The Voice",
-    instrument: "Vokalist",
-    inspiration: "Beyoncé",
-    interest: {
-      hobby: "Painting",
-      food: "Pizza",
-    },
-    image: personImg,
-  },
+
   {
     name: "Truls Venmann",
     alias: "Truls Venmann",
     instrument: "Trommeslager",
-    inspiration: "Beyoncé",
-    interest: {
-      hobby: "Painting",
-      food: "Pizza",
-    },
-    image: personImg,
+    inspiration: "Vågal",
+    interest: { hobby: "Musikk", food: "Pizza" },
+    image: trulsImg,
   },
   {
     name: "Torstein Vala",
-    alias: "The Voice",
+    alias: "Torstein Vala",
     instrument: "Gitarist",
-    inspiration: "Beyoncé",
-    interest: {
-      hobby: "Painting",
-      food: "Pizza",
-    },
-    image: personImg,
+    inspiration: "Vågal",
+    interest: { hobby: "Musikk", food: "Pizza" },
+    image: torsteinImg,
   },
   {
     name: "Tony Portås Moen",
-    alias: "The Voice",
+    alias: "Tony Portås Moen",
     instrument: "Bassist",
     inspiration: "Beyoncé",
-    interest: {
-      hobby: "Painting",
-      food: "Pizza",
-    },
-    image: personImg,
+    interest: { hobby: "Musikk", food: "Pizza" },
+    image: tonyImg,
   },
 ];
 
-/* Displays all band members */
 const Bandet: React.FC = () => {
   return (
-    <main className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {members.map((m) => (
-        <BandMember key={m.name} member={m} />
-      ))}
+    <main className="container-page py-10 md:py-14">
+      <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
+        BANDET
+      </h1>
+      <div className="align-text mb-8">
+        <p>
+          Vågal er bandet som garanterer fullt trøkk fra første sekund! Med sin
+          unike miks av bygderock har Vågal på kort tid fått en stor og lojal
+          lytterskare over hele Norge. Vågal kickstartet sin reise med første
+          singel "Rådebank" som havnet rett på Spotify sin New Music Friday og
+          lå i flere uker på Spotify topp 50 mest delte. «I baksetet i min
+          Chevrolet» havnet på 7. plass på Spotify topp 50 mest delte. Deres
+          energiske fremføringer og fengende låter skaper en uforglemmelig
+          atmosfære, enten du er på konsert, festival eller bygdefest
+        </p>
+      </div>
+      <div className="grid gap-8 md:grid-cols-2">
+        {members.map((m) => (
+          <BandMember key={m.name} member={m} imageHeight={600} />
+        ))}
+      </div>
     </main>
   );
 };

@@ -5,42 +5,56 @@ type Member = {
   alias: string;
   instrument: string;
   inspiration: string;
-  interest: {
-    hobby: string;
-    food: string;
-  };
+  interest: { hobby: string; food: string };
   image: string;
 };
 
 type Props = {
   member: Member;
+  imageHeight: number;
 };
 
-const BandMember: React.FC<Props> = ({ member }) => {
+const BandMember: React.FC<Props> = ({ member, imageHeight = 560 }) => {
   return (
-    <div className="rounded-2xl shadow-lg p-4 bg-white max-w-sm">
+    <section
+      className="relative overflow-hidden rounded-2xl card-surface"
+      aria-labelledby={`${member.name}-heading`}
+    >
       <img
         src={member.image}
         alt={member.name}
-        className="w-full h-48 object-cover rounded-xl mb-4"
+        className="w-full object-cover"
+        style={{ height: imageHeight }}
       />
-      <h2 className="text-xl font-bold">{member.name}</h2>
-      <p className="text-gray-600 italic">{member.alias}</p>
-      <ul className="mt-3 text-gray-700 space-y-1">
-        <li>
-          <strong>Instrument:</strong> {member.instrument}
-        </li>
-        <li>
-          <strong>Inspiration:</strong> {member.inspiration}
-        </li>
-        <li>
-          <strong>Hobby:</strong> {member.interest.hobby}
-        </li>
-        <li>
-          <strong>Favorittmat:</strong> {member.interest.food}
-        </li>
-      </ul>
-    </div>
+
+      <div />
+
+      <div>
+        <div className="p-5">
+          <h2 id={`${member.name}-heading`} className="text-xl font-semibold">
+            {member.name}
+          </h2>
+          <div />
+
+          <p className="mt-2 italic">{member.alias}</p>
+
+          <ul className="mt-3 space-y-1 text-sm leading-6">
+            <li>
+              <strong>Instrument:</strong> {member.instrument}
+            </li>
+            <li>
+              <strong>Inspiration:</strong> {member.inspiration}
+            </li>
+            <li>
+              <strong>Hobby:</strong> {member.interest.hobby}
+            </li>
+            <li>
+              <strong>Favorittmat:</strong> {member.interest.food}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 };
 
