@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "SlashCommand(/bmad:bmm:workflows:create-ux-design)",
+      "SlashCommand(/bmad:bmm:workflows:create-story)",
+      "Bash(git remote set-url:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

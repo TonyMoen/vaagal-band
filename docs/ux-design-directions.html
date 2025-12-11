@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vågal - Design Directions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #2A2A2A;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A3A3A3;
+            --text-muted: #737373;
+            --accent-primary: #E65C00;
+            --accent-hover: #FF6B00;
+            --accent-subtle: #FF9500;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 80px;
+        }
+
+        .direction-section {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .direction-section.active {
+            display: block;
+        }
+
+        /* Direction 1: Bold Hero Focus */
+        .direction-1 .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a0a00 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .direction-1 .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23E65C00" stroke-width="0.5" opacity="0.1"/></svg>') center/cover;
+            opacity: 0.3;
+        }
+
+        .direction-1 .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .direction-1 .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 120px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .direction-1 .hero .tagline {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .direction-1 .hero-ctas {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Direction 2: Split Layout */
+        .direction-2 .hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .direction-2 .hero-left {
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 64px;
+        }
+
+        .direction-2 .hero-right {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #8B3800 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .direction-2 .hero-right::after {
+            content: 'BAND PHOTO';
+            color: rgba(255,255,255,0.3);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            letter-spacing: 4px;
+        }
+
+        .direction-2 .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .direction-2 .hero .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Direction 3: Immersive Full-Screen */
+        .direction-3 .hero {
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%),
+                        linear-gradient(135deg, #2a1a0a 0%, var(--bg-primary) 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .direction-3 .hero-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+        }
+
+        .direction-3 .hero-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .direction-3 .hero-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .direction-3 .hero-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .direction-3 .hero-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .direction-3 .hero-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 48px;
+        }
+
+        .direction-3 .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 140px;
+            font-weight: 700;
+            letter-spacing: -4px;
+            margin-bottom: 16px;
+        }
+
+        .direction-3 .hero .subtitle {
+            font-size: 20px;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 48px;
+        }
+
+        .direction-3 .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Direction 4: Card-Based Layout */
+        .direction-4 .hero {
+            min-height: 100vh;
+            padding: 100px 48px 48px;
+            background: var(--bg-primary);
+        }
+
+        .direction-4 .hero-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .direction-4 .hero-header h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .direction-4 .hero-header .tagline {
+            color: var(--accent-primary);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .direction-4 .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .direction-4 .hero-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .direction-4 .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(230, 92, 0, 0.1);
+        }
+
+        .direction-4 .hero-card.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(to top, var(--bg-secondary) 0%, transparent 100%),
+                        linear-gradient(135deg, #2a1a0a 0%, var(--bg-secondary) 100%);
+        }
+
+        .direction-4 .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .direction-4 .card-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .direction-4 .card-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Direction 5: Minimal & Clean */
+        .direction-5 .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 48px;
+            background: var(--bg-primary);
+        }
+
+        .direction-5 .hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .direction-5 .hero-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .direction-5 .hero-center {
+            text-align: center;
+        }
+
+        .direction-5 .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 200px;
+            font-weight: 700;
+            letter-spacing: -8px;
+            line-height: 0.85;
+            color: var(--text-primary);
+        }
+
+        .direction-5 .hero .accent-line {
+            width: 100px;
+            height: 4px;
+            background: var(--accent-primary);
+            margin: 32px auto;
+            border-radius: var(--radius-full);
+        }
+
+        .direction-5 .hero .tagline {
+            color: var(--text-secondary);
+            font-size: 16px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .direction-5 .hero-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+        }
+
+        .direction-5 .hero-bottom a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.2s;
+        }
+
+        .direction-5 .hero-bottom a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Direction 6: Magazine Style */
+        .direction-6 .hero {
+            min-height: 100vh;
+            padding: 100px 0 0;
+            background: var(--bg-primary);
+        }
+
+        .direction-6 .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        .direction-6 .hero-eyebrow {
+            color: var(--accent-primary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+        }
+
+        .direction-6 .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.95;
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .direction-6 .hero-meta {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .direction-6 .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .direction-6 .hero-meta-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .direction-6 .hero-meta-value {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .direction-6 .hero-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #2a1a0a 0%, var(--bg-secondary) 100%);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 18px;
+            letter-spacing: 4px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 32px;
+            border-radius: var(--radius-md);
+            font-family: 'Barlow', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Info Section */
+        .info-section {
+            background: var(--bg-secondary);
+            padding: 48px;
+            margin-top: 48px;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+
+        .info-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-content h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            margin-bottom: 24px;
+            color: var(--accent-primary);
+        }
+
+        .info-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .info-content ul {
+            color: var(--text-secondary);
+            margin-left: 24px;
+        }
+
+        .info-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .direction-1 .hero h1 { font-size: 64px; }
+            .direction-2 .hero { grid-template-columns: 1fr; }
+            .direction-2 .hero-right { display: none; }
+            .direction-3 .hero h1 { font-size: 72px; }
+            .direction-4 .hero-grid { grid-template-columns: 1fr; }
+            .direction-4 .hero-card.featured { grid-column: span 1; grid-row: span 1; }
+            .direction-5 .hero h1 { font-size: 80px; }
+            .direction-6 .hero h1 { font-size: 48px; }
+            .nav-tabs { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-header">
+        <div class="nav-content">
+            <div class="nav-title">Vågal Design Directions</div>
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-direction="1">Bold Hero</button>
+                <button class="nav-tab" data-direction="2">Split Layout</button>
+                <button class="nav-tab" data-direction="3">Immersive</button>
+                <button class="nav-tab" data-direction="4">Card-Based</button>
+                <button class="nav-tab" data-direction="5">Minimal</button>
+                <button class="nav-tab" data-direction="6">Magazine</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Direction 1: Bold Hero Focus -->
+        <section class="direction-section direction-1 active" id="direction-1">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>VÅGAL</h1>
+                    <p class="tagline">Bygderock fra Norge</p>
+                    <div class="hero-ctas">
+                        <a href="#" class="btn btn-primary">Hør Musikken</a>
+                        <a href="#" class="btn btn-secondary">Se Konserter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 1: Bold Hero Focus</h2>
+                    <p><strong>Concept:</strong> Maximum impact with oversized typography and gradient effects. The band name dominates, creating instant recognition.</p>
+                    <p><strong>Best for:</strong> Strong brand statement, memorable first impression</p>
+                    <ul>
+                        <li>Gradient text effect on band name</li>
+                        <li>Centered, symmetrical layout</li>
+                        <li>Subtle background pattern</li>
+                        <li>Clear dual CTAs for fans and industry</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direction 2: Split Layout -->
+        <section class="direction-section direction-2" id="direction-2">
+            <div class="hero">
+                <div class="hero-left">
+                    <h1>VÅGAL<br/><span style="color: var(--accent-primary)">BYGDEROCK</span></h1>
+                    <p class="tagline">Rural party vibes from Norway. Vintage cars, country roads, and good times.</p>
+                    <div class="hero-ctas">
+                        <a href="#" class="btn btn-primary">Listen Now</a>
+                        <a href="#" class="btn btn-secondary">Book Us</a>
+                    </div>
+                </div>
+                <div class="hero-right"></div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 2: Split Layout</h2>
+                    <p><strong>Concept:</strong> Content on left, hero imagery on right. Creates clear information hierarchy while showcasing band photos.</p>
+                    <p><strong>Best for:</strong> Balancing text content with visual impact</p>
+                    <ul>
+                        <li>Two-column asymmetric layout</li>
+                        <li>Orange accent block for band imagery</li>
+                        <li>Left-aligned text for readability</li>
+                        <li>Room for longer descriptions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direction 3: Immersive Full-Screen -->
+        <section class="direction-section direction-3" id="direction-3">
+            <div class="hero">
+                <nav class="hero-nav">
+                    <div class="hero-logo">VÅGAL</div>
+                    <div class="hero-links">
+                        <a href="#">Band</a>
+                        <a href="#">Konserter</a>
+                        <a href="#">Kontakt</a>
+                    </div>
+                </nav>
+                <div class="hero-main">
+                    <h1>VÅGAL</h1>
+                    <p class="subtitle">Bygderock fra Norge</p>
+                    <div class="hero-ctas">
+                        <a href="#" class="btn btn-primary">Spill Musikk</a>
+                    </div>
+                </div>
+                <div class="scroll-indicator">Scroll for more ↓</div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 3: Immersive Full-Screen</h2>
+                    <p><strong>Concept:</strong> Full viewport takeover with integrated navigation. Creates cinematic first impression.</p>
+                    <p><strong>Best for:</strong> Maximum visual impact, band with strong imagery</p>
+                    <ul>
+                        <li>Integrated navigation in hero</li>
+                        <li>Massive typography (140px)</li>
+                        <li>Single primary CTA for focus</li>
+                        <li>Scroll indicator for content below</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direction 4: Card-Based Layout -->
+        <section class="direction-section direction-4" id="direction-4">
+            <div class="hero">
+                <div class="hero-header">
+                    <h1>VÅGAL</h1>
+                    <p class="tagline">Bygderock fra Norge</p>
+                </div>
+                <div class="hero-grid">
+                    <div class="hero-card featured">
+                        <div class="card-title" style="font-size: 48px; margin-bottom: 16px;">Ny Musikk</div>
+                        <p class="card-desc">Stream vår nyeste singel på Spotify</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-icon">🎸</div>
+                        <div class="card-title">Bandet</div>
+                        <p class="card-desc">Møt gutta bak musikken</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-icon">🎤</div>
+                        <div class="card-title">Konserter</div>
+                        <p class="card-desc">Se kommende spillejobber</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-icon">📧</div>
+                        <div class="card-title">Booking</div>
+                        <p class="card-desc">Book Vågal til ditt arrangement</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-icon">📺</div>
+                        <div class="card-title">Video</div>
+                        <p class="card-desc">Se musikkvideoer på YouTube</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 4: Card-Based Layout</h2>
+                    <p><strong>Concept:</strong> Dashboard-style with clear action cards. Everything accessible from homepage.</p>
+                    <p><strong>Best for:</strong> Task-oriented users (industry), clear navigation</p>
+                    <ul>
+                        <li>Grid of action cards</li>
+                        <li>Featured card for primary content</li>
+                        <li>Icon-driven navigation</li>
+                        <li>Hover effects for interactivity</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direction 5: Minimal & Clean -->
+        <section class="direction-section direction-5" id="direction-5">
+            <div class="hero">
+                <div class="hero-top">
+                    <div class="hero-logo">V.</div>
+                    <a href="#" class="btn btn-secondary">Kontakt</a>
+                </div>
+                <div class="hero-center">
+                    <h1>VÅGAL</h1>
+                    <div class="accent-line"></div>
+                    <p class="tagline">Bygderock fra Norge</p>
+                </div>
+                <div class="hero-bottom">
+                    <a href="#">Musikk</a>
+                    <a href="#">Band</a>
+                    <a href="#">Konserter</a>
+                    <a href="#">Video</a>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 5: Minimal & Clean</h2>
+                    <p><strong>Concept:</strong> Maximum whitespace, typography as design. Confident, premium feel.</p>
+                    <p><strong>Best for:</strong> Sophisticated brand positioning, letting imagery speak</p>
+                    <ul>
+                        <li>Ultra-large typography (200px)</li>
+                        <li>Orange accent line as visual anchor</li>
+                        <li>Footer-style navigation</li>
+                        <li>Lots of breathing room</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direction 6: Magazine Style -->
+        <section class="direction-section direction-6" id="direction-6">
+            <div class="hero">
+                <div class="hero-content">
+                    <p class="hero-eyebrow">Ny Musikk Ute Nå</p>
+                    <h1>Vågal bringer bygderock til nye høyder</h1>
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <span class="hero-meta-label">Sjanger</span>
+                            <span class="hero-meta-value">Bygderock / Country</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <span class="hero-meta-label">Fra</span>
+                            <span class="hero-meta-value">Norge</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <span class="hero-meta-label">Medlemmer</span>
+                            <span class="hero-meta-value">4 stk</span>
+                        </div>
+                    </div>
+                    <div class="hero-ctas">
+                        <a href="#" class="btn btn-primary">Hør Nå</a>
+                        <a href="#" class="btn btn-secondary">Les Mer</a>
+                    </div>
+                </div>
+                <div class="hero-image">HERO BAND IMAGE</div>
+            </div>
+            <div class="info-section">
+                <div class="info-content">
+                    <h2>Direction 6: Magazine Style</h2>
+                    <p><strong>Concept:</strong> Editorial layout with headline, metadata, and featured image. Storytelling approach.</p>
+                    <p><strong>Best for:</strong> Content-rich sites, band with a story to tell</p>
+                    <ul>
+                        <li>Eyebrow text for context</li>
+                        <li>Headline-style typography</li>
+                        <li>Metadata section (genre, location, members)</li>
+                        <li>Large featured image area</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Update active section
+                const direction = tab.dataset.direction;
+                document.querySelectorAll('.direction-section').forEach(s => s.classList.remove('active'));
+                document.getElementById(`direction-${direction}`).classList.add('active');
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
