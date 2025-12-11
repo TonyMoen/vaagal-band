@@ -50,7 +50,7 @@ development_status:
   # Epic 2: Content Management System
   epic-2: in-progress
   2-1-initialize-sanity-cms-project: done
-  2-2-create-hero-content-schema-and-integration: backlog
+  2-2-create-hero-content-schema-and-integration: review
   2-3-create-band-member-content-schema: backlog
   2-4-integrate-band-members-with-frontend: backlog
   2-5-content-preview-capability: backlog

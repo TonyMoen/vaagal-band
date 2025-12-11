@@ -1,5 +1,4 @@
 import Hero from "../components/Hero";
-import heroImg from "../assets/hero-1920.jpg";
 import SpotifyEmbed from "../components/SpotifyWidget";
 import BandsintownWidget from "../components/BandsintownWidget";
 import YouTubeEmbed from "../components/YoutubeWidget";
@@ -8,7 +7,8 @@ export default function Hjem() {
   return (
     <>
       <section className="full-bleed">
-        <Hero src={heroImg} alt="Bandbilde av Vågal" overlay={true} />
+        {/* Hero now fetches from CMS automatically, with fallback to local image */}
+        <Hero alt="Bandbilde av Vågal" overlay={true} />
       </section>
 
       <section className="container-page py-10 md:py-14">

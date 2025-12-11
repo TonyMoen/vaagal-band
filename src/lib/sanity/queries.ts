@@ -1,5 +1,14 @@
-// GROQ queries will be added in subsequent stories:
-// - Story 2.2: Hero content query
-// - Story 2.3: Band members query
+// GROQ queries for Sanity CMS content
 
-export {}
+/**
+ * Hero content query - fetches the first hero document
+ * Returns: { _id, title, subtitle, image }
+ */
+export const heroQuery = `*[_type == "hero"][0] {
+  _id,
+  title,
+  subtitle,
+  image
+}`
+
+// Story 2.3: Band members query will be added here
