@@ -41,9 +41,9 @@ story_location: docs/sprint-artifacts
 development_status:
   # Epic 1: Project Foundation & Cleanup
   epic-1: in-progress
-  1-1-environment-variables-setup: ready-for-dev
-  1-2-remove-merch-page-and-related-code: backlog
-  1-3-initialize-shadcn-ui-design-system: backlog
+  1-1-environment-variables-setup: done
+  1-2-remove-merch-page-and-related-code: done
+  1-3-initialize-shadcn-ui-design-system: review
   1-4-create-shared-utility-components: backlog
   epic-1-retrospective: optional
 

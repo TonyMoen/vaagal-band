@@ -7,7 +7,6 @@ const items = [
   { to: "/", label: "Hjem", end: true },
   { to: "/bandet", label: "Bandet" },
   { to: "/konserter", label: "Konserter" },
-  { to: "/merch", label: "Merch" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ];
 

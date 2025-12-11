@@ -29,9 +29,6 @@ export default function Footer() {
           <NavLink className="hover:underline" to="/konserter">
             Konserter
           </NavLink>
-          <NavLink className="hover:underline" to="/merch">
-            Merch
-          </NavLink>
           <NavLink className="hover:underline" to="/kontakt-oss">
             Kontakt oss
           </NavLink>

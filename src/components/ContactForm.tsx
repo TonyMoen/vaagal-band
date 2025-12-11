@@ -4,14 +4,14 @@ import Swal from "sweetalert2";
 /* KILDE: How to Make Working Contact Form in React JS https://www.youtube.com/watch?v=94_6JPDi13g */
 
 const Contact = () => {
-  const [result, setResult] = React.useState("");
+  const [, setResult] = React.useState("");
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Sending....");
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
 
-    formData.append("access_key", "9615cac2-5462-4fed-a770-50e99b97b5bd");
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",

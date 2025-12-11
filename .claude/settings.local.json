@@ -5,7 +5,17 @@
       "SlashCommand(/bmad:bmm:workflows:create-ux-design)",
       "SlashCommand(/bmad:bmm:workflows:create-story)",
       "Bash(git remote set-url:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite build)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "Bash(npx shadcn@latest init -y -d)",
+      "Bash(timeout 5 npm run dev:*)"
     ],
     "deny": [],
     "ask": []
