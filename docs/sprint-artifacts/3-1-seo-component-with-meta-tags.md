@@ -302,6 +302,11 @@ Design the SEO component to be easily extensible for these additions.
 - [Source: src/main.tsx] - Current app root structure
 - [Source: src/pages/Hjem.tsx] - Example page structure
 
+## Review Follow-ups (AI)
+
+- [ ] [AI-Review][MEDIUM] Konserter.tsx has placeholder social links without href attributes - non-functional buttons. [src/pages/Konserter.tsx:41-42]
+- [ ] [AI-Review][LOW] Testing Checklist section has unchecked items `[ ]` despite story marked done.
+
 ## Dev Agent Record
 
 ### Context Reference

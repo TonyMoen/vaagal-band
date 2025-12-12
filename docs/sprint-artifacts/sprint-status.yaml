@@ -59,15 +59,15 @@ development_status:
   # Epic 3: SEO & Discoverability
   epic-3: in-progress
   3-1-seo-component-with-meta-tags: done
-  3-2-open-graph-and-twitter-card-tags: review
-  3-3-structured-data-json-ld: review
-  3-4-sitemap-and-robots-txt: backlog
+  3-2-open-graph-and-twitter-card-tags: in-progress  # [AI-Review] HIGH: OG image path will 404
+  3-3-structured-data-json-ld: review  # [AI-Review] MEDIUM: DRY violation only
+  3-4-sitemap-and-robots-txt: in-progress  # [AI-Review] HIGH: Files not committed to git
   epic-3-retrospective: optional
 
   # Epic 4: Navigation & Mobile Experience
-  epic-4: backlog
-  4-1-desktop-navigation-with-shadcn-ui: backlog
-  4-2-mobile-navigation-drawer: backlog
+  epic-4: in-progress
+  4-1-desktop-navigation-with-shadcn-ui: in-progress  # [AI-Review] 3 MEDIUM, 2 LOW action items
+  4-2-mobile-navigation-drawer: review
   4-3-footer-navigation: backlog
   4-4-responsive-layout-polish: backlog
   epic-4-retrospective: optional

@@ -340,6 +340,11 @@ export default function Hjem() {
 - [Schema.org MusicGroup](https://schema.org/MusicGroup) - Schema specification
 - [Google Structured Data Guidelines](https://developers.google.com/search/docs/appearance/structured-data) - Best practices
 
+## Review Follow-ups (AI)
+
+- [ ] [AI-Review][MEDIUM] DRY violation: `BASE_URL` constant duplicated in SEO.tsx and StructuredData.tsx. Consider creating shared `src/constants/seo.ts`. [src/components/StructuredData.tsx:3]
+- [ ] [AI-Review][LOW] MusicGroup schema could include `member` array with band members as Person objects for richer search results.
+
 ## Dev Agent Record
 
 ### Context Reference

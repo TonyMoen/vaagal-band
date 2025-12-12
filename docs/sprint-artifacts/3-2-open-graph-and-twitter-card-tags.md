@@ -1,6 +1,6 @@
 # Story 3.2: Open Graph and Twitter Card Tags
 
-Status: Ready for Review
+Status: in-progress
 
 ## Story
 
@@ -283,6 +283,10 @@ export default function SEO({ title, description, image, url }: SEOProps) {
 - [Source: docs/architecture.md#Frontend Architecture] - SEO strategy
 - [Source: src/components/SEO.tsx] - Current SEO component implementation
 - [Source: docs/sprint-artifacts/3-1-seo-component-with-meta-tags.md] - Previous story with learnings
+
+## Review Follow-ups (AI)
+
+- [ ] [AI-Review][HIGH] OG image path `/assets/hero-1920.jpg` will 404 - image is in `src/assets/` (bundled with hash), not `public/assets/`. Copy to `public/assets/` or create dedicated OG image. [src/components/SEO.tsx:12]
 
 ## Dev Agent Record
 

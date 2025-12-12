@@ -1,23 +1,29 @@
 // src/components/NavBar.tsx
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import logo from "../assets/vaagal-logo.svg";
+import { useState } from "react"
+import { NavLink } from "react-router-dom"
+import logo from "../assets/vaagal-logo.svg"
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+} from "@/components/ui/navigation-menu"
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { cn } from "@/lib/utils"
 
 const items = [
   { to: "/", label: "Hjem", end: true },
   { to: "/bandet", label: "Bandet" },
   { to: "/konserter", label: "Konserter" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
-];
+]
 
 export default function NavBar() {
-  const [open, setOpen] = useState(false);
-
-  const linkBase =
-    "relative inline-flex items-center rounded-2xl px-5 py-4 text-base font-semibold transition";
-  const linkInactive =
-    "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30";
-  const linkActive = "text-[var(--color-text)] bg-[var(--color-bg)]/30";
+  const [open, setOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-surface)]/80">
@@ -40,97 +46,99 @@ export default function NavBar() {
           />
         </NavLink>
 
-        {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-2">
-          {items.map(({ to, label, end }) => (
-            <li key={to}>
-              <NavLink
-                to={to}
-                end={end as boolean | undefined}
-                className={({ isActive }) =>
-                  `${linkBase} ${isActive ? linkActive : linkInactive}`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {label}
-                    <span
-                      className={`absolute inset-x-4 -bottom-1 h-1 rounded-full bg-[var(--color-accent)] transition-opacity ${
-                        isActive ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop Navigation with shadcn/ui NavigationMenu */}
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList className="gap-2">
+            {items.map(({ to, label, end }) => (
+              <NavigationMenuItem key={to}>
+                <NavLink
+                  to={to}
+                  end={end as boolean | undefined}
+                  className={({ isActive }) =>
+                    cn(
+                      "relative inline-flex items-center px-4 py-2 text-base font-semibold transition-colors rounded-lg",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
+                      isActive
+                        ? "text-[var(--color-text)]"
+                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30"
+                    )
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {label}
+                      {isActive && (
+                        <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[var(--color-accent)]" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] hover:bg-[var(--color-bg)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
-          aria-label="Meny"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <svg
-            className={`h-6 w-6 ${open ? "hidden" : "block"}`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
+        {/* Mobile Navigation with shadcn/ui Sheet */}
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button
+              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] hover:bg-[var(--color-bg)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              aria-label="Meny"
+            >
+              <svg
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 7h16M4 12h16M4 17h16"
+                />
+              </svg>
+            </button>
+          </SheetTrigger>
+          <SheetContent
+            side="right"
+            className="w-[280px] bg-[var(--color-surface)] border-l border-[var(--color-border)] p-0"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 7h16M4 12h16M4 17h16"
-            />
-          </svg>
-          <svg
-            className={`h-6 w-6 ${open ? "block" : "hidden"}`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+            <SheetTitle className="sr-only">Navigasjonsmeny</SheetTitle>
+            <nav
+              className="flex flex-col gap-1 px-4 py-6 pt-12"
+              aria-label="Mobilnavigasjon"
+            >
+              {items.map(({ to, label, end }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={end as boolean | undefined}
+                  className={({ isActive }) =>
+                    cn(
+                      "relative block rounded-2xl px-5 py-4 text-base font-semibold transition-colors",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
+                      isActive
+                        ? "bg-[var(--color-bg)]/30 text-[var(--color-text)]"
+                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30"
+                    )
+                  }
+                  onClick={() => setOpen(false)}
+                >
+                  {({ isActive }) => (
+                    <>
+                      {label}
+                      {isActive && (
+                        <span className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-full bg-[var(--color-accent)]" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
       </nav>
-
-      {/* Mobile drawer */}
-      <div
-        id="mobile-menu"
-        className={`md:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] transition-[max-height] duration-200 ${
-          open ? "max-h-96" : "max-h-0 overflow-hidden"
-        }`}
-      >
-        <ul className="mx-auto max-w-[1280px] px-6 py-2 flex flex-col gap-1">
-          {items.map(({ to, label, end }) => (
-            <li key={to}>
-              <NavLink
-                to={to}
-                end={end as boolean | undefined}
-                className={({ isActive }) =>
-                  `block rounded-2xl px-5 py-4 text-base font-semibold ${
-                    isActive
-                      ? "bg-[var(--color-bg)]/30 text-[var(--color-text)]"
-                      : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30"
-                  }`
-                }
-                onClick={() => setOpen(false)}
-              >
-                {label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </div>
     </header>
-  );
+  )
 }
