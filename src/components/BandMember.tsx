@@ -1,17 +1,10 @@
 import React from "react";
-
-type Member = {
-  name: string;
-  alias: string;
-  instrument: string;
-  inspiration: string;
-  interest: { hobby: string; food: string };
-  image: string;
-};
+import { urlFor } from "@/lib/sanity/image";
+import type { BandMember as BandMemberType } from "@/types/sanity";
 
 type Props = {
-  member: Member;
-  imageHeight: number;
+  member: BandMemberType;
+  imageHeight?: number;
 };
 
 const BandMember: React.FC<Props> = ({ member, imageHeight = 560 }) => {
@@ -20,39 +13,46 @@ const BandMember: React.FC<Props> = ({ member, imageHeight = 560 }) => {
       className="relative overflow-hidden rounded-2xl card-surface"
       aria-labelledby={`${member.name}-heading`}
     >
-      <img
-        src={member.image}
-        alt={member.name}
-        className="w-full object-cover"
-        style={{ height: imageHeight }}
-      />
+      {member.image && (
+        <img
+          src={urlFor(member.image).width(800).url()}
+          alt={member.name}
+          className="w-full object-cover"
+          style={{ height: imageHeight }}
+        />
+      )}
 
-      <div />
+      <div className="p-5">
+        <h2 id={`${member.name}-heading`} className="text-xl font-semibold">
+          {member.name}
+        </h2>
 
-      <div>
-        <div className="p-5">
-          <h2 id={`${member.name}-heading`} className="text-xl font-semibold">
-            {member.name}
-          </h2>
-          <div />
-
+        {member.alias && member.alias !== member.name && (
           <p className="mt-2 italic">{member.alias}</p>
+        )}
 
-          <ul className="mt-3 space-y-1 text-sm leading-6">
+        <ul className="mt-3 space-y-1 text-sm leading-6">
+          {member.instrument && (
             <li>
               <strong>Instrument:</strong> {member.instrument}
             </li>
+          )}
+          {member.inspiration && (
             <li>
               <strong>Inspiration:</strong> {member.inspiration}
             </li>
+          )}
+          {member.hobby && (
             <li>
-              <strong>Hobby:</strong> {member.interest.hobby}
+              <strong>Hobby:</strong> {member.hobby}
             </li>
+          )}
+          {member.food && (
             <li>
-              <strong>Favorittmat:</strong> {member.interest.food}
+              <strong>Favorittmat:</strong> {member.food}
             </li>
-          </ul>
-        </div>
+          )}
+        </ul>
       </div>
     </section>
   );

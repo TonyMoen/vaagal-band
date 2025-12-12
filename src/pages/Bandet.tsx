@@ -1,57 +1,28 @@
 import React from "react";
 import BandMember from "../components/BandMember";
-import sondreImg from "../assets/sondre.jpg";
-import mariusImg from "../assets/marius.jpg";
-import torsteinImg from "../assets/torstein.jpg";
-import tonyImg from "../assets/tony.jpg";
-import trulsImg from "../assets/truls.jpg";
-
-const members = [
-  {
-    name: "Marius Presthaug",
-    alias: "Marius Presthaug",
-    instrument: "Vokalist",
-    inspiration: "Hellbillies, Plumbo",
-    interest: { hobby: "Maling", food: "Fisk" },
-    image: mariusImg,
-  },
-
-  {
-    name: "Sondre Gautefald",
-    alias: "Mr Caravan",
-    instrument: "Multiinstrument",
-    inspiration: "Iron Maiden",
-    interest: { hobby: "Ski", food: "Taco" },
-    image: sondreImg,
-  },
-
-  {
-    name: "Truls Venmann",
-    alias: "Truls Venmann",
-    instrument: "Trommeslager",
-    inspiration: "Vågal",
-    interest: { hobby: "Musikk", food: "Pizza" },
-    image: trulsImg,
-  },
-  {
-    name: "Torstein Vala",
-    alias: "Torstein Vala",
-    instrument: "Gitarist",
-    inspiration: "Vågal",
-    interest: { hobby: "Musikk", food: "Pizza" },
-    image: torsteinImg,
-  },
-  {
-    name: "Tony Portås Moen",
-    alias: "Tony Portås Moen",
-    instrument: "Bassist",
-    inspiration: "Beyoncé",
-    interest: { hobby: "Musikk", food: "Pizza" },
-    image: tonyImg,
-  },
-];
+import { useBandMembers } from "@/hooks/useBandMembers";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { ErrorMessage } from "@/components/ErrorMessage";
 
 const Bandet: React.FC = () => {
+  const { data, loading, error } = useBandMembers();
+
+  if (loading) {
+    return (
+      <main className="container-page py-10 md:py-14">
+        <LoadingSpinner size="lg" className="min-h-[200px]" />
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="container-page py-10 md:py-14">
+        <ErrorMessage message="Could not load band members" />
+      </main>
+    );
+  }
+
   return (
     <main className="container-page py-10 md:py-14">
       <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
@@ -70,8 +41,8 @@ const Bandet: React.FC = () => {
         </p>
       </div>
       <div className="grid gap-8 md:grid-cols-2">
-        {members.map((m) => (
-          <BandMember key={m.name} member={m} imageHeight={600} />
+        {data?.map((m) => (
+          <BandMember key={m._id} member={m} imageHeight={600} />
         ))}
       </div>
     </main>

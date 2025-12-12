@@ -52,7 +52,7 @@ development_status:
   2-1-initialize-sanity-cms-project: done
   2-2-create-hero-content-schema-and-integration: review
   2-3-create-band-member-content-schema: done
-  2-4-integrate-band-members-with-frontend: backlog
+  2-4-integrate-band-members-with-frontend: done
   2-5-content-preview-capability: backlog
   epic-2-retrospective: optional
 
