@@ -8,11 +8,13 @@ interface SEOProps {
 }
 
 const SITE_NAME = "Vågal"
-const BASE_URL = "https://vaagal.no" // Update to actual domain when deployed
+const BASE_URL = "https://vaagal.no"
+const DEFAULT_OG_IMAGE = "/assets/hero-1920.jpg"
 
-export default function SEO({ title, description, url }: SEOProps) {
+export default function SEO({ title, description, image, url }: SEOProps) {
   const fullTitle = `${title} | ${SITE_NAME}`
   const canonicalUrl = url ? `${BASE_URL}${url}` : undefined
+  const ogImage = image ? `${BASE_URL}${image}` : `${BASE_URL}${DEFAULT_OG_IMAGE}`
 
   return (
     <Helmet>
@@ -27,6 +29,21 @@ export default function SEO({ title, description, url }: SEOProps) {
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       {canonicalUrl && <link rel="alternate" hrefLang="nb" href={canonicalUrl} />}
+
+      {/* Open Graph tags */}
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImage} />
+      {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:locale" content="nb_NO" />
+
+      {/* Twitter Card tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
     </Helmet>
   )
 }
