@@ -29,3 +29,19 @@ export interface BandMember {
   image?: SanityImageSource
   order?: number
 }
+
+/**
+ * Music release content from Sanity CMS
+ * Used by useReleases hook and Discography components
+ */
+export interface Release {
+  _id: string
+  title: string
+  releaseType?: 'single' | 'EP' | 'album'
+  coverImage: SanityImageSource
+  releaseDate: string
+  spotifyUrl?: string
+  appleMusicUrl?: string
+  youtubeUrl?: string
+  isLatest?: boolean
+}

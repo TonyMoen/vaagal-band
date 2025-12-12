@@ -27,3 +27,34 @@ export const bandMembersQuery = `*[_type == "bandMember"] | order(order asc) {
   image,
   order
 }`
+
+/**
+ * All releases query - fetches all releases sorted by date (newest first)
+ * Returns: Array of { _id, title, releaseType, coverImage, releaseDate, spotifyUrl, appleMusicUrl, youtubeUrl, isLatest }
+ */
+export const releasesQuery = `*[_type == "release"] | order(releaseDate desc) {
+  _id,
+  title,
+  releaseType,
+  coverImage,
+  releaseDate,
+  spotifyUrl,
+  appleMusicUrl,
+  youtubeUrl,
+  isLatest
+}`
+
+/**
+ * Latest release query - fetches the release marked as featured for homepage
+ * Returns: Single release object or null
+ */
+export const latestReleaseQuery = `*[_type == "release" && isLatest == true][0] {
+  _id,
+  title,
+  releaseType,
+  coverImage,
+  releaseDate,
+  spotifyUrl,
+  appleMusicUrl,
+  youtubeUrl
+}`
