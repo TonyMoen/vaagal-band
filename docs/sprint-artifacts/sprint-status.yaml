@@ -90,8 +90,8 @@ development_status:
   # Epic 7: UI Enhancements & Discography
   epic-7: in-progress
   7-1-social-media-icon-buttons-in-navigation: review
-  7-2-footer-social-media-icon-cleanup: ready-for-dev
-  7-3-consistent-page-hero-sections: backlog
+  7-2-footer-social-media-icon-cleanup: review
+  7-3-consistent-page-hero-sections: ready-for-dev
   7-4-discography-content-schema-in-sanity: backlog
   7-5-discography-page: backlog
   7-6-latest-release-homepage-hero-feature: backlog
