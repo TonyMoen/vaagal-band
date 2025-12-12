@@ -59,8 +59,8 @@ development_status:
   # Epic 3: SEO & Discoverability
   epic-3: in-progress
   3-1-seo-component-with-meta-tags: done
-  3-2-open-graph-and-twitter-card-tags: backlog
-  3-3-structured-data-json-ld: backlog
+  3-2-open-graph-and-twitter-card-tags: review
+  3-3-structured-data-json-ld: review
   3-4-sitemap-and-robots-txt: backlog
   epic-3-retrospective: optional
 

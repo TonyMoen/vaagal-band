@@ -3,6 +3,7 @@ import SpotifyEmbed from "../components/SpotifyWidget"
 import BandsintownWidget from "../components/BandsintownWidget"
 import YouTubeEmbed from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
+import StructuredData from "../components/StructuredData"
 
 export default function Hjem() {
   return (
@@ -12,6 +13,7 @@ export default function Hjem() {
         description="Vågal - Bygderock fra Norge. Hør musikken vår, se konserter og bli kjent med bandet."
         url="/"
       />
+      <StructuredData />
       <section className="full-bleed">
         {/* Hero now fetches from CMS automatically, with fallback to local image */}
         <Hero alt="Bandbilde av Vågal" overlay={true} />
