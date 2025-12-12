@@ -11,4 +11,19 @@ export const heroQuery = `*[_type == "hero"][0] {
   image
 }`
 
-// Story 2.3: Band members query will be added here
+/**
+ * Band members query - fetches all band members sorted by order
+ * Returns: Array of { _id, name, alias, instrument, inspiration, hobby, food, bio, image, order }
+ */
+export const bandMembersQuery = `*[_type == "bandMember"] | order(order asc) {
+  _id,
+  name,
+  alias,
+  instrument,
+  inspiration,
+  hobby,
+  food,
+  bio,
+  image,
+  order
+}`

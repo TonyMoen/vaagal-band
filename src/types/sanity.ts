@@ -13,4 +13,19 @@ export interface HeroContent {
   image: SanityImageSource
 }
 
-// Story 2.3: BandMember type will be added here
+/**
+ * Band member content from Sanity CMS
+ * Used by useBandMembers hook and BandMember component
+ */
+export interface BandMember {
+  _id: string
+  name: string
+  alias?: string
+  instrument?: string
+  inspiration?: string
+  hobby?: string
+  food?: string
+  bio?: string
+  image?: SanityImageSource
+  order?: number
+}
