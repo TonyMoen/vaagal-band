@@ -1,6 +1,6 @@
 # Story 7.3: Consistent Page Hero Sections
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -22,39 +22,39 @@ so that **each page has a clear visual identity and consistent experience**.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create PageHero component (AC: 1, 2, 3, 5)
-  - [ ] Create `src/components/PageHero.tsx` as a simpler, shorter hero variant
-  - [ ] Props: `title` (required), `subtitle` (optional), `className` (optional)
-  - [ ] Use Barlow Condensed font for title (matching main Hero typography)
-  - [ ] Set height to 200-300px range (NOT full viewport like homepage)
-  - [ ] Dark background (#0A0A0A) with consistent styling
-  - [ ] Center text vertically and horizontally
-  - [ ] Responsive typography: smaller on mobile, larger on desktop
+- [x] Task 1: Create PageHero component (AC: 1, 2, 3, 5)
+  - [x] Create `src/components/PageHero.tsx` as a simpler, shorter hero variant
+  - [x] Props: `title` (required), `subtitle` (optional), `className` (optional)
+  - [x] Use Barlow Condensed font for title (matching main Hero typography)
+  - [x] Set height to 200-300px range (NOT full viewport like homepage)
+  - [x] Dark background (#0A0A0A) with consistent styling
+  - [x] Center text vertically and horizontally
+  - [x] Responsive typography: smaller on mobile, larger on desktop
 
-- [ ] Task 2: Add PageHero to Bandet page (AC: 1, 4)
-  - [ ] Import PageHero component
-  - [ ] Add `<PageHero title="BANDET" />` at top of page (before content)
-  - [ ] Remove existing `<h1>` from page content to avoid duplication
-  - [ ] Adjust page padding/spacing to account for hero
+- [x] Task 2: Add PageHero to Bandet page (AC: 1, 4)
+  - [x] Import PageHero component
+  - [x] Add `<PageHero title="BANDET" />` at top of page (before content)
+  - [x] Remove existing `<h1>` from page content to avoid duplication
+  - [x] Adjust page padding/spacing to account for hero
 
-- [ ] Task 3: Add PageHero to Konserter page (AC: 1, 4)
-  - [ ] Import PageHero component
-  - [ ] Add `<PageHero title="KONSERTER" subtitle="Kommende konserter og festivaler" />` at top
-  - [ ] Remove existing `<h1>` and subtitle from page content
-  - [ ] Adjust spacing for smooth transition from hero to content
+- [x] Task 3: Add PageHero to Konserter page (AC: 1, 4)
+  - [x] Import PageHero component
+  - [x] Add `<PageHero title="KONSERTER" subtitle="Kommende konserter og festivaler" />` at top
+  - [x] Remove existing `<h1>` and subtitle from page content
+  - [x] Adjust spacing for smooth transition from hero to content
 
-- [ ] Task 4: Add PageHero to KontaktOss page (AC: 1, 4)
-  - [ ] Import PageHero component
-  - [ ] Add `<PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />` at top
-  - [ ] Remove existing `<h1>` from page content
-  - [ ] Adjust spacing for form section
+- [x] Task 4: Add PageHero to KontaktOss page (AC: 1, 4)
+  - [x] Import PageHero component
+  - [x] Add `<PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />` at top
+  - [x] Remove existing `<h1>` from page content
+  - [x] Adjust spacing for form section
 
-- [ ] Task 5: Verify consistency and responsiveness (AC: 1, 2, 3)
-  - [ ] Test all pages at mobile (320px, 390px)
-  - [ ] Test all pages at tablet (768px)
-  - [ ] Test all pages at desktop (1024px+)
-  - [ ] Verify visual consistency across all pages
-  - [ ] Ensure no layout shift or scrolling issues
+- [x] Task 5: Verify consistency and responsiveness (AC: 1, 2, 3)
+  - [x] Test all pages at mobile (320px, 390px)
+  - [x] Test all pages at tablet (768px)
+  - [x] Test all pages at desktop (1024px+)
+  - [x] Verify visual consistency across all pages
+  - [x] Ensure no layout shift or scrolling issues
 
 ## Dev Notes
 
@@ -246,26 +246,38 @@ ce0c3fa feat: Refactor contact form with shadcn/ui components (Story 6.1)
 
 ### Context Reference
 
-<!-- Story created by create-story workflow -->
+Story created by create-story workflow
 
 ### Agent Model Used
 
-<!-- To be filled by dev agent -->
+claude-opus-4-5-20251101
 
 ### Debug Log References
 
-<!-- To be filled during implementation -->
+- Build successful with no TypeScript errors
+- All IDE diagnostics clean (0 errors/warnings)
 
 ### Completion Notes List
 
-<!-- To be filled after implementation -->
+- Created PageHero component with CSS variables for colors (var(--color-bg), var(--color-text), var(--color-muted))
+- Used font-condensed Tailwind class for Barlow Condensed font
+- Component uses cn() utility for class merging
+- Height set to min-h-[200px] mobile, min-h-[280px] desktop (within 200-300px spec)
+- Responsive typography: text-4xl → text-5xl → text-6xl
+- All three pages updated: Bandet, Konserter, KontaktOss
+- Removed duplicate h1 elements from all pages
+- Build passes with no errors
+
+### Change Log
+
+- 2025-12-12: Implemented Story 7.3 - Added consistent PageHero sections to all interior pages
 
 ### File List
 
-**Files to Create:**
+**Files Created:**
 - `src/components/PageHero.tsx`
 
-**Files to Modify:**
+**Files Modified:**
 - `src/pages/Bandet.tsx`
 - `src/pages/Konserter.tsx`
 - `src/pages/KontaktOss.tsx`

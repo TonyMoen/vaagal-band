@@ -1,7 +1,12 @@
+import { useState } from "react"
 import BandsintownWidget from "../components/BandsintownWidget"
+import { EmptyStateConserter } from "../components/EmptyStateConserter"
+import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
 
 export default function Konserter() {
+  const [isEmpty, setIsEmpty] = useState(false)
+
   return (
     <>
       <SEO
@@ -9,19 +14,12 @@ export default function Konserter() {
         description="Se kommende konserter med Vågal. Finn datoer, steder og billettinformasjon."
         url="/konserter"
       />
+      <PageHero title="KONSERTER" subtitle="Kommende konserter og festivaler" />
       <section className="container-page py-10 md:py-14">
-        <header className="mb-8 md:mb-10">
-        <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
-          KONSERTER
-        </h1>
-        <p className="mt-2 text-center">
-          Følg med på kommende datoer. Billetter slippes fortløpende.
-        </p>
-      </header>
-
-      <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
-          <BandsintownWidget />
+          <BandsintownWidget onEmptyState={() => setIsEmpty(true)} />
+          {isEmpty && <EmptyStateConserter className="mt-6" />}
         </div>
 
         <aside className="space-y-4 self-start">
