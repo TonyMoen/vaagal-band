@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import SocialIcons from "@/components/SocialIcons"
 
 const items = [
   { to: "/", label: "Hjem", end: true },
@@ -76,6 +77,9 @@ export default function NavBar() {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
+          <div className="ml-4 flex items-center border-l border-[var(--color-border)] pl-4">
+            <SocialIcons iconSize={24} />
+          </div>
         </NavigationMenu>
 
         {/* Mobile Navigation with shadcn/ui Sheet */}
@@ -136,6 +140,9 @@ export default function NavBar() {
                 </NavLink>
               ))}
             </nav>
+            <div className="mt-auto border-t border-[var(--color-border)] px-4 py-6">
+              <SocialIcons iconSize={20} className="justify-center" />
+            </div>
           </SheetContent>
         </Sheet>
       </nav>

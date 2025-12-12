@@ -84,5 +84,17 @@ development_status:
   epic-6: in-progress
   6-1-contact-form-with-shadcn-ui-components: review
   6-2-form-validation-and-error-handling: review
-  6-3-form-submission-with-feedback: ready-for-dev
+  6-3-form-submission-with-feedback: review
   epic-6-retrospective: optional
+
+  # Epic 7: UI Enhancements & Discography
+  epic-7: in-progress
+  7-1-social-media-icon-buttons-in-navigation: review
+  7-2-footer-social-media-icon-cleanup: ready-for-dev
+  7-3-consistent-page-hero-sections: backlog
+  7-4-discography-content-schema-in-sanity: backlog
+  7-5-discography-page: backlog
+  7-6-latest-release-homepage-hero-feature: backlog
+  7-7-apply-full-color-palette-across-ui: backlog
+  7-8-hidden-promoter-page-arrangoerer: backlog
+  epic-7-retrospective: optional
