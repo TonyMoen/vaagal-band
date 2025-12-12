@@ -1,30 +1,46 @@
-import React from "react";
-import BandMember from "../components/BandMember";
-import { useBandMembers } from "@/hooks/useBandMembers";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
-import { ErrorMessage } from "@/components/ErrorMessage";
+import React from "react"
+import BandMember from "../components/BandMember"
+import { useBandMembers } from "@/hooks/useBandMembers"
+import { LoadingSpinner } from "@/components/LoadingSpinner"
+import { ErrorMessage } from "@/components/ErrorMessage"
+import SEO from "../components/SEO"
 
 const Bandet: React.FC = () => {
-  const { data, loading, error } = useBandMembers();
+  const { data, loading, error } = useBandMembers()
 
   if (loading) {
     return (
       <main className="container-page py-10 md:py-14">
+        <SEO
+          title="Bandet"
+          description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+          url="/bandet"
+        />
         <LoadingSpinner size="lg" className="min-h-[200px]" />
       </main>
-    );
+    )
   }
 
   if (error) {
     return (
       <main className="container-page py-10 md:py-14">
+        <SEO
+          title="Bandet"
+          description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+          url="/bandet"
+        />
         <ErrorMessage message="Could not load band members" />
       </main>
-    );
+    )
   }
 
   return (
     <main className="container-page py-10 md:py-14">
+      <SEO
+        title="Bandet"
+        description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+        url="/bandet"
+      />
       <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
         BANDET
       </h1>

@@ -1,11 +1,17 @@
-import Hero from "../components/Hero";
-import SpotifyEmbed from "../components/SpotifyWidget";
-import BandsintownWidget from "../components/BandsintownWidget";
-import YouTubeEmbed from "../components/YoutubeWidget";
+import Hero from "../components/Hero"
+import SpotifyEmbed from "../components/SpotifyWidget"
+import BandsintownWidget from "../components/BandsintownWidget"
+import YouTubeEmbed from "../components/YoutubeWidget"
+import SEO from "../components/SEO"
 
 export default function Hjem() {
   return (
     <>
+      <SEO
+        title="Hjem"
+        description="Vågal - Bygderock fra Norge. Hør musikken vår, se konserter og bli kjent med bandet."
+        url="/"
+      />
       <section className="full-bleed">
         {/* Hero now fetches from CMS automatically, with fallback to local image */}
         <Hero alt="Bandbilde av Vågal" overlay={true} />

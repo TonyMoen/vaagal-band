@@ -1,9 +1,16 @@
-import BandsintownWidget from "../components/BandsintownWidget";
+import BandsintownWidget from "../components/BandsintownWidget"
+import SEO from "../components/SEO"
 
 export default function Konserter() {
   return (
-    <section className="container-page py-10 md:py-14">
-      <header className="mb-8 md:mb-10">
+    <>
+      <SEO
+        title="Konserter"
+        description="Se kommende konserter med Vågal. Finn datoer, steder og billettinformasjon."
+        url="/konserter"
+      />
+      <section className="container-page py-10 md:py-14">
+        <header className="mb-8 md:mb-10">
         <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
           KONSERTER
         </h1>
@@ -37,6 +44,7 @@ export default function Konserter() {
           </div>
         </aside>
       </div>
-    </section>
-  );
+      </section>
+    </>
+  )
 }
