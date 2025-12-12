@@ -49,7 +49,7 @@ const Contact = () => {
             type="text"
             placeholder="Ditt navn"
             required
-            className="w-full px-3 py-2 rounded-2xl"
+            className="w-full px-4 py-3 min-h-[44px] rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
           />
         </div>
 
@@ -66,7 +66,7 @@ const Contact = () => {
             type="email"
             placeholder="Din epost"
             required
-            className="w-full px-3 py-2 rounded-2xl"
+            className="w-full px-4 py-3 min-h-[44px] rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
           />
         </div>
 
@@ -82,11 +82,11 @@ const Contact = () => {
             name="message"
             placeholder="Skriv melding"
             required
-            className="w-full px-3 py-2 rounded-2xl min-h-[120px] resize-none"
+            className="w-full px-4 py-3 rounded-2xl min-h-[120px] resize-none bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
           />
         </div>
 
-        <button type="submit" className="btn">
+        <button type="submit" className="btn w-full">
           Send melding
         </button>
       </form>

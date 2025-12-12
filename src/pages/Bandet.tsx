@@ -44,7 +44,7 @@ const Bandet: React.FC = () => {
       <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold tracking-tight">
         BANDET
       </h1>
-      <div className="align-text mb-8">
+      <div className="mx-auto max-w-3xl text-center mb-8">
         <p>
           Vågal er bandet som garanterer fullt trøkk fra første sekund! Med sin
           unike miks av bygderock har Vågal på kort tid fått en stor og lojal
@@ -58,7 +58,7 @@ const Bandet: React.FC = () => {
       </div>
       <div className="grid gap-8 md:grid-cols-2">
         {data?.map((m) => (
-          <BandMember key={m._id} member={m} imageHeight={600} />
+          <BandMember key={m._id} member={m} />
         ))}
       </div>
     </main>

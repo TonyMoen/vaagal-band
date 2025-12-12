@@ -4,10 +4,9 @@ import type { BandMember as BandMemberType } from "@/types/sanity";
 
 type Props = {
   member: BandMemberType;
-  imageHeight?: number;
 };
 
-const BandMember: React.FC<Props> = ({ member, imageHeight = 560 }) => {
+const BandMember: React.FC<Props> = ({ member }) => {
   return (
     <section
       className="relative overflow-hidden rounded-2xl card-surface"
@@ -17,8 +16,7 @@ const BandMember: React.FC<Props> = ({ member, imageHeight = 560 }) => {
         <img
           src={urlFor(member.image).width(800).url()}
           alt={member.name}
-          className="w-full object-cover"
-          style={{ height: imageHeight }}
+          className="w-full object-cover h-[350px] sm:h-[450px] md:h-[500px] lg:h-[560px]"
         />
       )}
 

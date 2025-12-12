@@ -23,10 +23,10 @@ export default function Footer() {
           </NavLink>
         </div>
 
-        <nav aria-label="Bunnmeny" className="grid gap-3 text-center md:text-left">
+        <nav aria-label="Bunnmeny" className="grid gap-1 text-center md:text-left">
           <NavLink
             className={({ isActive }) =>
-              `py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
+              `min-h-[44px] inline-flex items-center justify-center md:justify-start py-2 px-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
                 isActive
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-muted)] hover:text-[var(--color-accent)]"
@@ -39,7 +39,7 @@ export default function Footer() {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
+              `min-h-[44px] inline-flex items-center justify-center md:justify-start py-2 px-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
                 isActive
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-muted)] hover:text-[var(--color-accent)]"
@@ -51,7 +51,7 @@ export default function Footer() {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
+              `min-h-[44px] inline-flex items-center justify-center md:justify-start py-2 px-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
                 isActive
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-muted)] hover:text-[var(--color-accent)]"
@@ -63,7 +63,7 @@ export default function Footer() {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
+              `min-h-[44px] inline-flex items-center justify-center md:justify-start py-2 px-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded ${
                 isActive
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-muted)] hover:text-[var(--color-accent)]"

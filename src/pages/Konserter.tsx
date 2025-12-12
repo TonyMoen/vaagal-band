@@ -36,10 +36,26 @@ export default function Konserter() {
 
           <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <h3 className="font-semibold">Få varsel</h3>
-            <p>Følg oss på sosiale medier for billettslipp og oppdateringer.</p>
-            <div className="mt-3 flex gap-3">
-              <a className="btn">Instagram</a>
-              <a className="btn">Facebook</a>
+            <p className="text-sm text-[var(--color-muted)]">Følg oss på sosiale medier for billettslipp og oppdateringer.</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <a
+                href="https://www.instagram.com/vaagal_band/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+                aria-label="Følg oss på Instagram (åpnes i ny fane)"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/vaagal.band.no/?locale=nb_NO"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+                aria-label="Følg oss på Facebook (åpnes i ny fane)"
+              >
+                Facebook
+              </a>
             </div>
           </div>
         </aside>

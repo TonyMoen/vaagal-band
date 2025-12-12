@@ -69,7 +69,7 @@ development_status:
   4-1-desktop-navigation-with-shadcn-ui: in-progress  # [AI-Review] 3 MEDIUM, 2 LOW action items
   4-2-mobile-navigation-drawer: review
   4-3-footer-navigation: done
-  4-4-responsive-layout-polish: backlog
+  4-4-responsive-layout-polish: review
   epic-4-retrospective: optional
 
   # Epic 5: Widgets & External Integrations
