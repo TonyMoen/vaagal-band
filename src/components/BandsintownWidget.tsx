@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 interface BandsintownEmbedProps {
   artistId?: string
   className?: string
+  onEmptyState?: () => void
 }
 
 /**
@@ -15,6 +16,7 @@ interface BandsintownEmbedProps {
 export function BandsintownEmbed({
   artistId = 'id_15561560',
   className,
+  onEmptyState,
 }: BandsintownEmbedProps) {
   const [isLoading, setIsLoading] = useState(true)
   const ref = useRef<HTMLDivElement | null>(null)
@@ -31,8 +33,8 @@ export function BandsintownEmbed({
     a.setAttribute('data-artist-name', artistId)
     a.setAttribute('data-auto-style', 'true')
     a.setAttribute('data-background-color', 'rgba(0,0,0,0)')
-    a.setAttribute('data-separator-color', '#26282b')
-    a.setAttribute('data-text-color', '#e7e7ea')
+    a.setAttribute('data-separator-color', '#2A2A2A')  // Tertiary
+    a.setAttribute('data-text-color', '#F5F5F5')       // Text Primary
     a.setAttribute(
       'data-font',
       'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif'
@@ -48,7 +50,7 @@ export function BandsintownEmbed({
     a.setAttribute('data-display-limit', 'all')
     a.setAttribute('data-date-format', 'MMM. D, YYYY')
     a.setAttribute('data-date-orientation', 'horizontal')
-    a.setAttribute('data-date-border-color', '#26282b')
+    a.setAttribute('data-date-border-color', '#2A2A2A')  // Tertiary
     a.setAttribute('data-date-border-width', '1px')
     a.setAttribute('data-date-border-radius', '12px')
     a.setAttribute('data-date-capitalization', 'capitalize')
@@ -56,8 +58,8 @@ export function BandsintownEmbed({
     a.setAttribute('data-event-ticket-text', 'BILLETTER')
     a.setAttribute('data-event-ticket-icon', 'false')
     a.setAttribute('data-event-ticket-cta-text-color', '#ffffff')
-    a.setAttribute('data-event-ticket-cta-bg-color', '#ff6100')
-    a.setAttribute('data-event-ticket-cta-border-color', '#ff6100')
+    a.setAttribute('data-event-ticket-cta-bg-color', '#E65C00')    // Accent Primary
+    a.setAttribute('data-event-ticket-cta-border-color', '#E65C00')  // Accent Primary
     a.setAttribute('data-event-ticket-cta-border-width', '0px')
     a.setAttribute('data-event-ticket-cta-border-radius', '12px')
     a.setAttribute('data-button-label-capitalization', 'uppercase')
@@ -65,7 +67,7 @@ export function BandsintownEmbed({
     a.setAttribute('data-location-capitalization', 'uppercase')
     a.setAttribute('data-venue-capitalization', 'uppercase')
     a.setAttribute('data-bit-logo-position', 'bottomRight')
-    a.setAttribute('data-bit-logo-color', '#888888')
+    a.setAttribute('data-bit-logo-color', '#A3A3A3')  // Text Secondary
     a.setAttribute('data-language', 'en')
     a.setAttribute('data-layout-breakpoint', '900')
 
@@ -91,13 +93,18 @@ export function BandsintownEmbed({
     const observer = new MutationObserver(() => {
       // Check if Bandsintown widget has rendered content
       // The widget creates elements with classes like 'bit-events', 'bit-no-dates', or 'bit-widget'
-      if (
-        el.querySelector('.bit-events') ||
-        el.querySelector('.bit-no-dates') ||
-        el.querySelector('.bit-widget')
-      ) {
+      const hasNoDates = el.querySelector('.bit-no-dates')
+      const hasEvents = el.querySelector('.bit-events')
+      const hasWidget = el.querySelector('.bit-widget')
+
+      if (hasEvents || hasNoDates || hasWidget) {
         setIsLoading(false)
         observer.disconnect()
+
+        // Call onEmptyState callback when no concerts are found
+        if (hasNoDates && onEmptyState) {
+          onEmptyState()
+        }
       }
     })
 
@@ -114,7 +121,7 @@ export function BandsintownEmbed({
       clearTimeout(timeout)
       el.innerHTML = ''
     }
-  }, [artistId])
+  }, [artistId, onEmptyState])
 
   return (
     <div
@@ -152,6 +159,7 @@ export default function BandsintownWidget({
   artistId = 'id_15561560',
   className,
   fallbackUrl = 'https://www.bandsintown.com/a/15561560-vgal',
+  onEmptyState,
 }: BandsintownWidgetProps) {
   return (
     <WidgetErrorBoundary
@@ -159,7 +167,7 @@ export default function BandsintownWidget({
       fallbackUrl={fallbackUrl}
       className={cn('min-h-[200px]', className)}
     >
-      <BandsintownEmbed artistId={artistId} />
+      <BandsintownEmbed artistId={artistId} onEmptyState={onEmptyState} />
     </WidgetErrorBoundary>
   )
 }

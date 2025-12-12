@@ -6,40 +6,56 @@
 
 /* Vågal Dark Theme - Dark-only mode (no light theme toggle)
  * Brand colors from UX Design Specification:
- * - Background: #0A0A0A
- * - Secondary: #1A1A1A
- * - Text Primary: #F5F5F5
- * - Accent: #E65C00 (orange)
+ * - Primary Background: #0A0A0A - HSL(0, 0%, 4%)
+ * - Secondary: #1A1A1A - HSL(0, 0%, 10%)
+ * - Tertiary: #2A2A2A - HSL(0, 0%, 16%)
+ * - Text Primary: #F5F5F5 - HSL(0, 0%, 96%)
+ * - Text Secondary: #A3A3A3 - HSL(0, 0%, 64%)
+ * - Accent Primary: #E65C00 - HSL(24, 100%, 45%)
+ * - Accent Hover: #FF6B00 - HSL(25, 100%, 50%)
  */
 @layer base {
   :root {
+    /* Background: #0A0A0A */
     --background: 0 0% 4%;
+    /* Foreground (Text Primary): #F5F5F5 */
     --foreground: 0 0% 96%;
 
+    /* Card (Secondary): #1A1A1A */
     --card: 0 0% 10%;
     --card-foreground: 0 0% 96%;
 
+    /* Popover (Secondary): #1A1A1A */
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 96%;
 
+    /* Primary (Accent): #E65C00 */
     --primary: 24 100% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 16%;
+    /* Secondary (same as card): #1A1A1A */
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 96%;
 
+    /* Muted (Tertiary): #2A2A2A */
     --muted: 0 0% 16%;
+    /* Muted Foreground (Text Secondary): #A3A3A3 */
     --muted-foreground: 0 0% 64%;
 
+    /* Accent (Primary): #E65C00 */
     --accent: 24 100% 45%;
     --accent-foreground: 0 0% 100%;
 
+    /* Destructive (error state) */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 24 100% 45%;
+    /* Border (Tertiary): #2A2A2A */
+    --border: 0 0% 16%;
+    /* Input border (Tertiary): #2A2A2A */
+    --input: 0 0% 16%;
+    /* Focus ring (Accent Hover): #FF6B00 */
+    --ring: 25 100% 50%;
 
     --chart-1: 24 100% 45%;
     --chart-2: 173 58% 39%;

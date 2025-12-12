@@ -33,7 +33,7 @@ export default function Hero({
 
   if (isLoading) {
     return (
-      <section className="relative isolate min-h-[45svh] md:min-h-[65vh] flex items-center justify-center bg-[#0A0A0A]">
+      <section className="relative isolate min-h-[45svh] md:min-h-[65vh] flex items-center justify-center bg-[var(--color-bg)]">
         <LoadingSpinner size="lg" />
       </section>
     )
@@ -66,8 +66,8 @@ export default function Hero({
         {/* Latest Release Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           {/* Title + UTE NÅ! */}
-          <p className="text-lg md:text-2xl font-semibold text-[#F5F5F5] mb-2 uppercase tracking-wide">
-            {latestRelease.title} - <span className="text-[#E65C00]">UTE NÅ!</span>
+          <p className="text-lg md:text-2xl font-semibold text-[var(--color-text)] mb-2 uppercase tracking-wide">
+            {latestRelease.title} - <span className="text-[var(--color-accent)]">UTE NÅ!</span>
           </p>
 
           {/* Centered Release Cover Image */}
@@ -85,7 +85,7 @@ export default function Hero({
               <Button
                 asChild
                 size="lg"
-                className="bg-[#E65C00] hover:bg-[#FF6B00] text-white font-semibold"
+                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold"
               >
                 <a
                   href={latestRelease.spotifyUrl}
@@ -137,12 +137,12 @@ export default function Hero({
       {!skipCms && (heroData?.title || heroData?.subtitle) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           {heroData?.title && (
-            <h1 className="font-bold text-5xl md:text-7xl lg:text-[120px] xl:text-[160px] text-[#F5F5F5] leading-none tracking-tight">
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-[120px] xl:text-[160px] text-[var(--color-text)] leading-none tracking-tight">
               {heroData.title}
             </h1>
           )}
           {heroData?.subtitle && (
-            <p className="mt-4 text-xl md:text-2xl text-[#A3A3A3]">
+            <p className="mt-4 text-xl md:text-2xl text-[var(--color-muted)]">
               {heroData.subtitle}
             </p>
           )}

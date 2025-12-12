@@ -62,7 +62,7 @@ export default function NavBar() {
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
                         ? "text-[var(--color-text)]"
-                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30"
+                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-tertiary)]/50"
                     )
                   }
                 >
@@ -87,7 +87,7 @@ export default function NavBar() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] hover:bg-[var(--color-bg)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               aria-label="Meny"
             >
               <svg
@@ -125,7 +125,7 @@ export default function NavBar() {
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
                         ? "bg-[var(--color-bg)]/30 text-[var(--color-text)]"
-                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)]/30"
+                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-tertiary)]/50"
                     )
                   }
                   onClick={() => setOpen(false)}

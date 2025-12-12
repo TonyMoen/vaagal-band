@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
-import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -56,6 +57,8 @@ const validateMessage = (value: string): string => {
 };
 
 const Contact = () => {
+  const { toast } = useToast();
+
   // Controlled form state (converted from uncontrolled for validation)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -65,6 +68,9 @@ const Contact = () => {
   // Validation state (Task 1)
   const [touched, setTouched] = useState<TouchedFields>({});
   const [errors, setErrors] = useState<FormErrors>({});
+
+  // Loading state (Story 6.3 Task 2)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Validate all fields and update errors state
   const validateField = (field: keyof FormErrors, value: string) => {
@@ -147,34 +153,58 @@ const Contact = () => {
       return;
     }
 
-    // Build FormData for Web3Forms submission
-    const formData = new FormData();
-    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("subject", subject);
-    formData.append("message", message);
+    // Set loading state immediately (AC2)
+    setIsSubmitting(true);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      // Build FormData for Web3Forms submission
+      const formData = new FormData();
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("subject", subject);
+      formData.append("message", message);
 
-    const data = await response.json();
-
-    if (data.success) {
-      Swal.fire({
-        title: "Takk!",
-        text: "Meldingen er sendt!",
-        icon: "success",
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
-      // Reset all form state
-      setName("");
-      setEmail("");
-      setSubject("");
-      setMessage("");
-      setTouched({});
-      setErrors({});
+
+      // Check if response is ok (status 200-299)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Success toast (AC3)
+        toast({
+          title: "Melding sendt!",
+          duration: 5000,
+          variant: "success",
+        });
+        // Reset all form state on success
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+        setTouched({});
+        setErrors({});
+      } else {
+        // API returned success: false
+        throw new Error(data.message || "Submission failed");
+      }
+    } catch (error) {
+      // Error toast (AC4) - form data preserved
+      console.error("Form submission error:", error);
+      toast({
+        title: "Noe gikk galt. Prøv igjen.",
+        duration: 5000,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -363,16 +393,17 @@ const Contact = () => {
           )}
         </div>
 
-        {/* Submit Button (Task 6) */}
+        {/* Submit Button with loading state (Story 6.3 AC2) */}
         <Button
           type="submit"
-          disabled={!isFormValid}
+          disabled={!isFormValid || isSubmitting}
           className={cn(
-            "w-full min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white font-semibold rounded-2xl",
+            "w-full min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold rounded-2xl",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
         >
-          Send melding
+          {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {isSubmitting ? "Sender..." : "Send melding"}
         </Button>
       </form>
     </section>

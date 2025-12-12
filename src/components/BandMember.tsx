@@ -26,10 +26,10 @@ const BandMember: React.FC<Props> = ({ member }) => {
         </h2>
 
         {member.alias && member.alias !== member.name && (
-          <p className="mt-2 italic">{member.alias}</p>
+          <p className="mt-2 italic text-[var(--color-muted)]">{member.alias}</p>
         )}
 
-        <ul className="mt-3 space-y-1 text-sm leading-6">
+        <ul className="mt-3 space-y-1 text-sm leading-6 text-[var(--color-muted)]">
           {member.instrument && (
             <li>
               <strong>Instrument:</strong> {member.instrument}
