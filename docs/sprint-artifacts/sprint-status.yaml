@@ -83,6 +83,6 @@ development_status:
   # Epic 6: Contact & Booking Flow
   epic-6: in-progress
   6-1-contact-form-with-shadcn-ui-components: review
-  6-2-form-validation-and-error-handling: ready-for-dev
-  6-3-form-submission-with-feedback: backlog
+  6-2-form-validation-and-error-handling: review
+  6-3-form-submission-with-feedback: ready-for-dev
   epic-6-retrospective: optional
