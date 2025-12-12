@@ -1,7 +1,7 @@
 import Hero from "../components/Hero"
 import SpotifyWidget from "../components/SpotifyWidget"
 import BandsintownWidget from "../components/BandsintownWidget"
-import YouTubeEmbed from "../components/YoutubeWidget"
+import YouTubeWidget from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
 import StructuredData from "../components/StructuredData"
 
@@ -35,7 +35,7 @@ export default function Hjem() {
           </aside>
 
           <div className="md:col-span-3">
-            <YouTubeEmbed
+            <YouTubeWidget
               url="https://youtu.be/5RKw6rMlKwg?si=29CXXAN4GDDHLG2s"
               title="Vågal Øst til Vest"
             />
