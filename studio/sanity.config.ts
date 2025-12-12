@@ -1,6 +1,7 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
+import {defaultDocumentNode} from './src/defaultDocumentNode'
 
 export default defineConfig({
   name: 'default',
@@ -9,7 +10,11 @@ export default defineConfig({
   projectId: 'h4lkrp1v',
   dataset: 'production',
 
-  plugins: [structureTool()],
+  plugins: [
+    structureTool({
+      defaultDocumentNode,
+    }),
+  ],
 
   schema: {
     types: schemaTypes,
