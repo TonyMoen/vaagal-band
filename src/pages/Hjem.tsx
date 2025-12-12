@@ -1,5 +1,5 @@
 import Hero from "../components/Hero"
-import SpotifyEmbed from "../components/SpotifyWidget"
+import SpotifyWidget from "../components/SpotifyWidget"
 import BandsintownWidget from "../components/BandsintownWidget"
 import YouTubeEmbed from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
@@ -26,14 +26,12 @@ export default function Hjem() {
           </div>
 
           <aside className="self-start">
-            <div className="card-surface">
-              <SpotifyEmbed
-                url="https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9?si=CPT7wksQQI22VfUK42qozA"
-                title="Vågal på Spotify"
-                height={520}
-                theme="dark"
-              />
-            </div>
+            <SpotifyWidget
+              url="https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9?si=CPT7wksQQI22VfUK42qozA"
+              title="Vågal på Spotify"
+              height={520}
+              theme="dark"
+            />
           </aside>
 
           <div className="md:col-span-3">

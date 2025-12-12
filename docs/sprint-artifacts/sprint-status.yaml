@@ -73,8 +73,8 @@ development_status:
   epic-4-retrospective: optional
 
   # Epic 5: Widgets & External Integrations
-  epic-5: backlog
-  5-1-spotify-widget-with-error-handling: backlog
+  epic-5: in-progress
+  5-1-spotify-widget-with-error-handling: done
   5-2-youtube-widget-with-error-handling: backlog
   5-3-bandsintown-homepage-widget: backlog
   5-4-concerts-page-with-full-listing: backlog
