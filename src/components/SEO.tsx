@@ -5,13 +5,14 @@ interface SEOProps {
   description: string
   image?: string
   url?: string
+  noindex?: boolean
 }
 
 const SITE_NAME = "Vågal"
 const BASE_URL = "https://vaagal.no"
 const DEFAULT_OG_IMAGE = "/assets/hero-1920.jpg"
 
-export default function SEO({ title, description, image, url }: SEOProps) {
+export default function SEO({ title, description, image, url, noindex }: SEOProps) {
   const fullTitle = `${title} | ${SITE_NAME}`
   const canonicalUrl = url ? `${BASE_URL}${url}` : undefined
   const ogImage = image ? `${BASE_URL}${image}` : `${BASE_URL}${DEFAULT_OG_IMAGE}`
@@ -25,6 +26,9 @@ export default function SEO({ title, description, image, url }: SEOProps) {
       {/* Core meta tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+
+      {/* Robots directive for hidden pages */}
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}

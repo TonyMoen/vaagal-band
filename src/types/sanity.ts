@@ -45,3 +45,35 @@ export interface Release {
   youtubeUrl?: string
   isLatest?: boolean
 }
+
+/**
+ * Portable text block structure for rich text content
+ */
+export interface PortableTextBlock {
+  _type: string
+  _key: string
+  children: {
+    _type: string
+    _key: string
+    text: string
+    marks?: string[]
+  }[]
+  markDefs?: unknown[]
+  style?: string
+}
+
+/**
+ * Promoter materials content from Sanity CMS
+ * Used by usePromoterMaterials hook and Arrangoerer page
+ */
+export interface PromoterMaterials {
+  _id: string
+  technicalRider?: string // URL from asset
+  hospitalityRider?: string
+  bandBioShort?: string
+  bandBioLong?: PortableTextBlock[]
+  pressPhotos?: SanityImageSource[]
+  logoFiles?: string[] // URLs from assets
+  contactEmail?: string
+  contactPhone?: string
+}

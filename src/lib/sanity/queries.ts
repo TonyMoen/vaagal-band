@@ -58,3 +58,19 @@ export const latestReleaseQuery = `*[_type == "release" && isLatest == true][0] 
   appleMusicUrl,
   youtubeUrl
 }`
+
+/**
+ * Promoter materials query - fetches the press kit and rider content
+ * Returns: Single promoterMaterials document with all fields
+ */
+export const promoterMaterialsQuery = `*[_type == "promoterMaterials"][0] {
+  _id,
+  "technicalRider": technicalRider.asset->url,
+  hospitalityRider,
+  bandBioShort,
+  bandBioLong,
+  pressPhotos,
+  "logoFiles": logoFiles[].asset->url,
+  contactEmail,
+  contactPhone
+}`
