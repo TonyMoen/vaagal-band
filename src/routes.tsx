@@ -3,6 +3,7 @@ import App from "./App";
 import Home from "./pages/Hjem";
 import Konserter from "./pages/Konserter";
 import Bandet from "./pages/Bandet";
+import Diskografi from "./pages/Diskografi";
 import KontaktOss from "./pages/KontaktOss";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "konserter", element: <Konserter /> },
       { path: "bandet", element: <Bandet /> },
+      { path: "diskografi", element: <Diskografi /> },
       { path: "kontakt-oss", element: <KontaktOss /> },
       { path: "*", element: <NotFoundPage /> },
     ],

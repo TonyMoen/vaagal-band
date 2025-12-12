@@ -19,6 +19,7 @@ import SocialIcons from "@/components/SocialIcons"
 const items = [
   { to: "/", label: "Hjem", end: true },
   { to: "/bandet", label: "Bandet" },
+  { to: "/diskografi", label: "Diskografi" },
   { to: "/konserter", label: "Konserter" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ]
