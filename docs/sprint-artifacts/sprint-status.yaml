@@ -77,12 +77,12 @@ development_status:
   5-1-spotify-widget-with-error-handling: done
   5-2-youtube-widget-with-error-handling: review
   5-3-bandsintown-homepage-widget: review
-  5-4-concerts-page-with-full-listing: backlog
+  5-4-concerts-page-with-full-listing: review
   epic-5-retrospective: optional
 
   # Epic 6: Contact & Booking Flow
-  epic-6: backlog
-  6-1-contact-form-with-shadcn-ui-components: backlog
-  6-2-form-validation-and-error-handling: backlog
+  epic-6: in-progress
+  6-1-contact-form-with-shadcn-ui-components: review
+  6-2-form-validation-and-error-handling: ready-for-dev
   6-3-form-submission-with-feedback: backlog
   epic-6-retrospective: optional
