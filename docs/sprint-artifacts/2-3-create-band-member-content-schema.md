@@ -1,6 +1,6 @@
 # Story 2.3: Create Band Member Content Schema
 
-Status: Ready for Review
+Status: Done
 
 ## Story
 
