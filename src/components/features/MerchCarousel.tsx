@@ -37,7 +37,7 @@ function MerchCarouselContent() {
         {products.map((product) => (
           <CarouselItem
             key={product.id}
-            className="basis-full sm:basis-1/2 lg:basis-1/4"
+            className="basis-1/2 sm:basis-1/2 lg:basis-1/4"
           >
             <ProductCard product={product} />
           </CarouselItem>
