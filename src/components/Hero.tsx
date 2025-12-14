@@ -75,7 +75,7 @@ export default function Hero({
             <img
               src={releaseCoverSrc}
               alt={`${latestRelease.title} cover`}
-              className="w-72 h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] object-cover shadow-2xl border-4 border-white/20"
+              className="w-48 h-48 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] object-cover shadow-2xl border-4 border-white/20"
             />
           </div>
 
