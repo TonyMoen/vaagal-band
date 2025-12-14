@@ -1,6 +1,5 @@
 import { urlFor } from "@/lib/sanity/image"
 import type { Release } from "@/types/sanity"
-import { cn } from "@/lib/utils"
 
 type Props = {
   release: Release
@@ -18,13 +17,6 @@ export default function ReleaseCard({ release }: Props) {
     day: 'numeric'
   })
 
-  // Release type badge styling
-  const badgeStyles: Record<string, string> = {
-    single: "bg-[var(--color-accent)]/20 text-[var(--color-accent)]",
-    EP: "bg-blue-500/20 text-blue-400",
-    album: "bg-green-500/20 text-green-400",
-  }
-
   return (
     <article className="overflow-hidden rounded-none card-surface">
       {/* Cover Image */}
@@ -40,27 +32,15 @@ export default function ReleaseCard({ release }: Props) {
       )}
 
       <div className="p-5">
-        {/* Release Type Badge */}
-        {release.releaseType && (
-          <span
-            className={cn(
-              "inline-block rounded-none px-3 py-1 text-xs font-semibold uppercase tracking-wide",
-              badgeStyles[release.releaseType] || badgeStyles.single
-            )}
-          >
-            {release.releaseType}
+        {/* Title and Date on same line */}
+        <div className="flex items-baseline justify-between gap-2">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
+            {release.title}
+          </h2>
+          <span className="text-sm text-[var(--color-muted)] whitespace-nowrap">
+            {formattedDate}
           </span>
-        )}
-
-        {/* Title */}
-        <h2 className="mt-2 text-lg font-semibold text-[var(--color-text)]">
-          {release.title}
-        </h2>
-
-        {/* Release Date */}
-        <p className="mt-1 text-sm text-[var(--color-muted)]">
-          {formattedDate}
-        </p>
+        </div>
 
         {/* Streaming Links */}
         <div className="mt-4 flex flex-wrap justify-center gap-2">
