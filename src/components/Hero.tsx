@@ -33,7 +33,7 @@ export default function Hero({
 
   if (isLoading) {
     return (
-      <section className="relative isolate min-h-[45svh] md:min-h-[65vh] flex items-center justify-center bg-[var(--color-bg)]">
+      <section className="relative isolate min-h-[100svh] md:min-h-[65vh] flex items-center justify-center bg-[var(--color-bg)]">
         <LoadingSpinner size="lg" />
       </section>
     )
@@ -49,7 +49,7 @@ export default function Hero({
       : src
 
     return (
-      <section className="relative isolate min-h-[45svh] md:min-h-[65vh]">
+      <section className="relative isolate min-h-[100svh] md:min-h-[65vh]">
         {/* Background: Normal hero image */}
         <img
           src={backgroundSrc}
@@ -120,7 +120,7 @@ export default function Hero({
   const imageAlt = !skipCms && heroData?.title ? heroData.title : alt
 
   return (
-    <section className="relative isolate min-h-[45svh] md:min-h-[65vh]">
+    <section className="relative isolate min-h-[100svh] md:min-h-[65vh]">
       <img
         src={imageSrc}
         alt={imageAlt}
