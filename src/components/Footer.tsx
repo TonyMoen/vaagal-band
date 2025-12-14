@@ -32,6 +32,34 @@ export default function Footer() {
           </NavLink>
         </div>
 
+        {/* Footer navigation links */}
+        <nav className="flex flex-wrap items-center justify-center gap-6" aria-label="Bunnnavigasjon">
+          <NavLink
+            to="/bandet"
+            className="text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+          >
+            Bandet
+          </NavLink>
+          <NavLink
+            to="/diskografi"
+            className="text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+          >
+            Diskografi
+          </NavLink>
+          <NavLink
+            to="/konserter"
+            className="text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+          >
+            Konserter
+          </NavLink>
+          <NavLink
+            to="/merch"
+            className="text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+          >
+            Merch
+          </NavLink>
+        </nav>
+
         {/* Social icons centered */}
         <SocialIcons iconSize={24} className="justify-center" />
 

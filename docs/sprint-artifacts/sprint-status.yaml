@@ -98,3 +98,8 @@ development_status:
   7-7-apply-full-color-palette-across-ui: review
   7-8-hidden-promoter-page-arrangoerer: review
   epic-7-retrospective: optional
+
+  # Epic 8: Merch & E-commerce
+  epic-8: in-progress
+  8-1-shopify-merch-integration: review
+  epic-8-retrospective: optional

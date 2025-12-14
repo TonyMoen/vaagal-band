@@ -6,6 +6,7 @@ import Bandet from "./pages/Bandet";
 import Diskografi from "./pages/Diskografi";
 import KontaktOss from "./pages/KontaktOss";
 import Arrangoerer from "./pages/Arrangoerer";
+import Merch from "./pages/Merch";
 import NotFoundPage from "./pages/NotFoundPage";
 
 export const router = createBrowserRouter([
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "diskografi", element: <Diskografi /> },
       { path: "kontakt-oss", element: <KontaktOss /> },
       { path: "arrangoerer", element: <Arrangoerer /> },
+      { path: "merch", element: <Merch /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

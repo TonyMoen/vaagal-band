@@ -21,6 +21,7 @@ const items = [
   { to: "/bandet", label: "Bandet" },
   { to: "/diskografi", label: "Diskografi" },
   { to: "/konserter", label: "Konserter" },
+  { to: "/merch", label: "Merch" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ]
 

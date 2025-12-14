@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
 import SpotifyWidget from "../components/SpotifyWidget"
 import ConcertList from "../components/ConcertList"
 import YouTubeWidget from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
 import StructuredData from "../components/StructuredData"
+import { MerchCarousel } from "@/components/features/MerchCarousel"
 
 export default function Hjem() {
   return (
@@ -39,6 +41,17 @@ export default function Hjem() {
               url="https://youtu.be/5RKw6rMlKwg?si=29CXXAN4GDDHLG2s"
               title="Vågal Øst til Vest"
             />
+          </div>
+
+          <div className="md:col-span-3 mt-8">
+            <h2 className="font-condensed text-2xl mb-4 text-[var(--color-text)]">Merch</h2>
+            <MerchCarousel />
+            <Link
+              to="/merch"
+              className="inline-flex mt-4 text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+            >
+              Se alt &rarr;
+            </Link>
           </div>
         </div>
       </section>
