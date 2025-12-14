@@ -5,7 +5,7 @@ import { WidgetErrorBoundary } from '@/components/WidgetErrorBoundary'
 import { Skeleton } from '@/components/ui/skeleton'
 
 function MerchCarouselContent() {
-  const { data: products, loading, error } = useShopifyProducts(12)
+  const { data: products, loading, error } = useShopifyProducts({ limit: 12, filterByArtist: 'Vågal' })
 
   if (loading) {
     return (

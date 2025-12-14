@@ -3,20 +3,28 @@ import { shopifyFetch } from '@/lib/shopify/client'
 import { productsQuery } from '@/lib/shopify/queries'
 import type { ShopifyProduct, ShopifyProductsResponse } from '@/types/shopify'
 
+interface UseShopifyProductsOptions {
+  limit?: number
+  filterByArtist?: string
+}
+
 /**
  * Hook to fetch products from Shopify Storefront API
  * Follows the standard data fetching pattern from architecture
  *
- * @param limit - Maximum number of products to fetch (default: 30)
+ * @param options - Configuration options
+ * @param options.limit - Maximum number of products to fetch (default: 30)
+ * @param options.filterByArtist - Filter products to only include those with this text in the title
  * @returns { data, loading, error } - Products state
  *
  * @example
- * const { data, loading, error } = useShopifyProducts()
+ * const { data, loading, error } = useShopifyProducts({ filterByArtist: 'Vågal' })
  * if (loading) return <LoadingSkeleton />
  * if (error) return <ErrorMessage message={error.message} />
  * return <ProductGrid products={data} />
  */
-export function useShopifyProducts(limit: number = 30) {
+export function useShopifyProducts(options: UseShopifyProductsOptions = {}) {
+  const { limit = 30, filterByArtist } = options
   const [data, setData] = useState<ShopifyProduct[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -27,12 +35,20 @@ export function useShopifyProducts(limit: number = 30) {
       sortKey: 'BEST_SELLING',
     })
       .then((response) => {
-        const products = response.products.edges.map((edge) => edge.node)
+        let products = response.products.edges.map((edge) => edge.node)
+
+        // Filter by artist name if specified
+        if (filterByArtist) {
+          products = products.filter((product) =>
+            product.title.toLowerCase().includes(filterByArtist.toLowerCase())
+          )
+        }
+
         setData(products)
       })
       .catch((err) => setError(err instanceof Error ? err : new Error(String(err))))
       .finally(() => setLoading(false))
-  }, [limit])
+  }, [limit, filterByArtist])
 
   return { data, loading, error }
 }

@@ -6,7 +6,7 @@ import SEO from '@/components/SEO'
 import { ExternalLink } from 'lucide-react'
 
 function MerchGrid() {
-  const { data: products, loading, error } = useShopifyProducts(30)
+  const { data: products, loading, error } = useShopifyProducts({ limit: 30, filterByArtist: 'Vågal' })
 
   if (loading) {
     return (

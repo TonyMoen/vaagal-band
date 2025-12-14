@@ -37,13 +37,6 @@ export default function Hjem() {
           </aside>
 
           <div className="md:col-span-3">
-            <YouTubeWidget
-              url="https://youtu.be/5RKw6rMlKwg?si=29CXXAN4GDDHLG2s"
-              title="Vågal Øst til Vest"
-            />
-          </div>
-
-          <div className="md:col-span-3 mt-8">
             <h2 className="font-condensed text-2xl mb-4 text-[var(--color-text)]">Merch</h2>
             <MerchCarousel />
             <Link
@@ -52,6 +45,13 @@ export default function Hjem() {
             >
               Se alt &rarr;
             </Link>
+          </div>
+
+          <div className="md:col-span-3 mt-8">
+            <YouTubeWidget
+              url="https://youtu.be/5RKw6rMlKwg?si=29CXXAN4GDDHLG2s"
+              title="Vågal Øst til Vest"
+            />
           </div>
         </div>
       </section>
