@@ -36,7 +36,7 @@ export default function Hjem() {
             />
           </aside>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-3 overflow-hidden">
             <h2 className="font-condensed text-2xl mb-4 text-[var(--color-text)]">Merch</h2>
             <MerchCarousel />
             <Link
