@@ -5,7 +5,7 @@ import { PageHero } from "@/components/PageHero"
 import SEO from "@/components/SEO"
 import { urlFor } from "@/lib/sanity/image"
 import { Button } from "@/components/ui/button"
-import { Download, Mail, Phone } from "lucide-react"
+import { Download, Mail, Phone, ExternalLink } from "lucide-react"
 import { PortableText } from "@portabletext/react"
 
 /**
@@ -107,15 +107,15 @@ export default function Arrangoerer() {
         )}
 
         {/* Hospitality Rider Section */}
-        {data.hospitalityRider && (
+        {data.hospitalityRider && data.hospitalityRider.length > 0 && (
           <section className="space-y-6">
             <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
               HOSPITALITY RIDER
             </h2>
             <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
-              <p className="whitespace-pre-wrap text-[var(--color-text)]">
-                {data.hospitalityRider}
-              </p>
+              <div className="prose prose-invert max-w-none text-[var(--color-text)]">
+                <PortableText value={data.hospitalityRider} />
+              </div>
             </div>
           </section>
         )}
@@ -125,6 +125,24 @@ export default function Arrangoerer() {
           <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
             PRESSEPAKKE
           </h2>
+
+          {/* Google Drive Link */}
+          {data.googleDriveUrl && (
+            <div className="rounded-none bg-[var(--color-accent)]/10 border border-[var(--color-accent)] p-6 md:p-8">
+              <p className="mb-4 text-[var(--color-text)]">
+                Last ned komplett pressepakke med bilder, logoer og mer fra Google Drive:
+              </p>
+              <Button
+                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
+                asChild
+              >
+                <a href={data.googleDriveUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Åpne pressepakke i Google Drive
+                </a>
+              </Button>
+            </div>
+          )}
 
           {/* Band Bio */}
           {(data.bandBioShort || data.bandBioLong) && (

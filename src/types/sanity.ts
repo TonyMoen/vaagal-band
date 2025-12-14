@@ -69,11 +69,12 @@ export interface PortableTextBlock {
 export interface PromoterMaterials {
   _id: string
   technicalRider?: string // URL from asset
-  hospitalityRider?: string
+  hospitalityRider?: PortableTextBlock[]
   bandBioShort?: string
   bandBioLong?: PortableTextBlock[]
   pressPhotos?: SanityImageSource[]
   logoFiles?: string[] // URLs from assets
+  googleDriveUrl?: string
   contactEmail?: string
   contactPhone?: string
 }

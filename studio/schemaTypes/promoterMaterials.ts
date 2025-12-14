@@ -17,9 +17,9 @@ export default defineType({
     defineField({
       name: 'hospitalityRider',
       title: 'Hospitality Rider',
-      type: 'text',
-      rows: 8,
-      description: 'Catering, dressing room, travel requirements',
+      type: 'array',
+      of: [{type: 'block'}],
+      description: 'Catering, dressing room, travel requirements (with formatting)',
     }),
     defineField({
       name: 'bandBioShort',
@@ -61,6 +61,12 @@ export default defineType({
         },
       ],
       description: 'Band logo in PNG and SVG formats',
+    }),
+    defineField({
+      name: 'googleDriveUrl',
+      title: 'Google Drive Promo Kit',
+      type: 'url',
+      description: 'Link to Google Drive folder with full promo kit',
     }),
     defineField({
       name: 'contactEmail',

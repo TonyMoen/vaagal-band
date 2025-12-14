@@ -71,6 +71,7 @@ export const promoterMaterialsQuery = `*[_type == "promoterMaterials"][0] {
   bandBioLong,
   pressPhotos,
   "logoFiles": logoFiles[].asset->url,
+  googleDriveUrl,
   contactEmail,
   contactPhone
 }`
