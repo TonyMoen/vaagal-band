@@ -23,7 +23,7 @@ export default function Arrangoerer() {
         <SEO
           title="For Arrangører"
           description="Profesjonelle materialer for booking av Vågal. Teknisk og hospitality rider, pressepakke og kontaktinformasjon."
-          url="/arrangoerer"
+          url="/arrangor"
           noindex
         />
         <PageHero title="FOR ARRANGØRER" />
@@ -41,7 +41,7 @@ export default function Arrangoerer() {
         <SEO
           title="For Arrangører"
           description="Profesjonelle materialer for booking av Vågal."
-          url="/arrangoerer"
+          url="/arrangor"
           noindex
         />
         <PageHero title="FOR ARRANGØRER" />
@@ -59,7 +59,7 @@ export default function Arrangoerer() {
         <SEO
           title="For Arrangører"
           description="Profesjonelle materialer for booking av Vågal."
-          url="/arrangoerer"
+          url="/arrangor"
           noindex
         />
         <PageHero title="FOR ARRANGØRER" subtitle="Pressepakke og rider informasjon" />
@@ -78,7 +78,7 @@ export default function Arrangoerer() {
       <SEO
         title="For Arrangører"
         description="Profesjonelle materialer for booking av Vågal. Teknisk og hospitality rider, pressepakke og kontaktinformasjon."
-        url="/arrangoerer"
+        url="/arrangor"
         noindex
       />
       <PageHero title="FOR ARRANGØRER" subtitle="Pressepakke og rider informasjon" />

@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       { path: "bandet", element: <Bandet /> },
       { path: "diskografi", element: <Diskografi /> },
       { path: "kontakt-oss", element: <KontaktOss /> },
-      { path: "arrangoerer", element: <Arrangoerer /> },
+      { path: "arrangor", element: <Arrangoerer /> },
       { path: "merch", element: <Merch /> },
       { path: "*", element: <NotFoundPage /> },
     ],
