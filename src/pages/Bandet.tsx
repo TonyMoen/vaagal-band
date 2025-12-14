@@ -50,7 +50,7 @@ const Bandet: React.FC = () => {
       />
       <PageHero title="BANDET" />
       <main className="container-page py-10 md:py-14">
-        <div className="mx-auto max-w-3xl text-center mb-8">
+        <div className="mx-auto max-w-3xl text-left mb-8">
           <p>
             Vågal er bandet som garanterer fullt trøkk fra første sekund! Med sin
             unike miks av bygderock har Vågal på kort tid fått en stor og lojal
