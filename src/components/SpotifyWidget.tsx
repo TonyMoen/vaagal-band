@@ -36,22 +36,29 @@ export function SpotifyEmbed({
     >
       {isLoading && (
         <Skeleton
-          className="absolute inset-0 rounded-lg bg-card"
+          className="absolute inset-0 rounded-none bg-card"
           style={{ height }}
           aria-hidden="true"
         />
       )}
-      <iframe
-        title={title}
-        loading="lazy"
-        src={embedSrc}
-        width="100%"
-        height={height}
-        style={{ border: 0, opacity: isLoading ? 0 : 1 }}
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        onLoad={() => setIsLoading(false)}
-        aria-label={title}
-      />
+      {/* Bordered wrapper to mask Spotify's internal rounded corners */}
+      <div
+        className="relative overflow-hidden rounded-none border-4 border-[var(--color-surface)] bg-[var(--color-surface)]"
+        style={{ height }}
+      >
+        <iframe
+          className="absolute inset-0 rounded-none"
+          title={title}
+          loading="lazy"
+          src={embedSrc}
+          width="100%"
+          height="100%"
+          style={{ border: 0, borderRadius: 0, opacity: isLoading ? 0 : 1 }}
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          onLoad={() => setIsLoading(false)}
+          aria-label={title}
+        />
+      </div>
     </div>
   )
 }

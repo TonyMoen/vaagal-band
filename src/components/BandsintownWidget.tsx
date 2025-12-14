@@ -1,24 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
+import { ExternalLink } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
-import { WidgetErrorBoundary } from '@/components/WidgetErrorBoundary'
 import { cn } from '@/lib/utils'
 
 interface BandsintownEmbedProps {
   artistId?: string
   className?: string
   onEmptyState?: () => void
+  fallbackUrl?: string
 }
 
 /**
  * Raw Bandsintown embed component with loading state
  * Uses script injection pattern with MutationObserver for load detection
  */
+const DEFAULT_FALLBACK_URL = 'https://www.bandsintown.com/a/15561560-vgal'
+
 export function BandsintownEmbed({
   artistId = 'id_15561560',
   className,
   onEmptyState,
+  fallbackUrl = DEFAULT_FALLBACK_URL,
 }: BandsintownEmbedProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -79,12 +84,11 @@ export function BandsintownEmbed({
     script.async = true
     script.charset = 'utf-8'
 
-    // Track script load errors
+    // Track script load errors - use state instead of throwing
     script.onerror = () => {
       console.error('[Bandsintown Widget Error]: Failed to load script')
       setIsLoading(false)
-      // Throw error to trigger error boundary
-      throw new Error('Failed to load Bandsintown widget script')
+      setHasError(true)
     }
 
     el.appendChild(script)
@@ -110,10 +114,15 @@ export function BandsintownEmbed({
 
     observer.observe(el, { childList: true, subtree: true })
 
-    // Timeout fallback - if widget doesn't load within 10 seconds, hide skeleton
+    // Timeout fallback - if widget doesn't load within 10 seconds, show error
     const timeout = setTimeout(() => {
-      setIsLoading(false)
       observer.disconnect()
+      setIsLoading(false)
+      // Check if anything rendered - if not, show fallback
+      const hasContent = el.querySelector('.bit-events') || el.querySelector('.bit-no-dates') || el.querySelector('.bit-widget')
+      if (!hasContent) {
+        setHasError(true)
+      }
     }, 10000)
 
     return () => {
@@ -122,6 +131,32 @@ export function BandsintownEmbed({
       el.innerHTML = ''
     }
   }, [artistId, onEmptyState])
+
+  // Show fallback UI when widget fails to load
+  if (hasError) {
+    return (
+      <div
+        className={cn(
+          'flex flex-col items-center justify-center gap-3 rounded-none bg-card p-6 text-center min-h-[352px]',
+          className
+        )}
+        role="alert"
+      >
+        <p className="text-muted-foreground">
+          Konsertkalenderen er midlertidig utilgjengelig
+        </p>
+        <a
+          href={fallbackUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        >
+          Se konserter på Bandsintown
+          <ExternalLink className="h-4 w-4" />
+        </a>
+      </div>
+    )
+  }
 
   return (
     <div
@@ -132,14 +167,14 @@ export function BandsintownEmbed({
     >
       {isLoading && (
         <Skeleton
-          className="absolute inset-0 min-h-[200px] w-full rounded-lg bg-card"
+          className="absolute inset-0 min-h-[352px] w-full rounded-none bg-card"
           aria-hidden="true"
         />
       )}
       <div
         ref={ref}
         className={cn(
-          'rounded-2xl border transition-opacity duration-300',
+          'rounded-none border transition-opacity duration-300 min-h-[352px]',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
       />
@@ -148,26 +183,21 @@ export function BandsintownEmbed({
 }
 
 /**
- * Bandsintown widget with error boundary wrapper
- * This is the recommended component for use in pages
+ * Bandsintown widget - the recommended component for use in pages
+ * Handles its own error state and fallback UI
  */
-interface BandsintownWidgetProps extends BandsintownEmbedProps {
-  fallbackUrl?: string
-}
-
 export default function BandsintownWidget({
   artistId = 'id_15561560',
   className,
-  fallbackUrl = 'https://www.bandsintown.com/a/15561560-vgal',
+  fallbackUrl = DEFAULT_FALLBACK_URL,
   onEmptyState,
-}: BandsintownWidgetProps) {
+}: BandsintownEmbedProps) {
   return (
-    <WidgetErrorBoundary
-      name="Bandsintown"
+    <BandsintownEmbed
+      artistId={artistId}
+      className={cn('min-h-[352px]', className)}
       fallbackUrl={fallbackUrl}
-      className={cn('min-h-[200px]', className)}
-    >
-      <BandsintownEmbed artistId={artistId} onEmptyState={onEmptyState} />
-    </WidgetErrorBoundary>
+      onEmptyState={onEmptyState}
+    />
   )
 }

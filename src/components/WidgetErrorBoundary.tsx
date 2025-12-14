@@ -37,7 +37,7 @@ export class WidgetErrorBoundary extends Component<
       return (
         <div
           className={cn(
-            'flex flex-col items-center justify-center gap-3 rounded-lg bg-card p-6 text-center',
+            'flex flex-col items-center justify-center gap-3 rounded-none bg-card p-6 text-center',
             this.props.className
           )}
           role="alert"
@@ -49,7 +49,7 @@ export class WidgetErrorBoundary extends Component<
             href={this.props.fallbackUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             Visit {this.props.name} directly
             <ExternalLink className="h-4 w-4" />

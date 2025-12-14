@@ -66,12 +66,12 @@ export function YouTubeEmbed({
       <div className="relative w-full pb-[56.25%]">
         {isLoading && (
           <Skeleton
-            className="absolute inset-0 h-full w-full rounded-lg bg-card"
+            className="absolute inset-0 h-full w-full rounded-none bg-card"
             aria-hidden="true"
           />
         )}
         <iframe
-          className="absolute inset-0 h-full w-full rounded-lg"
+          className="absolute inset-0 h-full w-full rounded-none"
           src={src}
           title={title}
           loading="lazy"

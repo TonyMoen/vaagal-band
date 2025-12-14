@@ -1,6 +1,6 @@
 import Hero from "../components/Hero"
 import SpotifyWidget from "../components/SpotifyWidget"
-import BandsintownWidget from "../components/BandsintownWidget"
+import ConcertList from "../components/ConcertList"
 import YouTubeWidget from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
 import StructuredData from "../components/StructuredData"
@@ -22,7 +22,7 @@ export default function Hjem() {
       <section className="container-page py-10 md:py-14">
         <div className="grid gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
-            <BandsintownWidget />
+            <ConcertList maxEvents={3} />
           </div>
 
           <aside className="self-start">

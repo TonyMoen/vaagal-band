@@ -26,7 +26,7 @@ export default function ReleaseCard({ release }: Props) {
   }
 
   return (
-    <article className="overflow-hidden rounded-2xl card-surface">
+    <article className="overflow-hidden rounded-none card-surface">
       {/* Cover Image */}
       {release.coverImage && (
         <div className="aspect-square overflow-hidden">
@@ -44,7 +44,7 @@ export default function ReleaseCard({ release }: Props) {
         {release.releaseType && (
           <span
             className={cn(
-              "inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide",
+              "inline-block rounded-none px-3 py-1 text-xs font-semibold uppercase tracking-wide",
               badgeStyles[release.releaseType] || badgeStyles.single
             )}
           >
@@ -63,13 +63,13 @@ export default function ReleaseCard({ release }: Props) {
         </p>
 
         {/* Streaming Links */}
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
           {release.spotifyUrl && (
             <a
               href={release.spotifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-lg bg-[#1DB954]/20 px-3 text-sm font-medium text-[#1DB954] transition-colors hover:bg-[#1DB954]/30"
+              className="inline-flex h-9 items-center justify-center rounded-none bg-[#1DB954]/20 px-3 text-sm font-medium text-[#1DB954] transition-colors hover:bg-[#1DB954]/30"
               aria-label={`Lytt til ${release.title} på Spotify`}
             >
               Spotify
@@ -80,7 +80,7 @@ export default function ReleaseCard({ release }: Props) {
               href={release.appleMusicUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-lg bg-[#FC3C44]/20 px-3 text-sm font-medium text-[#FC3C44] transition-colors hover:bg-[#FC3C44]/30"
+              className="inline-flex h-9 items-center justify-center rounded-none bg-[#FC3C44]/20 px-3 text-sm font-medium text-[#FC3C44] transition-colors hover:bg-[#FC3C44]/30"
               aria-label={`Lytt til ${release.title} på Apple Music`}
             >
               Apple Music
@@ -91,7 +91,7 @@ export default function ReleaseCard({ release }: Props) {
               href={release.youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-lg bg-[#FF0000]/20 px-3 text-sm font-medium text-[#FF0000] transition-colors hover:bg-[#FF0000]/30"
+              className="inline-flex h-9 items-center justify-center rounded-none bg-[#FF0000]/20 px-3 text-sm font-medium text-[#FF0000] transition-colors hover:bg-[#FF0000]/30"
               aria-label={`Se ${release.title} på YouTube`}
             >
               YouTube

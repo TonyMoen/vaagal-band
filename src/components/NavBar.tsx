@@ -48,8 +48,8 @@ export default function NavBar() {
           />
         </NavLink>
 
-        {/* Desktop Navigation with shadcn/ui NavigationMenu */}
-        <NavigationMenu className="hidden md:flex">
+        {/* Desktop Navigation - Centered links */}
+        <NavigationMenu className="hidden md:flex absolute left-1/2 -translate-x-1/2">
           <NavigationMenuList className="gap-2">
             {items.map(({ to, label, end }) => (
               <NavigationMenuItem key={to}>
@@ -58,7 +58,7 @@ export default function NavBar() {
                   end={end as boolean | undefined}
                   className={({ isActive }) =>
                     cn(
-                      "relative inline-flex items-center px-4 py-2 text-base font-semibold transition-colors rounded-lg",
+                      "relative inline-flex items-center px-4 py-2 text-base font-semibold transition-colors rounded-none",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
                         ? "text-[var(--color-text)]"
@@ -70,7 +70,7 @@ export default function NavBar() {
                     <>
                       {label}
                       {isActive && (
-                        <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[var(--color-accent)]" />
+                        <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-none bg-[var(--color-accent)]" />
                       )}
                     </>
                   )}
@@ -78,16 +78,18 @@ export default function NavBar() {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
-          <div className="ml-4 flex items-center border-l border-[var(--color-border)] pl-4">
-            <SocialIcons iconSize={24} />
-          </div>
         </NavigationMenu>
+
+        {/* Desktop Social Icons - Right side */}
+        <div className="hidden md:flex items-center">
+          <SocialIcons iconSize={24} />
+        </div>
 
         {/* Mobile Navigation with shadcn/ui Sheet */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-none border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               aria-label="Meny"
             >
               <svg
@@ -121,7 +123,7 @@ export default function NavBar() {
                   end={end as boolean | undefined}
                   className={({ isActive }) =>
                     cn(
-                      "relative block rounded-2xl px-5 py-4 text-base font-semibold transition-colors",
+                      "relative block rounded-none px-5 py-4 text-base font-semibold transition-colors",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
                         ? "bg-[var(--color-bg)]/30 text-[var(--color-text)]"
@@ -134,7 +136,7 @@ export default function NavBar() {
                     <>
                       {label}
                       {isActive && (
-                        <span className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-full bg-[var(--color-accent)]" />
+                        <span className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-none bg-[var(--color-accent)]" />
                       )}
                     </>
                   )}

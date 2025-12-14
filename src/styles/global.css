@@ -20,7 +20,7 @@
 
 @layer components {
   .card-surface {
-    @apply overflow-hidden rounded-2xl border shadow-sm;
+    @apply overflow-hidden rounded-none border shadow-sm;
     background-color: var(--color-surface);
     border-color: var(--color-border);
     color: var(--color-text);
@@ -28,7 +28,7 @@
 
   .btn {
     @apply inline-flex items-center justify-center font-semibold
-           rounded-2xl px-4 py-3 min-h-[44px] transition
+           rounded-none px-4 py-3 min-h-[44px] transition
            disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: var(--color-accent);
     color: #fff;

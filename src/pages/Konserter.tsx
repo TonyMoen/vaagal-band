@@ -1,12 +1,8 @@
-import { useState } from "react"
-import BandsintownWidget from "../components/BandsintownWidget"
-import { EmptyStateConserter } from "../components/EmptyStateConserter"
+import ConcertList from "../components/ConcertList"
 import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
 
 export default function Konserter() {
-  const [isEmpty, setIsEmpty] = useState(false)
-
   return (
     <>
       <SEO
@@ -18,12 +14,11 @@ export default function Konserter() {
       <section className="container-page py-10 md:py-14">
         <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
-          <BandsintownWidget onEmptyState={() => setIsEmpty(true)} />
-          {isEmpty && <EmptyStateConserter className="mt-6" />}
+          <ConcertList />
         </div>
 
         <aside className="space-y-4 self-start">
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <h2 className="text-lg font-semibold">Praktisk info</h2>
             <ul className="mt-3 space-y-1">
               <li>• Det blir fest</li>
@@ -32,7 +27,7 @@ export default function Konserter() {
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <h3 className="font-semibold">Få varsel</h3>
             <p className="text-sm text-[var(--color-muted)]">Følg oss på sosiale medier for billettslipp og oppdateringer.</p>
             <div className="mt-3 flex flex-wrap gap-3">

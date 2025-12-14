@@ -9,48 +9,35 @@ type Props = {
 const BandMember: React.FC<Props> = ({ member }) => {
   return (
     <section
-      className="relative overflow-hidden rounded-2xl card-surface"
+      className="relative overflow-hidden rounded-none"
       aria-labelledby={`${member.name}-heading`}
     >
       {member.image && (
         <img
           src={urlFor(member.image).width(800).url()}
           alt={member.name}
-          className="w-full object-cover h-[350px] sm:h-[450px] md:h-[500px] lg:h-[560px]"
+          className="w-full object-cover h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px]"
         />
       )}
 
-      <div className="p-5">
-        <h2 id={`${member.name}-heading`} className="text-xl font-semibold">
+      {/* Gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+      {/* Text overlay on image */}
+      <div className="absolute bottom-0 left-0 right-0 p-5">
+        <h2 id={`${member.name}-heading`} className="text-2xl font-bold text-white">
           {member.name}
         </h2>
 
         {member.alias && member.alias !== member.name && (
-          <p className="mt-2 italic text-[var(--color-muted)]">{member.alias}</p>
+          <p className="mt-1 italic text-white/70">{member.alias}</p>
         )}
 
-        <ul className="mt-3 space-y-1 text-sm leading-6 text-[var(--color-muted)]">
-          {member.instrument && (
-            <li>
-              <strong>Instrument:</strong> {member.instrument}
-            </li>
-          )}
-          {member.inspiration && (
-            <li>
-              <strong>Inspiration:</strong> {member.inspiration}
-            </li>
-          )}
-          {member.hobby && (
-            <li>
-              <strong>Hobby:</strong> {member.hobby}
-            </li>
-          )}
-          {member.food && (
-            <li>
-              <strong>Favorittmat:</strong> {member.food}
-            </li>
-          )}
-        </ul>
+        {member.instrument && (
+          <p className="mt-2 text-sm font-medium text-[var(--color-accent)]">
+            {member.instrument}
+          </p>
+        )}
       </div>
     </section>
   );

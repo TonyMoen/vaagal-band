@@ -13,7 +13,7 @@ export default function Footer() {
           <NavLink
             to="/"
             end
-            className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg"
+            className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-none"
           >
             <img
               src={logo}
@@ -26,7 +26,7 @@ export default function Footer() {
 
           <NavLink
             to="/kontakt-oss"
-            className="inline-flex h-11 items-center justify-center rounded-lg bg-[var(--color-accent)] px-6 text-sm font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-hover)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+            className="inline-flex h-11 items-center justify-center rounded-none bg-[var(--color-accent)] px-6 text-sm font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-hover)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
           >
             Book oss
           </NavLink>

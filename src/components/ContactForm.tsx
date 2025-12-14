@@ -210,13 +210,13 @@ const Contact = () => {
 
   // Base input styling for dark theme
   const baseInputClasses =
-    "bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus-visible:ring-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-offset-0 rounded-2xl min-h-[44px]";
+    "bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus-visible:ring-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-offset-0 rounded-none min-h-[44px]";
 
   // Error border styling (Task 5)
   const errorBorderClasses = "border-red-500 focus-visible:ring-red-500";
 
   return (
-    <section className="max-w-md w-full mx-auto p-6 rounded-2xl shadow-md card-surface">
+    <section className="max-w-md w-full mx-auto p-6 rounded-none shadow-md card-surface">
       <form onSubmit={onSubmit} className="space-y-4">
         <h2 className="text-center text-3xl font-bold mb-2 text-white">
           Kontakt Oss
@@ -398,7 +398,7 @@ const Contact = () => {
           type="submit"
           disabled={!isFormValid || isSubmitting}
           className={cn(
-            "w-full min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold rounded-2xl",
+            "w-full min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold rounded-none",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
         >

@@ -61,7 +61,7 @@ export default function SocialIcons({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          className="inline-flex items-center justify-center rounded-none p-2 text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
           <svg
             width={iconSize}

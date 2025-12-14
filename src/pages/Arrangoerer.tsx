@@ -89,7 +89,7 @@ export default function Arrangoerer() {
             <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
               TEKNISK RIDER
             </h2>
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
               <p className="mb-6 text-[var(--color-muted)]">
                 Komplett teknisk rider med stageplott, inputliste, lyd- og lyskrav.
               </p>
@@ -112,7 +112,7 @@ export default function Arrangoerer() {
             <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
               HOSPITALITY RIDER
             </h2>
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
               <p className="whitespace-pre-wrap text-[var(--color-text)]">
                 {data.hospitalityRider}
               </p>
@@ -128,7 +128,7 @@ export default function Arrangoerer() {
 
           {/* Band Bio */}
           {(data.bandBioShort || data.bandBioLong) && (
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8 space-y-6">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8 space-y-6">
               <h3 className="font-condensed text-xl font-semibold text-[var(--color-text)]">
                 Om Vågal
               </h3>
@@ -157,7 +157,7 @@ export default function Arrangoerer() {
 
           {/* Press Photos */}
           {data.pressPhotos && data.pressPhotos.length > 0 && (
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8 space-y-4">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8 space-y-4">
               <h3 className="font-condensed text-xl font-semibold text-[var(--color-text)]">
                 Pressebilder
               </h3>
@@ -166,7 +166,7 @@ export default function Arrangoerer() {
               </p>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {data.pressPhotos.map((photo, index) => (
-                  <div key={index} className="relative aspect-video overflow-hidden rounded-lg group">
+                  <div key={index} className="relative aspect-video overflow-hidden rounded-none group">
                     <img
                       src={urlFor(photo).width(800).url()}
                       alt={`Pressebilde ${index + 1}`}
@@ -177,7 +177,7 @@ export default function Arrangoerer() {
                       download
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute bottom-3 right-3 rounded-md bg-[var(--color-accent)] p-2 hover:bg-[var(--color-accent-hover)] transition-colors"
+                      className="absolute bottom-3 right-3 rounded-none bg-[var(--color-accent)] p-2 hover:bg-[var(--color-accent-hover)] transition-colors"
                     >
                       <Download className="h-5 w-5 text-white" />
                     </a>
@@ -189,7 +189,7 @@ export default function Arrangoerer() {
 
           {/* Logo Files */}
           {data.logoFiles && data.logoFiles.length > 0 && (
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8 space-y-4">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8 space-y-4">
               <h3 className="font-condensed text-xl font-semibold text-[var(--color-text)]">
                 Logofiler
               </h3>
@@ -221,7 +221,7 @@ export default function Arrangoerer() {
             <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
               KONTAKT FOR BOOKING
             </h2>
-            <div className="rounded-lg bg-[var(--color-surface)] p-6 md:p-8">
+            <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 {data.contactEmail && (
                   <Button

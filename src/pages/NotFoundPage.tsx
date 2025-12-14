@@ -20,11 +20,11 @@ export default function NotFoundPage() {
       <div className="mt-6 flex items-center justify-center gap-3">
         <button
           onClick={() => navigate(-1)}
-          className="rounded-xl border px-4 py-2"
+          className="rounded-none border px-4 py-2"
         >
           Gå tilbake
         </button>
-        <Link to="/" className="rounded-xl bg-black px-4 py-2 text-white">
+        <Link to="/" className="rounded-none bg-black px-4 py-2 text-white">
           Til forsiden
         </Link>
       </div>

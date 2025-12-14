@@ -12,7 +12,7 @@ export function ErrorMessage({ message, retry, className }: ErrorMessageProps) {
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center gap-4 rounded-lg bg-card p-4',
+        'flex flex-col items-center justify-center gap-4 rounded-none bg-card p-4',
         className
       )}
       role="alert"
