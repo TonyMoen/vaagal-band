@@ -40,15 +40,20 @@ export function useShopifyProducts(options: UseShopifyProductsOptions = {}) {
         // Filter by artist name if specified
         // Uses Unicode normalization and fallback matching for Norwegian characters
         if (filterByArtist) {
-          const normalizedFilter = filterByArtist.toLowerCase().normalize('NFC')
-          const asciiFilter = filterByArtist.toLowerCase().replace(/[åÅ]/g, 'a').replace(/[øØ]/g, 'o').replace(/[æÆ]/g, 'ae')
+          // Normalize filter to ASCII for robust matching
+          const toAscii = (str: string) =>
+            str.toLowerCase()
+              .normalize('NFKD')
+              .replace(/[\u0300-\u036f]/g, '') // Remove combining diacritics
+              .replace(/[åÅ\u212B]/g, 'a')     // Å variants including Angstrom
+              .replace(/[øØ]/g, 'o')
+              .replace(/[æÆ]/g, 'ae')
+
+          const asciiFilter = toAscii(filterByArtist)
 
           products = products.filter((product) => {
-            const title = product.title.toLowerCase()
-            const normalizedTitle = title.normalize('NFC')
-            const asciiTitle = title.replace(/[åÅ]/g, 'a').replace(/[øØ]/g, 'o').replace(/[æÆ]/g, 'ae')
-
-            return normalizedTitle.includes(normalizedFilter) || asciiTitle.includes(asciiFilter)
+            const asciiTitle = toAscii(product.title)
+            return asciiTitle.includes(asciiFilter)
           })
         }
 
