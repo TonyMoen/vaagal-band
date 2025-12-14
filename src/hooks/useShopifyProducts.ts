@@ -38,10 +38,18 @@ export function useShopifyProducts(options: UseShopifyProductsOptions = {}) {
         let products = response.products.edges.map((edge) => edge.node)
 
         // Filter by artist name if specified
+        // Uses Unicode normalization and fallback matching for Norwegian characters
         if (filterByArtist) {
-          products = products.filter((product) =>
-            product.title.toLowerCase().includes(filterByArtist.toLowerCase())
-          )
+          const normalizedFilter = filterByArtist.toLowerCase().normalize('NFC')
+          const asciiFilter = filterByArtist.toLowerCase().replace(/[åÅ]/g, 'a').replace(/[øØ]/g, 'o').replace(/[æÆ]/g, 'ae')
+
+          products = products.filter((product) => {
+            const title = product.title.toLowerCase()
+            const normalizedTitle = title.normalize('NFC')
+            const asciiTitle = title.replace(/[åÅ]/g, 'a').replace(/[øØ]/g, 'o').replace(/[æÆ]/g, 'ae')
+
+            return normalizedTitle.includes(normalizedFilter) || asciiTitle.includes(asciiFilter)
+          })
         }
 
         setData(products)
