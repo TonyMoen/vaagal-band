@@ -50,7 +50,7 @@ export default function NavBar() {
         </NavLink>
 
         {/* Desktop Navigation - Centered links */}
-        <NavigationMenu className="hidden md:flex absolute left-1/2 -translate-x-1/2">
+        <NavigationMenu className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
           <NavigationMenuList className="gap-2">
             {items.map(({ to, label, end }) => (
               <NavigationMenuItem key={to}>
@@ -82,7 +82,7 @@ export default function NavBar() {
         </NavigationMenu>
 
         {/* Desktop Social Icons - Right side */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <SocialIcons iconSize={24} />
         </div>
 
@@ -90,7 +90,7 @@ export default function NavBar() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-none border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="lg:hidden inline-flex h-12 w-12 items-center justify-center rounded-none border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               aria-label="Meny"
             >
               <svg

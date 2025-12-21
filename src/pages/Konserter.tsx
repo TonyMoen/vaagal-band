@@ -19,12 +19,23 @@ export default function Konserter() {
 
         <aside className="space-y-4 self-start">
           <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-            <h2 className="text-lg font-semibold">Praktisk info</h2>
-            <ul className="mt-3 space-y-1">
-              <li>• Det blir fest</li>
-              <li>• God stemning</li>
-              <li>• Masse musikk</li>
-            </ul>
+            <h2 className="text-lg font-semibold">Booking</h2>
+            <p className="mt-3 text-sm text-[var(--color-muted)]">
+              For booking og forespørsler, kontakt vår bookingagent:
+            </p>
+            <div className="mt-3 space-y-2">
+              <p className="font-semibold">Aronsen Booking & Management</p>
+              <p className="text-sm">
+                <a href="tel:+4792891523" className="text-[var(--color-accent)] hover:underline">
+                  928 91 523
+                </a>
+              </p>
+              <p className="text-sm">
+                <a href="mailto:arne@aronsenbooking.no" className="text-[var(--color-accent)] hover:underline">
+                  arne@aronsenbooking.no
+                </a>
+              </p>
+            </div>
           </div>
 
           <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">

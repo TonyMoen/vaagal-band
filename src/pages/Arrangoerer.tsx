@@ -113,7 +113,7 @@ export default function Arrangoerer() {
               HOSPITALITY RIDER
             </h2>
             <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
-              <div className="prose prose-invert max-w-none text-[var(--color-text)]">
+              <div className="prose prose-invert max-w-none text-[var(--color-text)] break-words">
                 <PortableText value={data.hospitalityRider} />
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function Arrangoerer() {
                   <h4 className="text-sm font-medium text-[var(--color-muted)] uppercase tracking-wide">
                     Full bio
                   </h4>
-                  <div className="prose prose-invert max-w-none text-[var(--color-text)]">
+                  <div className="prose prose-invert max-w-none text-[var(--color-text)] break-words">
                     <PortableText value={data.bandBioLong} />
                   </div>
                 </div>

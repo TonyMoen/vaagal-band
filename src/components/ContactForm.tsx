@@ -198,6 +198,7 @@ const Contact = () => {
     } catch (error) {
       // Error toast (AC4) - form data preserved
       console.error("Form submission error:", error);
+      console.error("API Key present:", !!import.meta.env.VITE_WEB3FORMS_KEY);
       toast({
         title: "Noe gikk galt. Prøv igjen.",
         duration: 5000,
