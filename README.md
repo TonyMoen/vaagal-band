@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Vågal - Official Band Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Vågal** is a Norwegian folk/country band ("Norsk Bygdeband"). This is the official website — a modern, responsive single-page application showcasing the band's music, concerts, merchandise, and more.
 
-Currently, two official plugins are available:
+**Live site:** [vaagalband.no](https://vaagalband.no)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+| Layer        | Technology                                             |
+| ------------ | ------------------------------------------------------ |
+| Framework    | React 19 + TypeScript                                  |
+| Build Tool   | Vite 7                                                 |
+| Styling      | Tailwind CSS 3 + Radix UI primitives                   |
+| CMS          | Sanity (headless)                                      |
+| E-commerce   | Shopify (merch store)                                  |
+| SEO          | react-helmet-async, Open Graph & Twitter Card meta     |
+| Routing      | React Router v7                                        |
+| UI Components| shadcn/ui (Button, Carousel, Sheet, Toast, etc.)       |
+| Embeds       | Spotify widget, YouTube widget, Bandsintown widget      |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Folder Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── assets/              # Static images and media
+├── components/
+│   ├── ui/              # Reusable UI primitives (shadcn/ui)
+│   ├── features/        # Feature-specific components (MerchCarousel, ProductCard)
+│   ├── NavBar.tsx        # Main navigation
+│   ├── Footer.tsx        # Site footer
+│   ├── Hero.tsx          # Landing hero section
+│   ├── PageHero.tsx      # Reusable page hero banner
+│   ├── BandMember.tsx    # Band member card
+│   ├── ConcertList.tsx   # Concert listing
+│   ├── ContactForm.tsx   # Contact form
+│   ├── ReleaseCard.tsx   # Discography release card
+│   ├── SEO.tsx           # SEO meta tag component
+│   ├── StructuredData.tsx # JSON-LD structured data
+│   ├── SocialIcons.tsx   # Social media links
+│   ├── SpotifyWidget.tsx # Embedded Spotify player
+│   ├── YoutubeWidget.tsx # Embedded YouTube player
+│   └── BandsintownWidget.tsx # Bandsintown concert feed
+├── hooks/               # Custom React hooks (useBandMembers, useReleases, etc.)
+├── lib/
+│   ├── sanity/          # Sanity client & queries
+│   └── shopify/         # Shopify client & queries
+├── pages/
+│   ├── Hjem.tsx         # Home page
+│   ├── Bandet.tsx       # About the band
+│   ├── Diskografi.tsx   # Discography
+│   ├── Konserter.tsx    # Concerts
+│   ├── Merch.tsx        # Merchandise store
+│   ├── KontaktOss.tsx   # Contact
+│   ├── Arrangoerer.tsx  # For event organizers / promoters
+│   └── NotFoundPage.tsx # 404 page
+├── styles/              # Global CSS
+├── types/               # TypeScript type definitions (Sanity, Shopify)
+├── routes.tsx           # Route definitions
+├── App.tsx              # App root
+└── main.tsx             # Entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Fully Norwegian** — all UI text and meta tags in Norwegian
+- **Headless CMS** — band members, releases, and concerts managed via Sanity
+- **Merch store** — products pulled from Shopify with carousel display
+- **Concert listings** — upcoming shows with Bandsintown integration
+- **Embedded media** — Spotify and YouTube players for music/videos
+- **SEO optimized** — Open Graph, Twitter Cards, and JSON-LD structured data
+- **Responsive design** — mobile-first layout with Tailwind CSS
+- **Promoter page** — dedicated section for event organizers
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+Copyright &copy; 2025 Vågal. All rights reserved.
