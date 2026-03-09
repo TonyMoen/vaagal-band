@@ -8,6 +8,8 @@ import KontaktOss from "./pages/KontaktOss";
 import Arrangoerer from "./pages/Arrangoerer";
 import Merch from "./pages/Merch";
 import NotFoundPage from "./pages/NotFoundPage";
+import { AuthProvider } from "./lib/auth";
+import AuthGuard from "./layouts/AuthGuard";
 import AiLayout from "./layouts/AiLayout";
 import Dashboard from "./pages/ai/Dashboard";
 import Create from "./pages/ai/Create";
@@ -36,7 +38,13 @@ export const router = createBrowserRouter([
   },
   {
     path: "/ai",
-    element: <AiLayout />,
+    element: (
+      <AuthProvider>
+        <AuthGuard>
+          <AiLayout />
+        </AuthGuard>
+      </AuthProvider>
+    ),
     children: [
       { index: true, element: <Dashboard /> },
       { path: "create", element: <Create /> },

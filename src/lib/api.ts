@@ -1,11 +1,20 @@
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem("vaagal-token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 async function request<T>(
   endpoint: string,
   options?: RequestInit
 ): Promise<T> {
   const res = await fetch(`${API_BASE}${endpoint}`, {
-    headers: { "Content-Type": "application/json", ...options?.headers },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+      ...options?.headers,
+    },
     ...options,
   });
   if (!res.ok) {
@@ -114,7 +123,7 @@ export const api = {
   ) => {
     return fetch(`${API_BASE}/api/yolo/batch`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...getAuthHeaders() },
       body: JSON.stringify({ prompts, platforms, num_images: numImages }),
     }).then(async (res) => {
       if (!res.ok) throw new Error(await res.text());
@@ -167,7 +176,7 @@ export const api = {
     const form = new FormData();
     form.append("file", file);
     if (folder) form.append("folder", folder);
-    return fetch(`${API_BASE}/api/images/upload`, { method: "POST", body: form }).then(
+    return fetch(`${API_BASE}/api/images/upload`, { method: "POST", body: form, headers: getAuthHeaders() }).then(
       (r) => r.json()
     );
   },
@@ -255,4 +264,13 @@ export const api = {
     }),
   getStyleStats: () => request<{ result: string }>("/api/style/stats"),
   summarizeStylePatterns: () => request<{ result: string }>("/api/style/summarize", { method: "POST" }),
+
+  // Auth
+  login: (email: string, password: string) =>
+    request<{ token: string; email: string }>("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    }),
+  authMe: () =>
+    request<{ email: string }>("/api/auth/me"),
 };

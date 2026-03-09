@@ -10,10 +10,12 @@ import {
   Calendar,
   Settings,
   ArrowLeft,
+  LogOut,
   Menu,
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/lib/auth";
 
 const navItems = [
   { to: "/ai", label: "Dashboard", icon: LayoutDashboard, end: true },
@@ -26,7 +28,7 @@ const navItems = [
   { to: "/ai/settings", label: "Innstillinger", icon: Settings },
 ];
 
-function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarContent({ onNavigate, onLogout }: { onNavigate?: () => void; onLogout: () => void }) {
   return (
     <>
       <div className="flex items-center gap-3 border-b border-[var(--color-border)] px-5 py-5">
@@ -63,7 +65,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </nav>
 
-      <div className="border-t border-[var(--color-border)] px-3 py-4">
+      <div className="border-t border-[var(--color-border)] px-3 py-4 space-y-1">
         <NavLink
           to="/"
           className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
@@ -71,6 +73,13 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
           <ArrowLeft size={18} />
           Tilbake til nettside
         </NavLink>
+        <button
+          onClick={onLogout}
+          className="flex w-full items-center gap-3 px-3 py-2.5 text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-red-500"
+        >
+          <LogOut size={18} />
+          Logg ut
+        </button>
       </div>
     </>
   );
@@ -78,12 +87,13 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
 export default function AiLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { logout } = useAuth();
 
   return (
     <div className="flex h-dvh bg-[var(--color-bg)] text-[var(--color-text)]">
       {/* Desktop sidebar */}
       <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
-        <SidebarContent />
+        <SidebarContent onLogout={logout} />
       </aside>
 
       {/* Mobile sidebar overlay */}
@@ -94,7 +104,7 @@ export default function AiLayout() {
             onClick={() => setMobileOpen(false)}
           />
           <aside className="relative z-10 flex w-60 flex-col bg-[var(--color-surface)]">
-            <SidebarContent onNavigate={() => setMobileOpen(false)} />
+            <SidebarContent onNavigate={() => setMobileOpen(false)} onLogout={logout} />
           </aside>
         </div>
       )}
