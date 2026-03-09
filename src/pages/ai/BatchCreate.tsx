@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { api, type Draft } from "@/lib/api";
-import { Layers, Loader2, Plus, X, Check, Eye, Download } from "lucide-react";
+import { Layers, Loader2, Plus, X, Check, Eye } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import PostPreview from "@/components/ai/PostPreview";
 

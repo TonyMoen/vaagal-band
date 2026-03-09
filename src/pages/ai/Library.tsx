@@ -39,7 +39,7 @@ export default function Library() {
   });
 
   const uploadImage = useMutation({
-    mutationFn: api.uploadImage,
+    mutationFn: (file: File) => api.uploadImage(file),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["images"] }),
   });
 

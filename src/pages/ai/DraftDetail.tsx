@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
-import { api, type Draft, type Post } from "@/lib/api";
+import { api, type Draft } from "@/lib/api";
 import PostPreview from "@/components/ai/PostPreview";
 import ImagePickerModal from "@/components/ai/ImagePickerModal";
 import {
@@ -161,7 +161,8 @@ export default function DraftDetail() {
     }
   };
 
-  const currentStatus = STATUS_OPTIONS.find((s) => s.value === draft.status) || STATUS_OPTIONS[0];
+  const _currentStatus = STATUS_OPTIONS.find((s) => s.value === draft.status) || STATUS_OPTIONS[0];
+  void _currentStatus;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
