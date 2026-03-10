@@ -11,6 +11,7 @@ import {
   Trash2,
   Loader2,
   Download,
+  Send,
 } from "lucide-react";
 
 const MONTH_NAMES = [
@@ -105,6 +106,8 @@ export default function Schedule() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [publishingId, setPublishingId] = useState<string | null>(null);
+  const [publishingAll, setPublishingAll] = useState(false);
 
   const activeSchedule = schedules.find((s) => s.id === activeScheduleId) || null;
 
@@ -175,6 +178,44 @@ export default function Schedule() {
     navigator.clipboard.writeText(text);
     setCopiedId(postId);
     setTimeout(() => setCopiedId(null), 1500);
+  }
+
+  async function publishPost(post: ScheduledPost) {
+    if (post.posted) return;
+    setPublishingId(post.post_id);
+    try {
+      const scheduledTime = `${post.scheduled_date}T${post.scheduled_time}:00`;
+      const isNow = new Date(scheduledTime) <= new Date();
+      const result = await api.publishDirect(
+        post.caption,
+        post.platform,
+        post.image_urls?.length ? post.image_urls : post.image_url ? [post.image_url] : [],
+        isNow ? "now" : scheduledTime,
+      );
+      if (result.status === "success" || result.status === "scheduled") {
+        togglePosted(post.post_id);
+      } else {
+        alert(`Publisering feila: ${result.error || "Ukjent feil"}`);
+      }
+    } catch (e: any) {
+      alert(`Publisering feila: ${e.message || "Nettverksfeil"}`);
+    } finally {
+      setPublishingId(null);
+    }
+  }
+
+  async function publishAllUnposted() {
+    if (!activeSchedule) return;
+    const unposted = activeSchedule.posts.filter(
+      (p) => !p.posted && p.platform.startsWith("facebook")
+    );
+    if (unposted.length === 0) return;
+    if (!confirm(`Publiser ${unposted.length} Facebook-innlegg?`)) return;
+    setPublishingAll(true);
+    for (const post of unposted) {
+      await publishPost(post);
+    }
+    setPublishingAll(false);
   }
 
   function handleDeleteSchedule(id: string) {
@@ -251,6 +292,20 @@ export default function Schedule() {
               title="Slett plan"
             >
               <Trash2 size={16} />
+            </button>
+          )}
+          {activeSchedule && activeSchedule.posts.some((p) => !p.posted && p.platform.startsWith("facebook")) && (
+            <button
+              onClick={publishAllUnposted}
+              disabled={publishingAll}
+              className="flex items-center gap-2 border border-blue-500 px-4 py-2 text-sm font-bold uppercase tracking-wider text-blue-500 hover:bg-blue-500 hover:text-white disabled:opacity-40"
+            >
+              {publishingAll ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Send size={16} />
+              )}
+              Publiser alle FB
             </button>
           )}
           <button
@@ -465,7 +520,20 @@ export default function Schedule() {
                         </p>
 
                         {/* Actions */}
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
+                          {!post.posted && post.platform.startsWith("facebook") && (
+                            <button
+                              onClick={() => publishPost(post)}
+                              disabled={publishingId === post.post_id}
+                              className="flex items-center gap-1.5 border border-blue-500 px-3 py-1.5 text-xs font-bold text-blue-500 hover:bg-blue-500 hover:text-white disabled:opacity-40"
+                            >
+                              {publishingId === post.post_id ? (
+                                <><Loader2 size={12} className="animate-spin" /> Publiserer...</>
+                              ) : (
+                                <><Send size={12} /> Publiser</>
+                              )}
+                            </button>
+                          )}
                           <button
                             onClick={() => copyCaption(post.caption, post.post_id)}
                             className="flex items-center gap-1.5 border border-[var(--color-border)] px-3 py-1.5 text-xs font-semibold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"

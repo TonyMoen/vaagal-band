@@ -231,6 +231,13 @@ export const api = {
     localStorage.setItem("vaagal-drafts", JSON.stringify(drafts));
   },
 
+  // Direct publish (from calendar)
+  publishDirect: (caption: string, platform: string, imageUrls: string[], scheduledPublishTime: string = "now") =>
+    request<{status: string; meta_post_id: string | null; url: string | null; error: string | null}>("/api/publish/direct", {
+      method: "POST",
+      body: JSON.stringify({ caption, platform, image_urls: imageUrls, scheduled_publish_time: scheduledPublishTime }),
+    }),
+
   // Schedule
   planSchedule: (posts: Array<{id: string; draft_id: string; platform: string; caption: string; image_url: string; image_urls: string[]}>, startDate: string, endDate: string) =>
     request<{schedule: Array<{post_id: string; scheduled_date: string; scheduled_time: string; category: string; reason: string}>; strategy_notes: string}>("/api/schedule/plan", {
