@@ -180,7 +180,7 @@ export default function Library() {
                   src={
                     tab === "processed"
                       ? `${API_BASE}/api/images/processed/${img.filename}`
-                      : `${API_BASE}/api/images/library/${img.filename}`
+                      : `${API_BASE}/api/images/library/${img.folder ? img.folder + "/" : ""}${img.filename}`
                   }
                   alt={img.filename}
                   className="h-full w-full object-cover"
