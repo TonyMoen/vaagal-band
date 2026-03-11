@@ -44,6 +44,7 @@ export default function DraftDetail() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [swapTarget, setSwapTarget] = useState<{ postId: string; imageIndex: number } | null>(null);
   const [swapError, setSwapError] = useState("");
+  const [applyFilter, setApplyFilter] = useState(true);
 
   useEffect(() => {
     const drafts = api.getDrafts();
@@ -108,7 +109,7 @@ export default function DraftDetail() {
     setSwapError("");
 
     try {
-      const result = await api.swapImage(imageKey, post.platform);
+      const result = await api.swapImage(imageKey, post.platform, undefined, applyFilter);
       if (!result.image_url) {
         setSwapError("Kunne ikkje prosessere bildet. Prøv å køyre 'Index bilder' fyrst.");
         return;
@@ -212,7 +213,22 @@ export default function DraftDetail() {
           </button>
         ))}
 
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex items-center gap-3">
+          <label className="flex cursor-pointer items-center gap-2 text-xs font-semibold text-[var(--color-muted)]">
+            <button
+              onClick={() => setApplyFilter(!applyFilter)}
+              className={`relative h-5 w-9 rounded-full transition-colors ${
+                applyFilter ? "bg-[var(--color-accent)]" : "bg-[var(--color-border)]"
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${
+                  applyFilter ? "left-[18px]" : "left-0.5"
+                }`}
+              />
+            </button>
+            Filter
+          </label>
           <button
             onClick={handleDownloadAll}
             className="flex items-center gap-1 border border-[var(--color-border)] px-3 py-1.5 text-xs font-semibold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"

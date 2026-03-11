@@ -192,10 +192,10 @@ export const api = {
     }),
   publishImages: () => request("/api/images/publish", { method: "POST" }),
   indexImages: () => request("/api/images/index", { method: "POST" }),
-  swapImage: (imageKey: string, platform: string, textOverlay?: string) =>
+  swapImage: (imageKey: string, platform: string, textOverlay?: string, applyFilter: boolean = true) =>
     request<{ image_url: string; image_filename: string }>("/api/images/swap", {
       method: "POST",
-      body: JSON.stringify({ image_key: imageKey, platform, text_overlay: textOverlay }),
+      body: JSON.stringify({ image_key: imageKey, platform, text_overlay: textOverlay, apply_filter: applyFilter }),
     }),
   searchImages: (query: string, platform?: string, numResults?: number) =>
     request<{ result: string }>(`/api/images/search?query=${encodeURIComponent(query)}${platform ? `&platform=${platform}` : ""}${numResults ? `&num_results=${numResults}` : ""}`),
