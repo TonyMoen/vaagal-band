@@ -12,7 +12,6 @@
 | Build Tool   | Vite 7                                                 |
 | Styling      | Tailwind CSS 3 + Radix UI primitives                   |
 | CMS          | Sanity (headless)                                      |
-| E-commerce   | Shopify (merch store)                                  |
 | SEO          | react-helmet-async, Open Graph & Twitter Card meta     |
 | Routing      | React Router v7                                        |
 | UI Components| shadcn/ui (Button, Carousel, Sheet, Toast, etc.)       |
@@ -25,7 +24,6 @@ src/
 ├── assets/              # Static images and media
 ├── components/
 │   ├── ui/              # Reusable UI primitives (shadcn/ui)
-│   ├── features/        # Feature-specific components (MerchCarousel, ProductCard)
 │   ├── NavBar.tsx        # Main navigation
 │   ├── Footer.tsx        # Site footer
 │   ├── Hero.tsx          # Landing hero section
@@ -42,19 +40,18 @@ src/
 │   └── BandsintownWidget.tsx # Bandsintown concert feed
 ├── hooks/               # Custom React hooks (useBandMembers, useReleases, etc.)
 ├── lib/
-│   ├── sanity/          # Sanity client & queries
-│   └── shopify/         # Shopify client & queries
+│   └── sanity/          # Sanity client & queries
 ├── pages/
 │   ├── Hjem.tsx         # Home page
 │   ├── Bandet.tsx       # About the band
 │   ├── Diskografi.tsx   # Discography
 │   ├── Konserter.tsx    # Concerts
-│   ├── Merch.tsx        # Merchandise store
+│   ├── Merch.tsx        # Merchandise (manual ordering via contact form)
 │   ├── KontaktOss.tsx   # Contact
 │   ├── Arrangoerer.tsx  # For event organizers / promoters
 │   └── NotFoundPage.tsx # 404 page
 ├── styles/              # Global CSS
-├── types/               # TypeScript type definitions (Sanity, Shopify)
+├── types/               # TypeScript type definitions (Sanity)
 ├── routes.tsx           # Route definitions
 ├── App.tsx              # App root
 └── main.tsx             # Entry point
@@ -64,7 +61,7 @@ src/
 
 - **Fully Norwegian** — all UI text and meta tags in Norwegian
 - **Headless CMS** — band members, releases, and concerts managed via Sanity
-- **Merch store** — products pulled from Shopify with carousel display
+- **Merch** — ordered manually via the contact form (webshop coming later)
 - **Concert listings** — upcoming shows with Bandsintown integration
 - **Embedded media** — Spotify and YouTube players for music/videos
 - **SEO optimized** — Open Graph, Twitter Cards, and JSON-LD structured data

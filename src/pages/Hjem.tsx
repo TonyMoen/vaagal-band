@@ -5,7 +5,6 @@ import ConcertList from "../components/ConcertList"
 import YouTubeWidget from "../components/YoutubeWidget"
 import SEO from "../components/SEO"
 import StructuredData from "../components/StructuredData"
-import { MerchCarousel } from "@/components/features/MerchCarousel"
 
 export default function Hjem() {
   return (
@@ -43,17 +42,20 @@ export default function Hjem() {
         </div>
 
         {/* Merch */}
-        <div className="overflow-hidden">
+        <div>
           <h2 className="font-condensed text-2xl md:text-3xl text-center text-[var(--color-accent)] mb-8 uppercase">
             Støtt Bandet – Offisiell Merch
           </h2>
-          <MerchCarousel />
+          <p className="text-center text-[var(--color-muted)] max-w-xl mx-auto">
+            T-skjorter, hettegensere og mer. Merch bestilles nå direkte fra
+            oss – ta kontakt, så ordner vi resten.
+          </p>
           <div className="text-center mt-6">
             <Link
               to="/merch"
               className="inline-flex text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
             >
-              Se alt &rarr;
+              Les mer &rarr;
             </Link>
           </div>
         </div>
