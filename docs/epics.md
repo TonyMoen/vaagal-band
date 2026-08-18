@@ -52,6 +52,7 @@ This document provides the complete epic and story breakdown for vaagal-app, dec
 - FR30: System provides a robots.txt file
 - FR31: Developers can configure API keys via environment variables
 - FR32: System hides or removes the Merch page from navigation
+- FR33: Visitors can browse and click through to purchase band merchandise via Shopify integration
 
 ### Non-Functional Requirements
 
@@ -151,6 +152,7 @@ This document provides the complete epic and story breakdown for vaagal-app, dec
 | FR30 | Epic 3 | robots.txt |
 | FR31 | Epic 1 | Environment variables |
 | FR32 | Epic 1 | Remove Merch page |
+| FR33 | Epic 8 | Shopify merch integration |
 
 ## Epic List
 
@@ -162,6 +164,8 @@ This document provides the complete epic and story breakdown for vaagal-app, dec
 | 4 | Navigation & Mobile Experience | FR8-FR12 | Professional responsive navigation |
 | 5 | Widgets & External Integrations | FR14-FR16, FR19, FR20 | Reliable music/video/concert access |
 | 6 | Contact & Booking Flow | FR21-FR23 | Easy booking inquiries |
+| 7 | UI Enhancements & Discography | FR12, FR14 | Polished UX, music showcase |
+| 8 | Merch & E-commerce | FR33 | Drive merch sales via Shopify integration |
 
 ---
 
@@ -747,3 +751,320 @@ So that **I know my inquiry was received**.
 - Form data is preserved
 - User can retry submission
 **And** submission completes within 2 seconds (NFR16)
+
+---
+
+## Epic 7: UI Enhancements & Discography
+
+**Goal:** Elevate the visual experience with consistent hero sections across all pages, prominent social media presence, and a discography showcase featuring the latest release on the homepage.
+
+**User Value:** Fans get a polished, cohesive experience across all pages. Social links are easily accessible. Latest music releases are prominently featured to drive engagement.
+
+**FRs Covered:** FR12 (brand visibility), FR14 (music access)
+
+### Story 7.1: Social Media Icon Buttons in Navigation
+
+As a **visitor**,
+I want **social media icons in the navigation bar**,
+So that **I can quickly access Vågal's social profiles from any page**.
+
+**Acceptance Criteria:**
+
+**Given** the navigation bar exists
+**When** I add social media icon buttons
+**Then** social media icons are displayed in the navbar:
+- Spotify icon linking to Vågal's Spotify
+- YouTube icon linking to Vågal's YouTube channel
+- Instagram icon linking to Vågal's Instagram
+- Facebook icon linking to Vågal's Facebook (if applicable)
+**And** icons use a consistent size (24x24px desktop, 20x20px mobile)
+**And** icons have hover state with orange accent color (#E65C00)
+**And** icons open links in new tab with `rel="noopener noreferrer"`
+**And** icons have appropriate `aria-label` for accessibility
+**And** icons are visible on both desktop and mobile navigation
+
+---
+
+### Story 7.2: Footer Social Media Icon Cleanup
+
+As a **visitor**,
+I want **clean social media icons in the footer without redundant text**,
+So that **the footer looks modern and uncluttered**.
+
+**Acceptance Criteria:**
+
+**Given** the footer has social media links with text labels
+**When** I update the footer social media section
+**Then** "Social Media" text heading is removed
+**And** social media links are displayed as icon-only buttons
+**And** icons match the navbar social icons (same set and style)
+**And** icons have hover state with orange accent color
+**And** icons have appropriate `aria-label` for screen readers
+**And** icon row is centered or right-aligned based on footer layout
+**And** spacing between icons is consistent (8-12px gap)
+
+---
+
+### Story 7.3: Consistent Page Hero Sections
+
+As a **visitor**,
+I want **a hero section on every page**,
+So that **each page has a clear visual identity and consistent experience**.
+
+**Acceptance Criteria:**
+
+**Given** only the homepage has a hero section
+**When** I add hero sections to all pages
+**Then** each page has a hero section with:
+- Page-specific title (e.g., "Bandet", "Konserter", "Kontakt Oss")
+- Optional subtitle or tagline
+- Consistent styling with dark background
+- Responsive typography (scaled for mobile/desktop)
+**And** hero sections use the same component with configurable props
+**And** hero sections are shorter than homepage hero (200-300px height)
+**And** pages affected: Bandet, Konserter, Kontakt Oss
+**And** hero typography uses Barlow Condensed font family
+
+---
+
+### Story 7.4: Discography Content Schema in Sanity
+
+As a **band member**,
+I want **to manage music releases in the CMS**,
+So that **I can add new singles/albums and feature them on the site**.
+
+**Acceptance Criteria:**
+
+**Given** Sanity CMS is configured
+**When** I create the discography schema
+**Then** a `release` document type exists in Sanity with fields:
+- `title` (string, required) - Song/album name
+- `releaseType` (string: "single", "EP", "album")
+- `coverImage` (image with hotspot, required)
+- `releaseDate` (date, required)
+- `spotifyUrl` (url, optional)
+- `appleMusicUrl` (url, optional)
+- `youtubeUrl` (url, optional)
+- `isLatest` (boolean) - Flag for homepage feature
+**And** releases are sortable by release date
+**And** `src/lib/sanity/queries.ts` includes GROQ query for releases
+**And** `src/types/sanity.ts` includes `Release` TypeScript interface
+
+---
+
+### Story 7.5: Discography Page
+
+As a **fan**,
+I want **a dedicated discography page**,
+So that **I can browse all of Vågal's music releases**.
+
+**Acceptance Criteria:**
+
+**Given** the discography schema exists
+**When** I create the discography page
+**Then** `src/pages/Diskografi.tsx` is created
+**And** route `/diskografi` is added to `src/routes.tsx`
+**And** navigation links are updated (navbar + footer + mobile)
+**And** page displays all releases in a grid layout:
+- Cover image
+- Title
+- Release type badge (Single/EP/Album)
+- Release date
+- Links to streaming platforms (icon buttons)
+**And** releases are sorted by release date (newest first)
+**And** page uses SEO component with appropriate meta tags
+**And** page has hero section with title "Diskografi"
+**And** grid is responsive (1 col mobile, 2 cols tablet, 3-4 cols desktop)
+
+---
+
+### Story 7.6: Latest Release Homepage Hero Feature
+
+As a **fan visiting the homepage**,
+I want **to see the latest release prominently featured**,
+So that **I immediately know about new music**.
+
+**Acceptance Criteria:**
+
+**Given** releases exist in Sanity CMS
+**When** a release is marked as `isLatest: true`
+**Then** the homepage hero displays:
+- The release cover image as hero background/featured image
+- Text: "{title} - UTE NÅ!" in prominent typography
+- Link to streaming platforms or discography page
+**And** if no release is marked as latest, default hero content displays
+**And** the latest release hero uses full-bleed styling
+**And** "UTE NÅ!" text uses accent color (#E65C00) for emphasis
+**And** hero includes call-to-action button: "Lytt nå" linking to Spotify
+**And** fallback to regular hero if no releases exist
+
+---
+
+### Story 7.7: Apply Full Color Palette Across UI
+
+As a **visitor**,
+I want **the site to use a cohesive, intentional color palette**,
+So that **the visual experience feels polished and professional**.
+
+**Acceptance Criteria:**
+
+**Given** the UX design defines a full color palette
+**When** I audit and update color usage across the site
+**Then** all components use colors from the defined palette:
+
+**Background colors:**
+- Primary Background (#0A0A0A): Page backgrounds, main containers
+- Secondary (#1A1A1A): Card backgrounds, input fields, elevated surfaces
+- Tertiary (#2A2A2A): Hover states on dark elements, section dividers, borders
+
+**Text colors:**
+- Text Primary (#F5F5F5): Headings, body text, primary content
+- Text Secondary (#A3A3A3): Subtitles, metadata, dates, labels, placeholders, less important info
+
+**Accent colors:**
+- Accent Primary (#E65C00): Links, buttons, active states, highlights
+- Accent Hover (#FF6B00): Hover states on accent elements, focus rings
+
+**Components to audit and update:**
+- Cards (band members, releases, concerts) → Secondary background
+- Input fields and textareas → Secondary background with Tertiary border
+- Footer sections → Secondary or Tertiary backgrounds for visual separation
+- Navigation hover states → Tertiary background
+- Metadata text (dates, labels, instruments) → Text Secondary color
+- Subtitles and taglines → Text Secondary color
+- All buttons and links → Accent Primary with Accent Hover on hover
+- Form placeholders → Text Secondary color
+
+**And** CSS variables are defined in globals.css for all palette colors
+**And** Tailwind config includes all palette colors as named utilities
+**And** no hardcoded hex values remain in components (use CSS vars or Tailwind classes)
+**And** contrast ratios meet WCAG AA standards (4.5:1 for text)
+
+---
+
+### Story 7.8: Hidden Promoter Page (Arrangører)
+
+As a **promoter or event organizer**,
+I want **a dedicated page with riders and press kit**,
+So that **I can quickly access all professional materials needed for booking**.
+
+**Acceptance Criteria:**
+
+**Given** promoters need professional materials
+**When** I create the hidden promoter page
+**Then** `src/pages/Arrangoerer.tsx` is created
+**And** route `/arrangoerer` is added to `src/routes.tsx`
+**And** the page is NOT linked in navigation (navbar, footer, mobile menu)
+**And** the page is accessible via direct URL only
+
+**Page content includes:**
+
+**Technical Rider section:**
+- Stage plot / input list (PDF download or inline display)
+- Sound requirements
+- Lighting requirements
+- Backline needs
+- Power requirements
+
+**Hospitality Rider section:**
+- Catering requirements
+- Dressing room needs
+- Travel/accommodation notes
+
+**Press Kit section:**
+- Band bio (short and long versions)
+- High-resolution band photos (download links)
+- Logo files (PNG, SVG)
+- Genre/style description
+- Social media links and stats
+- Spotify/streaming links
+- Contact information for booking
+
+**And** all downloadable files are stored in Sanity CMS (media library)
+**And** page uses SEO component with `noindex` meta tag (hidden from search)
+**And** page has hero section with title "For Arrangører"
+**And** page is styled consistently with dark theme
+**And** download buttons use accent color styling
+
+**Sanity schema additions:**
+- `promoterMaterials` document type with:
+  - `technicalRider` (file upload)
+  - `hospitalityRider` (file upload or rich text)
+  - `bandBioShort` (text)
+  - `bandBioLong` (rich text)
+  - `pressPhotos` (array of images with download option)
+  - `logoFiles` (array of files)
+  - `contactEmail` (string)
+  - `contactPhone` (string, optional)
+
+---
+
+## Epic 8: Merch & E-commerce
+
+**Goal:** Integrate Shopify Storefront API to showcase band merchandise, driving traffic to the Shopify store for purchases.
+
+**User Value:** Fans can browse merchandise directly on the band website and easily click through to purchase. Featured items on the homepage increase merch visibility and sales.
+
+**FRs Covered:** FR33 (Shopify merch integration)
+
+### Story 8.1: Shopify Merch Integration
+
+As a **fan**,
+I want **to browse band merchandise on the website**,
+So that **I can easily discover and purchase Vågal merch**.
+
+**Acceptance Criteria:**
+
+**Given** the band has a Shopify store with products
+**When** I visit the `/merch` page
+**Then** I see all products from Shopify displayed in a responsive grid layout
+**And** each product shows: image, title, price
+**And** clicking a product opens the Shopify product page in a new tab
+
+**Given** I'm on the homepage on desktop
+**When** I scroll to the merch section (below Bandsintown widget)
+**Then** I see 4 products in a horizontal carousel
+**And** I can swipe/scroll horizontally to see more products
+
+**Given** I'm on the homepage on tablet (iPad size)
+**When** I view the merch section
+**Then** I see 2 products visible with horizontal swipe for more
+
+**Given** I'm on the homepage on mobile
+**When** I view the merch section
+**Then** I see 1 product visible with horizontal swipe for more
+
+**Given** the Shopify API is slow or unavailable
+**When** the page loads
+**Then** I see a loading skeleton, then error message with fallback link to Shopify store
+
+**Technical Requirements:**
+
+- Shopify Storefront API (GraphQL) integration
+- Store domain: `merchforbands.myshopify.com`
+- Environment variables: `VITE_SHOPIFY_STOREFRONT_TOKEN`, `VITE_SHOPIFY_STORE_DOMAIN`
+- Best-sellers sort using Shopify's `BEST_SELLING` sort key
+- Embla Carousel for responsive home page carousel
+- Product cards match site's dark theme and zero-radius style
+- Norwegian Krone (NOK) currency formatting
+
+**Files to Create:**
+- `src/lib/shopify/client.ts` - GraphQL client
+- `src/lib/shopify/queries.ts` - Product queries
+- `src/types/shopify.ts` - TypeScript interfaces
+- `src/hooks/useShopifyProducts.ts` - Data fetching hook
+- `src/components/ui/carousel.tsx` - Embla wrapper
+- `src/components/features/ProductCard.tsx` - Product display card
+- `src/components/features/MerchCarousel.tsx` - Home page carousel
+- `src/pages/Merch.tsx` - Full merch page
+
+**Files to Modify:**
+- `src/routes.tsx` - Add `/merch` route
+- `src/pages/Hjem.tsx` - Add carousel section
+- `src/components/NavBar.tsx` - Add Merch nav link
+- `src/components/Footer.tsx` - Add Merch footer link
+
+**Dependencies:**
+- `embla-carousel-react` - Lightweight carousel library
+
+---
