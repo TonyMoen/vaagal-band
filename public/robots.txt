@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vaagal.no/sitemap.xml
+Sitemap: https://vaagalband.no/sitemap.xml

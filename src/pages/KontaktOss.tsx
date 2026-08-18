@@ -8,7 +8,7 @@ export default function KontaktOss() {
       <SEO
         title="Kontakt"
         description="Kontakt Vågal for booking, presse eller generelle henvendelser."
-        url="/kontakt"
+        url="/kontakt-oss"
       />
       <PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />
       <section className="container-page py-10 md:py-14">

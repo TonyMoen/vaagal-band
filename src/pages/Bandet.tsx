@@ -14,7 +14,7 @@ const Bandet: React.FC = () => {
       <>
         <SEO
           title="Bandet"
-          description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+          description="Møt medlemmene i Vågal - bygdebandet fra Norge som spiller bygderock, festcountry og norsk country."
           url="/bandet"
         />
         <PageHero title="BANDET" />
@@ -30,7 +30,7 @@ const Bandet: React.FC = () => {
       <>
         <SEO
           title="Bandet"
-          description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+          description="Møt medlemmene i Vågal - bygdebandet fra Norge som spiller bygderock, festcountry og norsk country."
           url="/bandet"
         />
         <PageHero title="BANDET" />
@@ -45,21 +45,22 @@ const Bandet: React.FC = () => {
     <>
       <SEO
         title="Bandet"
-        description="Møt medlemmene i Vågal - bygderock-bandet fra Norge. Les om musikerne bak musikken."
+        description="Møt medlemmene i Vågal - bygdebandet fra Norge som spiller bygderock, festcountry og norsk country."
         url="/bandet"
       />
       <PageHero title="BANDET" />
       <main className="container-page py-10 md:py-14">
         <div className="mx-auto max-w-3xl text-left mb-8">
           <p>
-            Vågal er bandet som garanterer fullt trøkk fra første sekund! Med sin
-            unike miks av bygderock har Vågal på kort tid fått en stor og lojal
-            lytterskare over hele Norge. Vågal kickstartet sin reise med første
-            singel "Rådebank" som havnet rett på Spotify sin New Music Friday og
-            lå i flere uker på Spotify topp 50 mest delte. «I baksetet i min
-            Chevrolet» havnet på 7. plass på Spotify topp 50 mest delte. Deres
-            energiske fremføringer og fengende låter skaper en uforglemmelig
-            atmosfære, enten du er på konsert, festival eller bygdefest
+            Vågal er bygdebandet som garanterer fullt trøkk fra første sekund!
+            Med sin unike miks av bygderock, norsk country og festmusikk har
+            Vågal på kort tid fått en stor og lojal lytterskare over hele Norge.
+            Vågal kickstartet sin reise med første singel "Rådebank" som havnet
+            rett på Spotify sin New Music Friday og lå i flere uker på Spotify
+            topp 50 mest delte. «I baksetet i min Chevrolet» havnet på 7. plass
+            på Spotify topp 50 mest delte. Deres energiske fremføringer og
+            fengende festcountry skaper en uforglemmelig atmosfære, enten du er
+            på konsert, festival eller bygdefest
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-2">

@@ -1,15 +1,15 @@
 import { Helmet } from "react-helmet-async"
 
-const BASE_URL = "https://vaagal.no"
+const BASE_URL = "https://vaagalband.no"
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
   "name": "Vågal",
-  "description": "Bygderock fra Norge. Et rockeband som blander moderne rock med norske røtter.",
+  "description": "Norsk bygdeband som spiller bygderock, festcountry og norsk country. Festmusikk med fullt trøkk fra første sekund.",
   "url": BASE_URL,
-  "genre": ["Bygderock", "Rock"],
-  "image": `${BASE_URL}/assets/hero-1920.jpg`,
+  "genre": ["Bygderock", "Festcountry", "Norsk country", "Festmusikk", "Rock"],
+  "image": `${BASE_URL}/og-image.jpg`,
   "foundingLocation": {
     "@type": "Place",
     "name": "Norge",

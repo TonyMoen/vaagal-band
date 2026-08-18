@@ -11,7 +11,7 @@ export default function Hjem() {
     <>
       <SEO
         title="Hjem"
-        description="Vågal - Bygderock fra Norge. Hør musikken vår, se konserter og bli kjent med bandet."
+        description="Vågal - norsk bygdeband med bygderock, festcountry og festmusikk. Hør musikken vår, se konserter og bli kjent med bandet."
         url="/"
       />
       <StructuredData />
@@ -24,7 +24,7 @@ export default function Hjem() {
         {/* Konserter & Spotify */}
         <div>
           <h2 className="font-condensed text-2xl md:text-3xl text-center text-[var(--color-accent)] mb-8 uppercase">
-            Bygderock fra de beste bygdene
+            Bygderock og festcountry fra de beste bygdene
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             <div className="md:col-span-2">

@@ -17,7 +17,7 @@ export default function Diskografi() {
       <>
         <SEO
           title="Diskografi"
-          description="Utforsk Vågal sin diskografi. Singler, EP-er og album fra bygderock-bandet."
+          description="Utforsk Vågal sin diskografi. Bygderock, festcountry og norsk country - singler, EP-er og album fra bygdebandet."
           url="/diskografi"
         />
         <PageHero title="DISKOGRAFI" />
@@ -33,7 +33,7 @@ export default function Diskografi() {
       <>
         <SEO
           title="Diskografi"
-          description="Utforsk Vågal sin diskografi. Singler, EP-er og album fra bygderock-bandet."
+          description="Utforsk Vågal sin diskografi. Bygderock, festcountry og norsk country - singler, EP-er og album fra bygdebandet."
           url="/diskografi"
         />
         <PageHero title="DISKOGRAFI" />
@@ -50,7 +50,7 @@ export default function Diskografi() {
       <>
         <SEO
           title="Diskografi"
-          description="Utforsk Vågal sin diskografi. Singler, EP-er og album fra bygderock-bandet."
+          description="Utforsk Vågal sin diskografi. Bygderock, festcountry og norsk country - singler, EP-er og album fra bygdebandet."
           url="/diskografi"
         />
         <PageHero title="DISKOGRAFI" />
@@ -67,10 +67,10 @@ export default function Diskografi() {
     <>
       <SEO
         title="Diskografi"
-        description="Utforsk Vågal sin diskografi. Singler, EP-er og album fra bygderock-bandet."
+        description="Utforsk Vågal sin diskografi. Bygderock, festcountry og norsk country - singler, EP-er og album fra bygdebandet."
         url="/diskografi"
       />
-      <PageHero title="DISKOGRAFI" subtitle="Singler, EP-er og album" />
+      <PageHero title="DISKOGRAFI" subtitle="Singler, EP-er og album – bygderock og festcountry" />
       <main className="container-page py-10 md:py-14">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((release) => (

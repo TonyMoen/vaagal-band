@@ -9,8 +9,8 @@ interface SEOProps {
 }
 
 const SITE_NAME = "Vågal"
-const BASE_URL = "https://vaagal.no"
-const DEFAULT_OG_IMAGE = "/assets/hero-1920.jpg"
+const BASE_URL = "https://vaagalband.no"
+const DEFAULT_OG_IMAGE = "/og-image.jpg"
 
 export default function SEO({ title, description, image, url, noindex }: SEOProps) {
   const fullTitle = `${title} | ${SITE_NAME}`
