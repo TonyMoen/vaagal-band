@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom"
 import { urlFor } from "@/lib/sanity/image"
+import { songPath } from "@/lib/songs"
 import type { Release } from "@/types/sanity"
 
 type Props = {
@@ -21,21 +23,30 @@ export default function ReleaseCard({ release }: Props) {
     <article className="overflow-hidden rounded-none card-surface">
       {/* Cover Image */}
       {release.coverImage && (
-        <div className="aspect-square overflow-hidden">
+        <Link
+          to={songPath(release)}
+          aria-label={`${release.title}: alle strømmetjenester`}
+          className="block aspect-square overflow-hidden"
+        >
           <img
-            src={urlFor(release.coverImage).width(400).height(400).url()}
+            src={urlFor(release.coverImage).width(800).height(800).url()}
             alt={`${release.title} cover`}
             className="h-full w-full object-cover transition-transform hover:scale-105"
             loading="lazy"
           />
-        </div>
+        </Link>
       )}
 
       <div className="p-5">
         {/* Title and Date on same line */}
         <div className="flex items-baseline justify-between gap-2">
           <h2 className="text-lg font-semibold text-[var(--color-text)]">
-            {release.title}
+            <Link
+              to={songPath(release)}
+              className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-accent)]"
+            >
+              {release.title}
+            </Link>
           </h2>
           <span className="text-sm text-[var(--color-muted)] whitespace-nowrap">
             {formattedDate}

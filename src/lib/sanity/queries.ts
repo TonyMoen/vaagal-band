@@ -30,17 +30,25 @@ export const bandMembersQuery = `*[_type == "bandMember"] | order(order asc) {
 
 /**
  * All releases query - fetches all releases sorted by date (newest first)
- * Returns: Array of { _id, title, releaseType, coverImage, releaseDate, spotifyUrl, appleMusicUrl, youtubeUrl, isLatest }
+ * Also feeds the song pages (/<slug>), so it carries every streaming link.
+ * Keep the projection in sync with scripts/prerender-songs.mjs.
  */
 export const releasesQuery = `*[_type == "release"] | order(releaseDate desc) {
   _id,
   title,
+  slug,
+  artistLine,
   releaseType,
   coverImage,
   releaseDate,
+  description,
+  presaveUrl,
   spotifyUrl,
   appleMusicUrl,
   youtubeUrl,
+  tidalUrl,
+  deezerUrl,
+  amazonMusicUrl,
   isLatest
 }`
 
@@ -48,9 +56,10 @@ export const releasesQuery = `*[_type == "release"] | order(releaseDate desc) {
  * Latest release query - fetches the release marked as featured for homepage
  * Returns: Single release object or null
  */
-export const latestReleaseQuery = `*[_type == "release" && isLatest == true][0] {
+export const latestReleaseQuery = `*[_type == "release" && isLatest == true] | order(releaseDate desc)[0] {
   _id,
   title,
+  slug,
   releaseType,
   coverImage,
   releaseDate,

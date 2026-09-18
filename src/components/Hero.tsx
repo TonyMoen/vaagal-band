@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
 import { useHero } from '@/hooks/useHero'
 import { useLatestRelease } from '@/hooks/useLatestRelease'
 import { urlFor } from '@/lib/sanity/image'
+import { songPath } from '@/lib/songs'
 import { LoadingSpinner } from './LoadingSpinner'
 import { Button } from './ui/button'
 import heroImg from '../assets/hero-1920.jpg'
@@ -70,14 +72,18 @@ export default function Hero({
             {latestRelease.title} - <span className="text-[var(--color-accent)]">UTE NÅ!</span>
           </p>
 
-          {/* Centered Release Cover Image */}
-          <div className="relative">
+          {/* Centered Release Cover Image, links to the song page with every streaming service */}
+          <Link
+            to={songPath(latestRelease)}
+            aria-label={`${latestRelease.title}: alle strømmetjenester`}
+            className="relative block"
+          >
             <img
               src={releaseCoverSrc}
               alt={`${latestRelease.title} cover`}
               className="w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[420px] xl:h-[420px] object-cover shadow-2xl border-4 border-white/20"
             />
-          </div>
+          </Link>
 
           {/* CTA Button */}
           <div className="flex flex-wrap justify-center gap-4 mt-6">
@@ -107,6 +113,14 @@ export default function Hero({
               </Button>
             )}
           </div>
+
+          {/* Song page: Apple Music, YouTube and the rest */}
+          <Link
+            to={songPath(latestRelease)}
+            className="mt-3 inline-flex min-h-[44px] items-center text-sm font-medium text-[var(--color-text)] underline-offset-4 hover:underline"
+          >
+            Alle strømmetjenester &rarr;
+          </Link>
         </div>
       </section>
     )

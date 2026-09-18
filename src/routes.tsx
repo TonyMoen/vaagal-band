@@ -7,6 +7,7 @@ import Diskografi from "./pages/Diskografi";
 import KontaktOss from "./pages/KontaktOss";
 import Arrangoerer from "./pages/Arrangoerer";
 import Merch from "./pages/Merch";
+import Sang from "./pages/Sang";
 import NotFoundPage from "./pages/NotFoundPage";
 import { AuthProvider } from "./lib/auth";
 import AuthGuard from "./layouts/AuthGuard";
@@ -33,6 +34,8 @@ export const router = createBrowserRouter([
       { path: "kontakt-oss", element: <KontaktOss /> },
       { path: "arrangor", element: <Arrangoerer /> },
       { path: "merch", element: <Merch /> },
+      // One page per release: vaagalband.no/<slug>. Unknown slugs render the 404 page.
+      { path: ":slug", element: <Sang /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

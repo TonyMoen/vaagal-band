@@ -3,19 +3,26 @@ import { Helmet } from "react-helmet-async"
 interface SEOProps {
   title: string
   description: string
+  /** Path on this site ("/og-image.jpg") or a full URL (e.g. a cover on the Sanity CDN) */
   image?: string
   url?: string
   noindex?: boolean
+  /** Open Graph type. Song pages use "music.song". */
+  type?: string
 }
 
 const SITE_NAME = "Vågal"
 const BASE_URL = "https://vaagalband.no"
 const DEFAULT_OG_IMAGE = "/og-image.jpg"
 
-export default function SEO({ title, description, image, url, noindex }: SEOProps) {
+export default function SEO({ title, description, image, url, noindex, type = "website" }: SEOProps) {
   const fullTitle = `${title} | ${SITE_NAME}`
   const canonicalUrl = url ? `${BASE_URL}${url}` : undefined
-  const ogImage = image ? `${BASE_URL}${image}` : `${BASE_URL}${DEFAULT_OG_IMAGE}`
+  const ogImage = !image
+    ? `${BASE_URL}${DEFAULT_OG_IMAGE}`
+    : image.startsWith("http")
+      ? image
+      : `${BASE_URL}${image}`
 
   return (
     <Helmet>
@@ -39,7 +46,7 @@ export default function SEO({ title, description, image, url, noindex }: SEOProp
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
       {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:locale" content="nb_NO" />
 

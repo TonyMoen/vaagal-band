@@ -37,12 +37,23 @@ export interface BandMember {
 export interface Release {
   _id: string
   title: string
+  /** Address of the song page (vaagalband.no/<slug>). Falls back to a slug made from the title. */
+  slug?: { current?: string } | null
+  /** Artist credit for collaborations, e.g. "Vågal, Endless" */
+  artistLine?: string | null
   releaseType?: 'single' | 'EP' | 'album'
   coverImage: SanityImageSource
   releaseDate: string
+  /** Optional short text about the song (Norwegian) */
+  description?: string | null
+  /** Pre-save link shown on the song page until the release date */
+  presaveUrl?: string | null
   spotifyUrl?: string
   appleMusicUrl?: string
   youtubeUrl?: string
+  tidalUrl?: string | null
+  deezerUrl?: string | null
+  amazonMusicUrl?: string | null
   isLatest?: boolean
 }
 
