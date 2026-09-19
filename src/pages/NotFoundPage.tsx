@@ -11,20 +11,17 @@ export default function NotFoundPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-xl py-16 text-center">
+    <div className="container-page mx-auto max-w-xl py-16 text-center">
       <h1 ref={h1Ref} tabIndex={-1} className="text-3xl font-semibold">
         Denne siden eksisterer ikke
       </h1>
       <p className="mt-2 text-sm opacity-70">Gå tilbake til forsiden.</p>
 
       <div className="mt-6 flex items-center justify-center gap-3">
-        <button
-          onClick={() => navigate(-1)}
-          className="rounded-none border px-4 py-2"
-        >
+        <button onClick={() => navigate(-1)} className="btn-outline">
           Gå tilbake
         </button>
-        <Link to="/" className="rounded-none bg-black px-4 py-2 text-white">
+        <Link to="/" className="btn">
           Til forsiden
         </Link>
       </div>

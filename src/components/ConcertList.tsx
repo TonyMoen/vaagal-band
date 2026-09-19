@@ -1,85 +1,44 @@
-import { useEffect, useState } from 'react'
-import { ExternalLink, MapPin, Calendar, Ticket } from 'lucide-react'
+import { ExternalLink, Calendar, Ticket } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-
-const BANDSINTOWN_API_KEY = '662fa34dff038486d0ff0ff242fa9503'
-const ARTIST_ID = '15561560'
-const BANDSINTOWN_URL = `https://www.bandsintown.com/a/${ARTIST_ID}-vgal`
-
-interface BandsintownEvent {
-  id: string
-  artist_id: string
-  url: string
-  datetime: string
-  title: string
-  description: string
-  venue: {
-    name: string
-    location: string
-    city: string
-    region: string
-    country: string
-  }
-  offers: Array<{
-    type: string
-    url: string
-    status: string
-  }>
-  lineup: string[]
-}
+import { useConcerts } from '@/hooks/useConcerts'
+import {
+  BANDSINTOWN_URL,
+  eventDate,
+  monthLabel,
+  ticketUrl,
+  venueLabel,
+  weekdayAndTime,
+  type BandsintownEvent,
+} from '@/lib/concerts'
 
 interface ConcertListProps {
   className?: string
   maxEvents?: number
   showEmptyState?: boolean
+  /** Put a "Oktober 2026" divider above each month (the concerts page) */
+  groupByMonth?: boolean
 }
 
 export function ConcertList({
   className,
   maxEvents,
   showEmptyState = true,
+  groupByMonth = false,
 }: ConcertListProps) {
-  const [events, setEvents] = useState<BandsintownEvent[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const response = await fetch(
-          `https://rest.bandsintown.com/artists/id_${ARTIST_ID}/events/?app_id=${BANDSINTOWN_API_KEY}`
-        )
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch events')
-        }
-
-        const data = await response.json()
-        setEvents(maxEvents ? data.slice(0, maxEvents) : data)
-      } catch (err) {
-        console.error('[ConcertList] Error fetching events:', err)
-        setError('Kunne ikke hente konserter')
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchEvents()
-  }, [maxEvents])
+  const { data, isLoading, isError } = useConcerts()
 
   if (isLoading) {
     return (
-      <div className={cn('space-y-4', className)}>
-        {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-24 w-full rounded-none" />
+      <div className={cn('space-y-2', className)}>
+        {Array.from({ length: maxEvents ?? 3 }, (_, i) => (
+          <Skeleton key={i} className="h-[78px] w-full rounded-none lg:h-[88px]" />
         ))}
       </div>
     )
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div
         className={cn(
@@ -88,19 +47,16 @@ export function ConcertList({
         )}
         role="alert"
       >
-        <p className="text-muted-foreground">{error}</p>
-        <a
-          href={BANDSINTOWN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center gap-2 rounded-none border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-        >
+        <p className="text-muted-foreground">Kunne ikke hente konserter</p>
+        <a href={BANDSINTOWN_URL} target="_blank" rel="noopener noreferrer" className="btn-outline">
           Se konserter på Bandsintown
-          <ExternalLink className="h-4 w-4" />
+          <ExternalLink className="h-4 w-4" aria-hidden="true" />
         </a>
       </div>
     )
   }
+
+  const events = maxEvents ? (data ?? []).slice(0, maxEvents) : data ?? []
 
   if (events.length === 0) {
     if (!showEmptyState) return null
@@ -112,86 +68,97 @@ export function ConcertList({
           className
         )}
       >
-        <Calendar className="h-12 w-12 text-muted-foreground" />
+        <Calendar className="h-12 w-12 text-muted-foreground" aria-hidden="true" />
         <div>
           <p className="text-lg font-medium">Ingen kommende konserter</p>
           <p className="text-sm text-muted-foreground">
             Følg oss på Bandsintown for å få beskjed når nye konserter legges ut
           </p>
         </div>
-        <a
-          href={BANDSINTOWN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center gap-2 rounded-none bg-accent-primary px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-primary/90"
-        >
+        <a href={BANDSINTOWN_URL} target="_blank" rel="noopener noreferrer" className="btn">
           Følg på Bandsintown
-          <ExternalLink className="h-4 w-4" />
+          <ExternalLink className="h-4 w-4" aria-hidden="true" />
         </a>
       </div>
     )
   }
 
   return (
-    <div className={cn('space-y-4', className)}>
-      {events.map((event) => (
-        <ConcertCard key={event.id} event={event} />
-      ))}
-    </div>
+    <ul className={cn('border-t border-[var(--color-border)]', groupByMonth && 'border-t-0', className)}>
+      {events.map((event, index) => {
+        const month = monthLabel(eventDate(event))
+        const newMonth =
+          groupByMonth && (index === 0 || monthLabel(eventDate(events[index - 1])) !== month)
+        return (
+          <li key={event.id}>
+            {newMonth && (
+              <h2
+                className={cn(
+                  'border-b border-[var(--color-border)] pb-2.5 font-condensed text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]',
+                  index > 0 && 'pt-6'
+                )}
+              >
+                {month}
+              </h2>
+            )}
+            <ConcertRow event={event} />
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 
-function ConcertCard({ event }: { event: BandsintownEvent }) {
-  const date = new Date(event.datetime)
-  const ticketOffer = event.offers?.find((o) => o.status === 'available')
+/** One gig: date block, venue and city, and a 44px action on the right. */
+function ConcertRow({ event }: { event: BandsintownEvent }) {
+  const date = eventDate(event)
+  const tickets = ticketUrl(event)
+  const name = venueLabel(event)
 
   return (
-    <div className="flex flex-col gap-4 rounded-none border border-tertiary bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
-      {/* Date */}
-      <div className="flex items-center gap-4">
-        <div className="flex h-16 w-16 flex-shrink-0 flex-col items-center justify-center rounded-none border border-tertiary bg-background">
-          <span className="text-xs font-medium uppercase text-muted-foreground">
-            {date.toLocaleDateString('nb-NO', { month: 'short' })}
-          </span>
-          <span className="text-2xl font-bold">{date.getDate()}</span>
-        </div>
+    <div className="grid min-h-[78px] grid-cols-[56px_minmax(0,1fr)_auto] items-center gap-3.5 border-b border-[var(--color-border)] py-[11px] lg:min-h-[88px] lg:grid-cols-[64px_minmax(0,1fr)_auto] lg:gap-5">
+      <time
+        dateTime={event.datetime}
+        className="flex h-14 w-14 flex-col items-center justify-center border border-[var(--color-tertiary)] bg-[var(--color-surface)] lg:h-16 lg:w-16"
+      >
+        <span className="text-[11px] font-semibold uppercase leading-none tracking-[0.1em] text-[var(--color-muted)]">
+          {date.toLocaleDateString('nb-NO', { month: 'short' }).replace('.', '')}
+        </span>
+        <span className="mt-1 text-2xl font-bold leading-none">{date.getDate()}</span>
+      </time>
 
-        {/* Venue Info */}
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate font-semibold">
-            {event.title || event.venue.name}
-          </h3>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <MapPin className="h-3 w-3 flex-shrink-0" />
-            <span className="truncate">
-              {event.venue.city}, {event.venue.country}
-            </span>
-          </div>
-        </div>
+      <div className="min-w-0">
+        <h3 className="text-[17px] font-semibold leading-tight [overflow-wrap:anywhere] lg:text-[19px]">
+          {name}
+        </h3>
+        <p className="mt-0.5 text-[14.5px] leading-snug text-[var(--color-muted)]">
+          {event.venue.city} · {weekdayAndTime(date)}
+        </p>
       </div>
 
-      {/* Ticket Button */}
-      <div className="flex-shrink-0">
-        {ticketOffer ? (
-          <Button asChild className="w-full sm:w-auto">
-            <a
-              href={ticketOffer.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Ticket className="mr-2 h-4 w-4" />
-              Billetter
-            </a>
-          </Button>
-        ) : (
-          <Button asChild variant="outline" className="w-full sm:w-auto">
-            <a href={event.url} target="_blank" rel="noopener noreferrer">
-              Mer info
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        )}
-      </div>
+      {tickets ? (
+        <a
+          href={tickets}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Billetter: ${name}, ${event.venue.city} (åpnes i ny fane)`}
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-none bg-[var(--color-accent)] px-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-hover)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+        >
+          <Ticket className="h-[17px] w-[17px]" aria-hidden="true" />
+          Billetter
+        </a>
+      ) : (
+        <a
+          href={event.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Mer info: ${name}, ${event.venue.city} (åpnes i ny fane)`}
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-none border border-[var(--color-tertiary)] px-3.5 text-[15px] font-semibold transition-colors hover:border-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        >
+          Info
+          <ExternalLink className="h-[17px] w-[17px]" aria-hidden="true" />
+        </a>
+      )}
     </div>
   )
 }

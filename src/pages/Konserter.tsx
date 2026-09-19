@@ -1,6 +1,9 @@
 import ConcertList from "../components/ConcertList"
+import BookingCard from "../components/BookingCard"
 import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
+import { BANDSINTOWN_URL } from "@/lib/concerts"
+import { FACEBOOK_URL, INSTAGRAM_URL } from "@/lib/links"
 
 export default function Konserter() {
   return (
@@ -11,59 +14,53 @@ export default function Konserter() {
         url="/konserter"
       />
       <PageHero title="KONSERTER" subtitle="Kommende konserter og festivaler" />
-      <section className="container-page py-10 md:py-14">
-        <div className="grid gap-8 md:grid-cols-3">
-        <div className="md:col-span-2">
-          <ConcertList />
+      <section className="container-page py-8 md:py-14">
+        {/* grid-cols-1 (= minmax(0,1fr)) keeps a long title from stretching the column past the screen */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
+            <ConcertList groupByMonth />
+          </div>
+
+          <aside className="grid min-w-0 content-start gap-4 md:grid-cols-2 lg:grid-cols-1">
+            <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+              <h2 className="font-condensed text-[26px] font-bold uppercase leading-none">Få varsel</h2>
+              <p className="mt-2 text-[15.5px] text-[var(--color-muted)]">
+                Følg oss for billettslipp og nye datoer.
+              </p>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline px-3"
+                  aria-label="Følg oss på Instagram (åpnes i ny fane)"
+                >
+                  Instagram
+                </a>
+                <a
+                  href={FACEBOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline px-3"
+                  aria-label="Følg oss på Facebook (åpnes i ny fane)"
+                >
+                  Facebook
+                </a>
+                <a
+                  href={BANDSINTOWN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline col-span-2 px-3"
+                  aria-label="Følg oss på Bandsintown (åpnes i ny fane)"
+                >
+                  Følg på Bandsintown
+                </a>
+              </div>
+            </div>
+
+            <BookingCard />
+          </aside>
         </div>
-
-        <aside className="space-y-4 self-start">
-          <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-            <h2 className="text-lg font-semibold">Booking</h2>
-            <p className="mt-3 text-sm text-[var(--color-muted)]">
-              For booking og forespørsler, kontakt vår bookingagent:
-            </p>
-            <div className="mt-3 space-y-2">
-              <p className="font-semibold">Aronsen Booking & Management</p>
-              <p className="text-sm">
-                <a href="tel:+4792891523" className="text-[var(--color-accent)] hover:underline">
-                  928 91 523
-                </a>
-              </p>
-              <p className="text-sm">
-                <a href="mailto:arne@aronsenbooking.no" className="text-[var(--color-accent)] hover:underline">
-                  arne@aronsenbooking.no
-                </a>
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-            <h3 className="font-semibold">Få varsel</h3>
-            <p className="text-sm text-[var(--color-muted)]">Følg oss på sosiale medier for billettslipp og oppdateringer.</p>
-            <div className="mt-3 flex flex-wrap gap-3">
-              <a
-                href="https://www.instagram.com/vaagal_band/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn"
-                aria-label="Følg oss på Instagram (åpnes i ny fane)"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://www.facebook.com/vaagal.band.no/?locale=nb_NO"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn"
-                aria-label="Følg oss på Facebook (åpnes i ny fane)"
-              >
-                Facebook
-              </a>
-            </div>
-          </div>
-        </aside>
-      </div>
       </section>
     </>
   )

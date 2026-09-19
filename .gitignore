@@ -29,3 +29,6 @@ dist-ssr
 *.sw?
 doc/
 .vercel
+
+# Lavish review artifacts
+.lavish/

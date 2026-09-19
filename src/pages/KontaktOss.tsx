@@ -1,4 +1,5 @@
 import Contact from "../components/ContactForm.tsx"
+import BookingCard from "../components/BookingCard"
 import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
 
@@ -11,36 +12,21 @@ export default function KontaktOss() {
         url="/kontakt-oss"
       />
       <PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />
-      <section className="container-page py-10 md:py-14">
-        <div className="grid gap-10 md:grid-cols-2 md:gap-16 max-w-4xl mx-auto">
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Send oss en melding</h2>
-            <p className="text-[var(--color-muted)] mb-6">
+      <section className="container-page py-6 md:py-14">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+          {/* Booking first on phones: tap to call is what a promoter on the move wants */}
+          <div className="min-w-0 md:order-2">
+            <BookingCard />
+          </div>
+
+          <div className="min-w-0 md:order-1">
+            <h2 className="font-condensed text-[26px] font-bold uppercase leading-none">
+              Send oss en melding
+            </h2>
+            <p className="mb-5 mt-2 text-[15.5px] text-[var(--color-muted)]">
               Fyll ut skjemaet så tar vi kontakt så snart som mulig.
             </p>
             <Contact />
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Booking</h2>
-            <p className="text-[var(--color-muted)] mb-6">
-              For booking og forespørsler, kontakt vår bookingagent:
-            </p>
-            <div className="rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-6 space-y-3">
-              <p className="font-semibold text-lg">Aronsen Booking & Management</p>
-              <p>
-                <span className="text-[var(--color-muted)]">Mobil: </span>
-                <a href="tel:+4792891523" className="text-[var(--color-accent)] hover:underline">
-                  928 91 523
-                </a>
-              </p>
-              <p>
-                <span className="text-[var(--color-muted)]">E-post: </span>
-                <a href="mailto:arne@aronsenbooking.no" className="text-[var(--color-accent)] hover:underline">
-                  arne@aronsenbooking.no
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </section>

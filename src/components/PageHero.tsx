@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { useHero } from "@/hooks/useHero"
-import { urlFor } from "@/lib/sanity/image"
+import { imageSrcSet, imageUrl } from "@/lib/sanity/image"
 
 interface PageHeroProps {
   title: string
@@ -10,14 +10,15 @@ interface PageHeroProps {
 
 /**
  * PageHero component for interior pages (Bandet, Konserter, Kontakt)
- * Now with hero background image from Sanity CMS for visual consistency
+ * With hero background image from Sanity CMS for visual consistency
  *
  * Features:
- * - 200-300px height (NOT full viewport like homepage)
- * - Hero background image from CMS with dark overlay
+ * - Compact: about 110px on phones, 190px on desktop, so the page's own
+ *   content starts on the first screen
+ * - Left aligned in the page container, like the song pages
+ * - Hero background image from CMS with dark gradient
  * - Falls back to plain background if no CMS image
  * - Barlow Condensed font for title
- * - Responsive typography
  */
 export function PageHero({
   title,
@@ -26,38 +27,35 @@ export function PageHero({
 }: PageHeroProps) {
   const { data: heroData } = useHero()
 
-  // Get CMS image URL if available
-  const backgroundImage = heroData?.image
-    ? urlFor(heroData.image).width(1920).quality(80).url()
-    : null
-
   return (
     <section
       className={cn(
-        "relative flex min-h-[200px] items-center justify-center py-16 md:min-h-[280px] md:py-20 bg-[var(--color-bg)]",
+        "relative isolate overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg)]",
         className
       )}
     >
-      {backgroundImage && (
+      {heroData?.image && (
         <>
           <img
-            src={backgroundImage}
+            src={imageUrl(heroData.image, 1200)}
+            srcSet={imageSrcSet(heroData.image, [480, 828, 1200, 1920])}
+            sizes="100vw"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover object-[center_58%]"
+            className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_58%]"
           />
           <div
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 -z-10 bg-gradient-to-t from-[#0A0A0A] to-[#0A0A0A]/70"
             aria-hidden="true"
           />
         </>
       )}
-      <div className="relative text-center px-4">
-        <h1 className="font-condensed text-4xl font-bold tracking-tight text-[var(--color-text)] md:text-5xl lg:text-6xl">
+      <div className="container-page pb-5 pt-8 md:pb-8 md:pt-14 lg:pt-16">
+        <h1 className="font-condensed text-[46px] font-bold uppercase leading-[0.95] text-[var(--color-text)] md:text-6xl lg:text-7xl">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-3 text-lg text-[var(--color-muted)] md:text-xl">
+          <p className="mt-1.5 text-[15.5px] text-[var(--color-text)]/80 md:mt-2 md:text-lg">
             {subtitle}
           </p>
         )}

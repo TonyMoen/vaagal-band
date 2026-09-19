@@ -94,6 +94,7 @@ export default function Arrangoerer() {
                 Komplett teknisk rider med stageplott, inputliste, lyd- og lyskrav.
               </p>
               <Button
+                size="touch"
                 className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
                 asChild
               >
@@ -133,6 +134,7 @@ export default function Arrangoerer() {
                 Last ned komplett pressepakke med bilder, logoer og mer fra Google Drive:
               </p>
               <Button
+                size="touch"
                 className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
                 asChild
               >
@@ -195,7 +197,8 @@ export default function Arrangoerer() {
                       download
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute bottom-3 right-3 rounded-none bg-[var(--color-accent)] p-2 hover:bg-[var(--color-accent-hover)] transition-colors"
+                      aria-label={`Last ned pressebilde ${index + 1}`}
+                      className="absolute bottom-3 right-3 inline-flex h-11 w-11 items-center justify-center rounded-none bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition-colors"
                     >
                       <Download className="h-5 w-5 text-white" />
                     </a>
@@ -218,6 +221,7 @@ export default function Arrangoerer() {
                 {data.logoFiles.map((logoUrl, index) => (
                   <Button
                     key={index}
+                    size="touch"
                     variant="outline"
                     className="border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-accent)]"
                     asChild
@@ -243,6 +247,7 @@ export default function Arrangoerer() {
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 {data.contactEmail && (
                   <Button
+                    size="touch"
                     className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
                     asChild
                   >
@@ -254,6 +259,7 @@ export default function Arrangoerer() {
                 )}
                 {data.contactPhone && (
                   <Button
+                    size="touch"
                     variant="outline"
                     className="border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-accent)]"
                     asChild

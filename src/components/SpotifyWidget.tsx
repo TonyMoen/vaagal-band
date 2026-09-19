@@ -2,10 +2,20 @@ import { useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { WidgetErrorBoundary } from '@/components/WidgetErrorBoundary'
 import { cn } from '@/lib/utils'
+import { SPOTIFY_ARTIST_URL } from '@/lib/links'
+
+/**
+ * Spotify draws a different player depending on the height it is given.
+ * On touch layouts we ask for the 152px compact player: it has nothing to
+ * scroll inside, so a thumb that lands on it still scrolls the page. From lg
+ * (mouse and room to spare) it becomes the 352px player with the track list.
+ */
+const RESPONSIVE_HEIGHT = 'h-[152px] lg:h-[352px]'
 
 interface SpotifyEmbedProps {
   url: string
   title?: string
+  /** Fixed height in px. Leave out for the responsive compact/full player. */
   height?: number
   theme?: 'dark' | 'light'
   className?: string
@@ -18,7 +28,7 @@ interface SpotifyEmbedProps {
 export function SpotifyEmbed({
   url,
   title = 'Spotify player',
-  height = 352,
+  height,
   theme = 'dark',
   className,
 }: SpotifyEmbedProps) {
@@ -34,29 +44,25 @@ export function SpotifyEmbed({
       role="region"
       aria-label={`Spotify music player: ${title}`}
     >
-      {isLoading && (
-        <Skeleton
-          className="absolute inset-0 rounded-none bg-card"
-          style={{ height }}
-          aria-hidden="true"
-        />
-      )}
-      {/* Bordered wrapper to mask Spotify's internal rounded corners */}
+      {/* Spotify rounds its own corners at 12px, so the frame follows them instead of fighting them */}
       <div
-        className="relative overflow-hidden rounded-none border-4 border-[var(--color-surface)] bg-[var(--color-surface)]"
-        style={{ height }}
+        className={cn(
+          'relative overflow-hidden rounded-[12px] bg-[var(--color-surface)]',
+          height === undefined && RESPONSIVE_HEIGHT
+        )}
+        style={height === undefined ? undefined : { height }}
       >
+        {isLoading && (
+          <Skeleton className="absolute inset-0 rounded-none bg-card" aria-hidden="true" />
+        )}
         <iframe
-          className="absolute inset-0 rounded-none"
+          className="absolute inset-0 h-full w-full"
           title={title}
           loading="lazy"
           src={embedSrc}
-          width="100%"
-          height="100%"
-          style={{ border: 0, borderRadius: 0, opacity: isLoading ? 0 : 1 }}
+          style={{ border: 0, opacity: isLoading ? 0 : 1 }}
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           onLoad={() => setIsLoading(false)}
-          aria-label={title}
         />
       </div>
     </div>
@@ -74,16 +80,16 @@ interface SpotifyWidgetProps extends SpotifyEmbedProps {
 export default function SpotifyWidget({
   url,
   title = 'Spotify player',
-  height = 352,
+  height,
   theme = 'dark',
   className,
-  fallbackUrl = 'https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9',
+  fallbackUrl = SPOTIFY_ARTIST_URL,
 }: SpotifyWidgetProps) {
   return (
     <WidgetErrorBoundary
       name="Spotify"
       fallbackUrl={fallbackUrl}
-      className={cn('min-h-[200px]', className)}
+      className={cn('min-h-[152px]', className)}
     >
       <SpotifyEmbed
         url={url}

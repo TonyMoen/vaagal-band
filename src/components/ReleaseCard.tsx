@@ -1,95 +1,65 @@
 import { Link } from "react-router-dom"
-import { urlFor } from "@/lib/sanity/image"
-import { songPath } from "@/lib/songs"
+import { imageSrcSet, imageUrl } from "@/lib/sanity/image"
+import { artistNames, formatDato, isUpcoming, songPath, typeLabel, yearOf } from "@/lib/songs"
+import { cn } from "@/lib/utils"
 import type { Release } from "@/types/sanity"
 
 type Props = {
   release: Release
+  /** How wide the tile is drawn, for the browser's image choice (the `sizes` attribute) */
+  sizes?: string
+  className?: string
 }
 
 /**
- * ReleaseCard component for displaying music releases
- * Shows cover image, title, release type badge, date, and streaming links
+ * ReleaseCard: cover, title and year as one link to the song page, where every
+ * streaming service is listed. One big target instead of a row of small chips,
+ * and compact enough for two columns on a phone.
  */
-export default function ReleaseCard({ release }: Props) {
-  // Format date for Norwegian locale
-  const formattedDate = new Date(release.releaseDate).toLocaleDateString('nb-NO', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+export default function ReleaseCard({
+  release,
+  sizes = "(min-width: 1024px) 280px, (min-width: 768px) 33vw, 50vw",
+  className,
+}: Props) {
+  const upcoming = isUpcoming(release)
+  const artists = artistNames(release)
 
   return (
-    <article className="overflow-hidden rounded-none card-surface">
-      {/* Cover Image */}
-      {release.coverImage && (
-        <Link
-          to={songPath(release)}
-          aria-label={`${release.title}: alle strømmetjenester`}
-          className="block aspect-square overflow-hidden"
-        >
-          <img
-            src={urlFor(release.coverImage).width(800).height(800).url()}
-            alt={`${release.title} cover`}
-            className="h-full w-full object-cover transition-transform hover:scale-105"
-            loading="lazy"
-          />
-        </Link>
+    <Link
+      to={songPath(release)}
+      aria-label={`${release.title}: alle strømmetjenester`}
+      className={cn(
+        "group block min-w-0 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]",
+        className
       )}
-
-      <div className="p-5">
-        {/* Title and Date on same line */}
-        <div className="flex items-baseline justify-between gap-2">
-          <h2 className="text-lg font-semibold text-[var(--color-text)]">
-            <Link
-              to={songPath(release)}
-              className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-accent)]"
-            >
-              {release.title}
-            </Link>
-          </h2>
-          <span className="text-sm text-[var(--color-muted)] whitespace-nowrap">
-            {formattedDate}
-          </span>
-        </div>
-
-        {/* Streaming Links */}
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {release.spotifyUrl && (
-            <a
-              href={release.spotifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-none bg-[#1DB954]/20 px-3 text-sm font-medium text-[#1DB954] transition-colors hover:bg-[#1DB954]/30"
-              aria-label={`Lytt til ${release.title} på Spotify`}
-            >
-              Spotify
-            </a>
-          )}
-          {release.appleMusicUrl && (
-            <a
-              href={release.appleMusicUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-none bg-[#FC3C44]/20 px-3 text-sm font-medium text-[#FC3C44] transition-colors hover:bg-[#FC3C44]/30"
-              aria-label={`Lytt til ${release.title} på Apple Music`}
-            >
-              Apple Music
-            </a>
-          )}
-          {release.youtubeUrl && (
-            <a
-              href={release.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-none bg-[#FF0000]/20 px-3 text-sm font-medium text-[#FF0000] transition-colors hover:bg-[#FF0000]/30"
-              aria-label={`Se ${release.title} på YouTube`}
-            >
-              YouTube
-            </a>
-          )}
-        </div>
+    >
+      <div className="aspect-square overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+        {release.coverImage?.asset && (
+          <img
+            src={imageUrl(release.coverImage, 420, { ratio: 1 })}
+            srcSet={imageSrcSet(release.coverImage, [200, 320, 420, 640], { ratio: 1 })}
+            sizes={sizes}
+            alt=""
+            width={420}
+            height={420}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
+          />
+        )}
       </div>
-    </article>
+      <h3 className="mt-2 text-[15.5px] font-semibold leading-tight text-[var(--color-text)] transition-colors [overflow-wrap:anywhere] group-hover:text-[var(--color-accent-hover)] md:text-base">
+        {release.title}
+      </h3>
+      <p
+        className={cn(
+          "mt-0.5 text-[13.5px] leading-snug",
+          upcoming ? "font-semibold text-[var(--color-accent-hover)]" : "text-[var(--color-muted)]"
+        )}
+      >
+        {upcoming
+          ? `Kommer ${formatDato(release.releaseDate)}`
+          : `${artists.length > 1 ? artists.join(", ") : typeLabel(release)} · ${yearOf(release)}`}
+      </p>
+    </Link>
   )
 }

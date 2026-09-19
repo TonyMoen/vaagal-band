@@ -26,28 +26,70 @@
     color: var(--color-text);
   }
 
+  /* Primary action. 48px tall: comfortably above the 44px touch minimum. */
   .btn {
-    @apply inline-flex items-center justify-center font-semibold
-           rounded-none px-4 py-3 min-h-[44px] transition
+    @apply inline-flex items-center justify-center gap-2 font-semibold
+           rounded-none px-5 min-h-[48px] transition-colors
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: var(--color-accent);
     color: #fff;
+    --tw-ring-color: var(--color-accent-hover);
+    --tw-ring-offset-color: var(--color-bg);
   }
   .btn:hover {
     background-color: var(--color-accent-hover);
   }
+
+  /* Secondary action: same size, outlined */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 font-semibold
+           rounded-none border px-5 min-h-[48px] transition-colors
+           focus-visible:outline-none focus-visible:ring-2;
+    border-color: var(--color-tertiary);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    --tw-ring-color: var(--color-accent);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-accent);
+  }
+
+  /* Orange condensed section heading, left aligned so it scans on a phone */
+  .section-title {
+    @apply font-condensed text-3xl font-bold uppercase leading-none md:text-4xl;
+    color: var(--color-accent);
+  }
+
+  /* Small letterspaced label above a title */
+  .kicker {
+    @apply font-condensed text-sm font-semibold uppercase tracking-[0.2em];
+    color: var(--color-accent-hover);
+  }
 }
 
 @layer utilities {
+  /* 16px gutters on phones, 32px from tablets up */
   .container-page {
     max-width: 1200px;
     margin-inline: auto;
     padding-inline: 1rem;
   }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
   .full-bleed {
     width: calc(100vw - (100vw - 100%));
     margin-left: 50%;
     transform: translateX(-50%);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

@@ -54,6 +54,9 @@ export interface Release {
   tidalUrl?: string | null
   deezerUrl?: string | null
   amazonMusicUrl?: string | null
+  /** Overrides "newest release" on the homepage hero */
+  pinToHero?: boolean
+  /** @deprecated Replaced by pinToHero. The hero now follows releaseDate. */
   isLatest?: boolean
 }
 

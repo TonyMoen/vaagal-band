@@ -1,7 +1,8 @@
 // src/components/NavBar.tsx
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import logo from "../assets/vaagal-logo.svg"
+import { ChevronRight } from "lucide-react"
+import logo from "../assets/vaagal-logo.webp"
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -14,7 +15,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { SPOTIFY_ARTIST_URL } from "@/lib/links"
+import { useHideOnScroll } from "@/hooks/useHideOnScroll"
 import SocialIcons from "@/components/SocialIcons"
+import ServiceIcon from "@/components/ServiceIcon"
 
 const items = [
   { to: "/", label: "Hjem", end: true },
@@ -27,23 +31,35 @@ const items = [
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
+  // Below lg the bar slides away while scrolling down and returns on the first scroll up
+  const hidden = useHideOnScroll()
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-surface)]/80">
+    <header
+      className={cn(
+        "sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/85",
+        // Keyboard focus inside the bar always brings it back (touch focus does not count, or the bar
+        // would stay put after every tap on the menu button)
+        "transition-transform duration-200 [&:has(:focus-visible)]:translate-y-0 motion-reduce:transition-none",
+        hidden && !open && "max-lg:-translate-y-full"
+      )}
+    >
       <nav
-        className="mx-auto flex h-20 max-w-[1280px] items-center justify-between gap-8 px-6"
+        className="mx-auto flex h-14 max-w-[1200px] items-center justify-between gap-4 pl-4 pr-1 md:pl-8 md:pr-5 lg:h-[72px] lg:gap-8 lg:px-8"
         aria-label="Hovednavigasjon"
       >
         <NavLink
           to="/"
           end
-          className="inline-flex items-center"
+          className="inline-flex min-h-[44px] items-center"
           aria-label="Vågal – Hjem"
         >
           <img
             src={logo}
             alt="Vågal"
-            className="h-16 w-auto"
+            width={192}
+            height={192}
+            className="h-11 w-11 lg:h-14 lg:w-14"
             loading="eager"
             decoding="async"
           />
@@ -51,7 +67,7 @@ export default function NavBar() {
 
         {/* Desktop Navigation - Centered links */}
         <NavigationMenu className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
-          <NavigationMenuList className="gap-2">
+          <NavigationMenuList className="gap-1 xl:gap-2">
             {items.map(({ to, label, end }) => (
               <NavigationMenuItem key={to}>
                 <NavLink
@@ -59,7 +75,7 @@ export default function NavBar() {
                   end={end as boolean | undefined}
                   className={({ isActive }) =>
                     cn(
-                      "relative inline-flex items-center px-4 py-2 text-base font-semibold transition-colors rounded-none",
+                      "relative inline-flex items-center whitespace-nowrap px-3 py-2 text-[15px] font-semibold transition-colors rounded-none xl:px-4 xl:text-base",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
                         ? "text-[var(--color-text)]"
@@ -83,18 +99,18 @@ export default function NavBar() {
 
         {/* Desktop Social Icons - Right side */}
         <div className="hidden lg:flex items-center">
-          <SocialIcons iconSize={24} />
+          <SocialIcons iconSize={22} size="compact" className="gap-1 xl:gap-2" />
         </div>
 
-        {/* Mobile Navigation with shadcn/ui Sheet */}
+        {/* Mobile Navigation: full-screen menu with shadcn/ui Sheet */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className="lg:hidden inline-flex h-12 w-12 items-center justify-center rounded-none border border-[var(--color-border)] hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="lg:hidden inline-flex h-12 w-12 items-center justify-center rounded-none hover:bg-[var(--color-tertiary)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               aria-label="Meny"
             >
               <svg
-                className="h-6 w-6"
+                className="h-7 w-7"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -110,13 +126,13 @@ export default function NavBar() {
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-[280px] bg-[var(--color-surface)] border-l border-[var(--color-border)] p-0"
+            className="flex w-full max-w-none flex-col overflow-y-auto border-l-0 bg-[var(--color-bg)] p-0 sm:max-w-none"
           >
             <SheetTitle className="sr-only">Navigasjonsmeny</SheetTitle>
-            <nav
-              className="flex flex-col gap-1 px-4 py-6 pt-12"
-              aria-label="Mobilnavigasjon"
-            >
+            <div className="flex h-14 flex-none items-center pl-4">
+              <img src={logo} alt="" width={192} height={192} className="h-11 w-11" />
+            </div>
+            <nav className="px-4" aria-label="Mobilnavigasjon">
               {items.map(({ to, label, end }) => (
                 <NavLink
                   key={to}
@@ -124,28 +140,31 @@ export default function NavBar() {
                   end={end as boolean | undefined}
                   className={({ isActive }) =>
                     cn(
-                      "relative block rounded-none px-5 py-4 text-base font-semibold transition-colors",
+                      "flex min-h-[60px] items-center justify-between border-b border-[var(--color-border)] font-condensed text-[34px] font-bold uppercase leading-none transition-colors",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]",
                       isActive
-                        ? "bg-[var(--color-bg)]/30 text-[var(--color-text)]"
-                        : "text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-tertiary)]/50"
+                        ? "text-[var(--color-accent-hover)]"
+                        : "text-[var(--color-text)] hover:text-[var(--color-accent-hover)]"
                     )
                   }
                   onClick={() => setOpen(false)}
                 >
-                  {({ isActive }) => (
-                    <>
-                      {label}
-                      {isActive && (
-                        <span className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-none bg-[var(--color-accent)]" />
-                      )}
-                    </>
-                  )}
+                  {label}
+                  <ChevronRight className="h-5 w-5 text-[var(--color-muted)]" aria-hidden="true" />
                 </NavLink>
               ))}
             </nav>
-            <div className="mt-auto border-t border-[var(--color-border)] px-4 py-6">
-              <SocialIcons iconSize={20} className="justify-center" />
+            <div className="mt-auto space-y-3 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6">
+              <a
+                href={SPOTIFY_ARTIST_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-none bg-[#1DB954] px-5 font-semibold text-[#0A0A0A] transition-colors hover:bg-[#1ed760]"
+              >
+                <ServiceIcon name="spotify" size={20} />
+                Lytt på Spotify
+              </a>
+              <SocialIcons iconSize={24} className="justify-between" />
             </div>
           </SheetContent>
         </Sheet>

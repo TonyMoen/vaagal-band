@@ -53,19 +53,27 @@ export const releasesQuery = `*[_type == "release"] | order(releaseDate desc) {
 }`
 
 /**
- * Latest release query - fetches the release marked as featured for homepage
+ * Latest release query - the release the homepage hero promotes.
+ * The newest release that is out ($today is YYYY-MM-DD in Norway), so the hero
+ * keeps up with Sanity on its own. A release with "Pin to homepage hero" wins
+ * instead, also before its date, which is how an upcoming release gets its
+ * pre-save button on the front page.
  * Returns: Single release object or null
  */
-export const latestReleaseQuery = `*[_type == "release" && isLatest == true] | order(releaseDate desc)[0] {
+export const latestReleaseQuery = `*[_type == "release" && (pinToHero == true || releaseDate <= $today)]
+  | order(select(pinToHero == true => 1, 0) desc, releaseDate desc)[0] {
   _id,
   title,
   slug,
+  artistLine,
   releaseType,
   coverImage,
   releaseDate,
+  presaveUrl,
   spotifyUrl,
   appleMusicUrl,
-  youtubeUrl
+  youtubeUrl,
+  pinToHero
 }`
 
 /**

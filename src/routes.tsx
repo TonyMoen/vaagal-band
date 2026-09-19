@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Hjem";
@@ -9,18 +10,16 @@ import Arrangoerer from "./pages/Arrangoerer";
 import Merch from "./pages/Merch";
 import Sang from "./pages/Sang";
 import NotFoundPage from "./pages/NotFoundPage";
-import { AuthProvider } from "./lib/auth";
-import AuthGuard from "./layouts/AuthGuard";
-import AiLayout from "./layouts/AiLayout";
-import Dashboard from "./pages/ai/Dashboard";
-import Create from "./pages/ai/Create";
-import BatchCreate from "./pages/ai/BatchCreate";
-import Chat from "./pages/ai/Chat";
-import Library from "./pages/ai/Library";
-import AiSettings from "./pages/ai/AiSettings";
-import Review from "./pages/ai/Review";
-import DraftDetail from "./pages/ai/DraftDetail";
-import Schedule from "./pages/ai/Schedule";
+import { LoadingSpinner } from "./components/LoadingSpinner";
+
+/**
+ * The AI dashboard is for logged-in band members only, so it is split out of
+ * the main bundle: each /ai route is downloaded when someone goes there, and
+ * fans on a phone never pay for it.
+ */
+const onDemand = (load: () => Promise<{ default: ComponentType }>) => async () => ({
+  Component: (await load()).default,
+});
 
 export const router = createBrowserRouter([
   {
@@ -41,23 +40,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "/ai",
-    element: (
-      <AuthProvider>
-        <AuthGuard>
-          <AiLayout />
-        </AuthGuard>
-      </AuthProvider>
-    ),
+    lazy: onDemand(() => import("./layouts/AiShell")),
+    // Shown while the dashboard chunk loads when /ai is the first page opened
+    hydrateFallbackElement: <LoadingSpinner size="lg" className="min-h-dvh" />,
     children: [
-      { index: true, element: <Dashboard /> },
-      { path: "create", element: <Create /> },
-      { path: "batch", element: <BatchCreate /> },
-      { path: "chat", element: <Chat /> },
-      { path: "review", element: <Review /> },
-      { path: "review/:id", element: <DraftDetail /> },
-      { path: "schedule", element: <Schedule /> },
-      { path: "library", element: <Library /> },
-      { path: "settings", element: <AiSettings /> },
+      { index: true, lazy: onDemand(() => import("./pages/ai/Dashboard")) },
+      { path: "create", lazy: onDemand(() => import("./pages/ai/Create")) },
+      { path: "batch", lazy: onDemand(() => import("./pages/ai/BatchCreate")) },
+      { path: "chat", lazy: onDemand(() => import("./pages/ai/Chat")) },
+      { path: "review", lazy: onDemand(() => import("./pages/ai/Review")) },
+      { path: "review/:id", lazy: onDemand(() => import("./pages/ai/DraftDetail")) },
+      { path: "schedule", lazy: onDemand(() => import("./pages/ai/Schedule")) },
+      { path: "library", lazy: onDemand(() => import("./pages/ai/Library")) },
+      { path: "settings", lazy: onDemand(() => import("./pages/ai/AiSettings")) },
     ],
   },
 ]);

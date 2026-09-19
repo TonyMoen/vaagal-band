@@ -124,11 +124,20 @@ export default defineType({
       type: 'url',
     }),
     defineField({
-      name: 'isLatest',
-      title: 'Feature as Latest Release',
+      name: 'pinToHero',
+      title: 'Pin to Homepage Hero',
       type: 'boolean',
-      description: 'Enable to feature this release on the homepage hero. Only one release should be marked as latest.',
+      description:
+        'Leave off: the homepage hero shows the newest release that is out, by Release Date. Turn on to keep this release in the hero instead, for example an upcoming release with a pre-save link. Only one release should be pinned.',
       initialValue: false,
+    }),
+    defineField({
+      name: 'isLatest',
+      title: 'Feature as Latest Release (old)',
+      type: 'boolean',
+      deprecated: {reason: 'The homepage hero now follows Release Date. Use "Pin to Homepage Hero" for exceptions.'},
+      hidden: true,
+      readOnly: true,
     }),
   ],
   preview: {
