@@ -174,7 +174,7 @@ for (const release of releases) {
     : summary
   const title = `${artists.length > 1 ? `${release.title} (${artists.join(', ')})` : release.title} | ${BAND_NAME}`
   const image = release.coverUrl
-    ? `${release.coverUrl}?w=1200&h=630&fit=fill&bg=0a0a0a&fm=jpg&q=85`
+    ? `${release.coverUrl}?w=1200&h=1200&fit=crop&fm=jpg&q=82`
     : `${BASE_URL}/og-image.jpg`
 
   const structuredData = {
@@ -214,7 +214,7 @@ for (const release of releases) {
   html = setMeta(html, 'property', 'og:description', description)
   html = setMeta(html, 'property', 'og:image', image)
   html = setMeta(html, 'property', 'og:image:width', '1200')
-  html = setMeta(html, 'property', 'og:image:height', '630')
+  html = setMeta(html, 'property', 'og:image:height', '1200')
   html = setMeta(html, 'name', 'twitter:url', url)
   html = setMeta(html, 'name', 'twitter:title', title)
   html = setMeta(html, 'name', 'twitter:description', description)

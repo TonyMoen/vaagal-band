@@ -77,9 +77,9 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
   const hasCover = Boolean(release.coverImage?.asset)
   const coverUrl = hasCover ? urlFor(release.coverImage).width(800).height(800).auto("format").url() : null
   const backdropUrl = hasCover ? urlFor(release.coverImage).width(64).height(64).blur(30).url() : null
-  // 1200x630 with the cover centred on black: the share card the prerender script also uses
+  // The cover itself, square: Facebook and Messenger crop a wide card to a strip, a square cover survives everywhere
   const shareImage = hasCover
-    ? urlFor(release.coverImage).width(1200).height(630).fit("fill").bg("0a0a0a").format("jpg").quality(85).url()
+    ? urlFor(release.coverImage).width(1200).height(1200).fit("crop").format("jpg").quality(82).url()
     : undefined
 
   const description = links.length
