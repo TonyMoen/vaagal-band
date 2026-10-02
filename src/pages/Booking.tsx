@@ -24,7 +24,7 @@ export default function Booking() {
   const venues = playedAt(past ?? [], 24)
 
   const delivers = [
-    "Egne låter – bygderock, norsk country og festcountry, laget for allsang og dans",
+    "Egne låter – bygderock og norsk country, laget for allsang og dans",
     `Konsert på ${BAND.setLength}`,
     members?.length ? `Fire musikere: ${memberSentence(members)}` : "Fire musikere: vokal, gitar, bass og trommer",
     "Vi spiller over hele Norge – bandet holder til på Notodden i Telemark",
@@ -34,9 +34,9 @@ export default function Booking() {
   return (
     <>
       <SEO
-        title="Book Vågal – populært festband til bygdefest, festival og firmafest"
+        title="Book Vågal – populært band til fest, bygdefest og festival"
         rawTitle
-        description="Book Vågal, et populært bygdeband og festband fra Notodden: bygderock og festcountry med allsang, 2 × 45 minutter, over hele Norge. Festival, bygdefest, firmafest, julebord og bryllup."
+        description="Book Vågal, et populært bygdeband og festband fra Notodden: bygderock og norsk country med allsang, 2 × 45 minutter, over hele Norge. Band til festival, bygdefest, firmafest, julebord og bryllup."
         url="/booking"
       />
       <JsonLd
@@ -55,9 +55,9 @@ export default function Booking() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <p className="max-w-3xl text-[16.5px] leading-relaxed md:text-lg">
-              Vågal er et av Norges mest populære nye bygdeband – et festband fra Notodden som spiller bygderock, norsk
-              country og festcountry, med egne låter, allsang og fullt trøkk. Vi spiller over hele Norge, på{" "}
-              {BAND.eventTypes.slice(0, -1).join(", ")} og {BAND.eventTypes[BAND.eventTypes.length - 1]}.
+              Vågal er et av Norges mest populære nye bygdeband – et festband fra Notodden som spiller bygderock og
+              norsk country, med egne låter, allsang og fullt trøkk. Trenger dere et band til fest? Vi spiller over
+              hele Norge, på {BAND.eventTypes.slice(0, -1).join(", ")} og {BAND.eventTypes[BAND.eventTypes.length - 1]}.
             </p>
 
             <section className="mt-9" aria-labelledby="hvorfor-vagal">

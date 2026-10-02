@@ -15,11 +15,11 @@ export const BAND = {
   hometown: 'Notodden',
   region: 'Telemark',
   founded: '2023',
-  genres: ['Bygderock', 'Norsk country', 'Festcountry', 'Festmusikk'],
+  genres: ['Bygderock', 'Norsk country', 'Countryrock', 'Festmusikk'],
   /** The band's own slogan */
-  slogan: 'Bygderock og festcountry fra de beste bygdene',
+  slogan: 'Bygderock og norsk country fra de beste bygdene',
   oneLiner:
-    'Vågal er et av Norges mest populære nye bygdeband – bygderock, norsk country og festcountry fra Notodden, med egne låter, allsang og fullt trøkk fra første sekund.',
+    'Vågal er et av Norges mest populære nye bygdeband – et festband fra Notodden som spiller bygderock og norsk country, med egne låter, allsang og fullt trøkk fra første sekund.',
   setLength: '2 × 45 minutter',
   coverage: 'hele Norge',
   eventTypes: ['festivaler', 'bygdefester', 'puber', 'klubber', 'firmafester', 'julebord', 'bryllup', 'private fester'],
@@ -42,7 +42,7 @@ export const BAND = {
 
 /** The "Om Vågal" text: plain sentences that answer who, where, since when and what. */
 export const ABOUT = [
-  'Vågal er et av Norges mest populære nye bygdeband. Festbandet fra Notodden i Telemark ble startet i 2023 og spiller bygderock, norsk country og festcountry – bare egne låter, laget for allsang, dans og fullt trøkk.',
+  'Vågal er et av Norges mest populære nye bygdeband. Festbandet fra Notodden i Telemark ble startet i 2023 og spiller bygderock og norsk country – bare egne låter, laget for allsang, dans og fullt trøkk.',
   'Debutsingelen «Rådebank» kom høsten 2023, havnet rett på Spotifys New Music Friday og lå i flere uker på Spotifys topp 50 over mest delte låter. «I baksetet i min Chevrolet» nådde 7. plass på samme liste, og i dag har bandet titusenvis av lyttere på Spotify hver måned.',
   'Siden har Vågal spilt på festivaler, bygdefester og puber over store deler av Østlandet og Sørlandet – blant annet Sommerbust i Kristiansand, Slåttefestivalen i Hjartdal, Kamerinafestivalen og Solfesten på Rjukan.',
 ]
@@ -71,7 +71,7 @@ export function bandFaq(memberLine: string): Faq[] {
     {
       question: 'Hva slags musikk spiller Vågal?',
       answer:
-        'Bygderock, norsk country og festcountry – egne låter, laget for allsang og fest. Vågal er et av Norges mest populære nye bygdeband, med titusenvis av lyttere på Spotify hver måned.',
+        'Bygderock og norsk country – egne låter, laget for allsang og fest. Vågal er et av Norges mest populære nye bygdeband og countryband, med titusenvis av lyttere på Spotify hver måned.',
     },
     ...(memberLine ? [{ question: 'Hvem er med i Vågal?', answer: `${memberLine}.` }] : []),
     {
@@ -95,7 +95,7 @@ export const BOOKING_FAQ: Faq[] = [
   { question: 'Hvor lang er konserten?', answer: 'Vanligvis 2 × 45 minutter.' },
   {
     question: 'Spiller dere covers?',
-    answer: 'Nei. Vi spiller egne låter – bygderock og festcountry som publikum synger med på.',
+    answer: 'Nei. Vi spiller egne låter – bygderock og norsk country som publikum synger med på.',
   },
   { question: 'Hvor i landet spiller dere?', answer: 'Over hele Norge. Bandet holder til på Notodden i Telemark.' },
   {

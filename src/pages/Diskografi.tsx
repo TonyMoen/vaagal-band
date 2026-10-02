@@ -14,7 +14,7 @@ import { breadcrumbNode, graph, recordingNode } from "@/lib/schema"
 import type { Release } from "@/types/sanity"
 
 const DESCRIPTION =
-  "Utforsk Vågal sin diskografi. Bygderock, festcountry og norsk country - singler, EP-er og album fra bygdebandet."
+  "Alle låtene til Vågal, et av Norges mest populære nye bygdeband: bygderock og norsk country med allsang – singler med lenker til Spotify, Apple Music og YouTube."
 
 /**
  * Diskografi page - displays all music releases from Sanity CMS
@@ -46,8 +46,8 @@ export default function Diskografi() {
         title="DISKOGRAFI"
         subtitle={
           releases.length > 0
-            ? `${releases.length} utgivelser – bygderock og festcountry`
-            : "Singler, EP-er og album – bygderock og festcountry"
+            ? `${releases.length} utgivelser – bygderock og norsk country`
+            : "Singler, EP-er og album – bygderock og norsk country"
         }
       />
       <div className="container-page py-6 md:py-12">

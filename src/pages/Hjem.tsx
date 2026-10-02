@@ -41,9 +41,9 @@ export default function Hjem() {
   return (
     <>
       <SEO
-        title="Vågal – populært norsk bygdeband | Bygderock og festcountry"
+        title="Vågal – populært norsk bygdeband og festband fra Notodden"
         rawTitle
-        description="Vågal er et av Norges mest populære nye bygdeband: bygderock og festcountry fra Notodden, med allsang og fullt trøkk. Hør låtene, se konsertene og book festbandet."
+        description="Vågal er et av Norges mest populære nye bygdeband: bygderock og norsk country med allsang og fullt trøkk. Hør låtene, se konsertene og book oss som band til fest og festival."
         url="/"
       />
       <JsonLd

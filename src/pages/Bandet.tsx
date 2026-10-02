@@ -27,7 +27,7 @@ const Bandet: React.FC = () => {
     <>
       <SEO
         title="Bandet – populært bygdeband fra Notodden"
-        description="Vågal er et av Norges mest populære nye bygdeband, startet på Notodden i 2023. Møt Marius Presthaug, Torstein Vala, Tony Portås og Truls Vennman – bygderock og festcountry med allsang."
+        description="Vågal er et av Norges mest populære nye bygdeband, startet på Notodden i 2023. Møt Marius Presthaug, Torstein Vala, Tony Portås og Truls Vennman – bygderock og norsk country med allsang."
         url="/bandet"
       />
       <JsonLd
