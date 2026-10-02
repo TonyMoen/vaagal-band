@@ -41,7 +41,7 @@ export const BAND = {
 /** The "Om Vågal" text: plain sentences that answer who, where, since when and what. */
 export const ABOUT = [
   'Vågal er et bygdeband fra Notodden i Telemark. Bandet ble startet i 2023 og spiller bygderock og norsk country – bare egne låter, laget for allsang, dans og fullt trøkk.',
-  'Debutsingelen «Rådebank» kom høsten 2023, havnet rett på Spotifys New Music Friday og lå i flere uker på Spotifys topp 50 over mest delte låter. «Baksetet i min Chevrolet» nådde 7. plass på samme liste.',
+  'Debutsingelen «Rådebank» kom høsten 2023, havnet rett på Spotifys New Music Friday og lå i flere uker på Spotifys topp 50 over mest delte låter. «I baksetet i min Chevrolet» nådde 7. plass på samme liste.',
   'Siden har Vågal spilt på festivaler, bygdefester og puber over store deler av Østlandet og Sørlandet – blant annet Sommerbust i Kristiansand, Slåttefestivalen i Hjartdal, Kamerinafestivalen og Solfesten på Rjukan.',
 ]
 

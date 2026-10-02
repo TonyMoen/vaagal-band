@@ -20,7 +20,7 @@ import { ABOUT } from "@/lib/band"
 import { bandNode, eventNode, graph } from "@/lib/schema"
 
 /** Shown until a music video is set on the Hero document in Sanity */
-const FALLBACK_VIDEO = { url: "https://www.youtube.com/watch?v=5RKw6rMlKwg", title: "Øst til Vest" }
+const FALLBACK_VIDEO = { url: "https://www.youtube.com/watch?v=5RKw6rMlKwg", title: "Øst til vest" }
 
 /**
  * Homepage. One source order, read top to bottom on a phone: release, next gig,
