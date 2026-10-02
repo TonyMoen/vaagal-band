@@ -16,7 +16,7 @@ export default function Konserter() {
     <>
       <SEO
         title="Konserter"
-        description="Se når og hvor bygdebandet Vågal spiller: kommende konserter med datoer, steder og billetter, og festivalene og bygdefestene vi har spilt på."
+        description="Se når og hvor Vågal spiller bygderock og festcountry live: kommende konserter med datoer, steder og billetter, og festivalene og bygdefestene vi har spilt på."
         url="/konserter"
       />
       <JsonLd

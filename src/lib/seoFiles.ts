@@ -3,7 +3,7 @@
  * llms.txt, a plain-text summary for AI tools (https://llmstxt.org). Both come
  * from the same data as the pages, so they never disagree with the site.
  */
-import { ABOUT, BAND, BOOKING_FAQ, SITE_URL, memberSentence } from '@/lib/band'
+import { ABOUT, BAND, BOOKING_FAQ, HIGHLIGHTS, SITE_URL, memberSentence } from '@/lib/band'
 import { longDate, venueLabel, playedAt } from '@/lib/concerts'
 import { songPath, typeLabel, yearOf } from '@/lib/songs'
 import type { InitialData } from '@/lib/initialData'
@@ -54,6 +54,10 @@ export function buildLlmsTxt(data: InitialData): string {
     `- Spiller på: ${BAND.eventTypes.join(', ')} – over ${BAND.coverage}`,
     `- Booking: ${BAND.booking.agency}, ${BAND.booking.phoneLabel}, ${BAND.booking.email}`,
     `- E-post til bandet: ${BAND.email}`,
+    '',
+    '## Hvorfor Vågal',
+    '',
+    ...HIGHLIGHTS.map((line) => `- ${line}`),
     '',
     '## Sider',
     '',

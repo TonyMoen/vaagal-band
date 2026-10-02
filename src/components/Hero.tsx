@@ -3,6 +3,7 @@ import { Play } from 'lucide-react'
 import { useHero } from '@/hooks/useHero'
 import { useLatestRelease } from '@/hooks/useLatestRelease'
 import { useToday } from '@/hooks/useToday'
+import { BAND } from '@/lib/band'
 import { imageSrcSet, imageUrl } from '@/lib/sanity/image'
 import { artistNames, formatDato, isUpcoming, songPath, typeLabel } from '@/lib/songs'
 import { LoadingSpinner } from './LoadingSpinner'
@@ -23,7 +24,7 @@ type Props = {
   disableLatestRelease?: boolean
 }
 
-const TAGLINE = 'Bygderock og festcountry fra de beste bygdene'
+const TAGLINE = BAND.slogan
 
 /**
  * Poster height: most of the first screen but never all of it, so the next
@@ -76,7 +77,7 @@ export default function Hero({
         <>
           {/* The page's h1: band name and genre, small on screen, first in the outline */}
           <h1 className="container-page absolute inset-x-0 top-4 font-condensed text-[13px] font-semibold uppercase leading-snug tracking-[0.2em] text-[var(--color-text)]/90 md:top-6 md:text-[15px]">
-            Vågal · {TAGLINE}
+            Vågal · Populært bygdeband · {TAGLINE}
           </h1>
           <ReleaseFeature release={release} />
         </>

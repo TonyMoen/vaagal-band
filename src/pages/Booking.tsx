@@ -9,14 +9,14 @@ import SectionHeading from "../components/SectionHeading"
 import { PageHero } from "@/components/PageHero"
 import { usePastConcerts } from "@/hooks/useConcerts"
 import { useBandMembers } from "@/hooks/useBandMembers"
-import { BAND, BOOKING_FAQ, memberSentence } from "@/lib/band"
+import { BAND, BOOKING_FAQ, HIGHLIGHTS, memberSentence } from "@/lib/band"
 import { playedAt } from "@/lib/concerts"
 import { bandNode, breadcrumbNode, faqNode, graph } from "@/lib/schema"
 
 /**
  * Booking page for organisers: festivals, bygdefester, pubs, company parties,
  * Christmas parties and weddings. Written in the words they search with
- * ("booke band til fest", "band til bygdefest", "countryband til festival").
+ * ("populært bygdeband", "festband", "band til fest", "band til bygdefest").
  */
 export default function Booking() {
   const { data: past } = usePastConcerts()
@@ -24,7 +24,7 @@ export default function Booking() {
   const venues = playedAt(past ?? [], 24)
 
   const delivers = [
-    "Egne låter – bygderock og norsk country, laget for allsang og dans",
+    "Egne låter – bygderock, norsk country og festcountry, laget for allsang og dans",
     `Konsert på ${BAND.setLength}`,
     members?.length ? `Fire musikere: ${memberSentence(members)}` : "Fire musikere: vokal, gitar, bass og trommer",
     "Vi spiller over hele Norge – bandet holder til på Notodden i Telemark",
@@ -34,9 +34,9 @@ export default function Booking() {
   return (
     <>
       <SEO
-        title="Book Vågal – bygdeband til festival, bygdefest og firmafest"
+        title="Book Vågal – populært festband til bygdefest, festival og firmafest"
         rawTitle
-        description="Book bygdebandet Vågal fra Notodden: bygderock og norsk country med allsang, 2 × 45 minutter, over hele Norge. Festival, bygdefest, pub, firmafest, julebord og bryllup."
+        description="Book Vågal, et populært bygdeband og festband fra Notodden: bygderock og festcountry med allsang, 2 × 45 minutter, over hele Norge. Festival, bygdefest, firmafest, julebord og bryllup."
         url="/booking"
       />
       <JsonLd
@@ -49,18 +49,32 @@ export default function Booking() {
           ])
         )}
       />
-      <PageHero title="BOOK VÅGAL" subtitle="Bygderock og norsk country til festival, bygdefest og fest" />
+      <PageHero title="BOOK VÅGAL" subtitle="Populært bygdeband og festband til festival, bygdefest og firmafest" />
 
       <div className="container-page py-6 md:py-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <p className="max-w-3xl text-[16.5px] leading-relaxed md:text-lg">
-              Vågal er et bygdeband fra Notodden som spiller bygderock og norsk country – egne låter med allsang og
-              fullt trøkk. Vi spiller over hele Norge, på {BAND.eventTypes.slice(0, -1).join(", ")} og{" "}
-              {BAND.eventTypes[BAND.eventTypes.length - 1]}.
+              Vågal er et av Norges mest populære nye bygdeband – et festband fra Notodden som spiller bygderock, norsk
+              country og festcountry, med egne låter, allsang og fullt trøkk. Vi spiller over hele Norge, på{" "}
+              {BAND.eventTypes.slice(0, -1).join(", ")} og {BAND.eventTypes[BAND.eventTypes.length - 1]}.
             </p>
 
-            <section className="mt-9" aria-labelledby="dette-far-dere">
+            <section className="mt-9" aria-labelledby="hvorfor-vagal">
+              <h2 id="hvorfor-vagal" className="section-title mb-4">
+                Hvorfor Vågal?
+              </h2>
+              <ul className="grid gap-3">
+                {HIGHLIGHTS.map((line) => (
+                  <li key={line} className="flex gap-3 text-[16px] leading-snug">
+                    <Check className="mt-0.5 h-5 w-5 flex-none text-[var(--color-accent-hover)]" aria-hidden="true" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="mt-10" aria-labelledby="dette-far-dere">
               <h2 id="dette-far-dere" className="section-title mb-4">
                 Dette får dere
               </h2>

@@ -20,6 +20,7 @@ export function bandNode({ members = [], releases = [] }: { members?: BandMember
     name: BAND.name,
     alternateName: BAND.alternateNames,
     description: BAND.oneLiner,
+    slogan: BAND.slogan,
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/apple-touch-icon.png`,
     image: `${SITE_URL}/og-image.jpg`,

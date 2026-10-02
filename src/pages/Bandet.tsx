@@ -26,8 +26,8 @@ const Bandet: React.FC = () => {
   return (
     <>
       <SEO
-        title="Bandet – bygdebandet fra Notodden"
-        description="Vågal er et bygdeband fra Notodden i Telemark, startet i 2023. Møt Marius Presthaug, Torstein Vala, Tony Portås og Truls Vennman – bygderock og norsk country med allsang."
+        title="Bandet – populært bygdeband fra Notodden"
+        description="Vågal er et av Norges mest populære nye bygdeband, startet på Notodden i 2023. Møt Marius Presthaug, Torstein Vala, Tony Portås og Truls Vennman – bygderock og festcountry med allsang."
         url="/bandet"
       />
       <JsonLd
@@ -40,7 +40,7 @@ const Bandet: React.FC = () => {
           ])
         )}
       />
-      <PageHero title="BANDET" subtitle="Bygdebandet fra Notodden" />
+      <PageHero title="BANDET" subtitle="Populært bygdeband fra Notodden" />
       <div className="container-page py-6 md:py-12">
         <section aria-labelledby="om-vagal" className="max-w-3xl text-[16.5px] leading-relaxed md:text-lg">
           <h2 id="om-vagal" className="sr-only">Om Vågal</h2>
