@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Play } from 'lucide-react'
 import { useHero } from '@/hooks/useHero'
 import { useLatestRelease } from '@/hooks/useLatestRelease'
+import { useToday } from '@/hooks/useToday'
 import { imageSrcSet, imageUrl } from '@/lib/sanity/image'
 import { artistNames, formatDato, isUpcoming, songPath, typeLabel } from '@/lib/songs'
 import { LoadingSpinner } from './LoadingSpinner'
@@ -73,9 +74,9 @@ export default function Hero({
 
       {release ? (
         <>
-          {/* The tagline is the page's h1: small on screen, first in the outline */}
+          {/* The page's h1: band name and genre, small on screen, first in the outline */}
           <h1 className="container-page absolute inset-x-0 top-4 font-condensed text-[13px] font-semibold uppercase leading-snug tracking-[0.2em] text-[var(--color-text)]/90 md:top-6 md:text-[15px]">
-            {TAGLINE}
+            Vågal · {TAGLINE}
           </h1>
           <ReleaseFeature release={release} />
         </>
@@ -134,10 +135,11 @@ function HeroBackground({
 
 /** Cover, title and the two actions, docked at the bottom of the poster where a thumb reaches. */
 function ReleaseFeature({ release }: { release: Release }) {
-  const upcoming = isUpcoming(release)
+  const today = useToday()
+  const upcoming = isUpcoming(release, today)
   const path = songPath(release)
   const type = release.releaseType === 'EP' ? 'EP' : typeLabel(release).toLowerCase()
-  const ageInDays = (Date.now() - new Date(`${release.releaseDate}T12:00:00Z`).getTime()) / 86_400_000
+  const ageInDays = (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${release.releaseDate}T12:00:00Z`)) / 86_400_000
   const kicker = upcoming
     ? `Kommer ${formatDato(release.releaseDate)}`
     : ageInDays <= NEW_FOR_DAYS

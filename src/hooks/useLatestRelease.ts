@@ -1,33 +1,21 @@
-import { useState, useEffect } from 'react'
-import { sanityClient } from '@/lib/sanity/client'
+import { useQuery } from '@tanstack/react-query'
+import { sanityFetch } from '@/lib/sanity/client'
 import { latestReleaseQuery } from '@/lib/sanity/queries'
 import { osloToday } from '@/lib/songs'
+import { seededFrom } from '@/lib/initialData'
 import type { Release } from '@/types/sanity'
 
 /**
- * Hook to fetch the release the homepage hero promotes: the newest one that
- * is out, or the one pinned in Sanity
+ * The release the homepage hero promotes: the newest one that is out, or the
+ * one pinned in Sanity.
  *
- * @returns { data, loading, error } - Latest release state
- *
- * @example
- * const { data, loading, error } = useLatestRelease()
- * if (loading) return <LoadingSpinner />
- * if (!data) return <DefaultHero />
- * return <LatestReleaseHero release={data} />
+ * @returns { data, loading, error }
  */
 export function useLatestRelease() {
-  const [data, setData] = useState<Release | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    sanityClient
-      .fetch<Release | null>(latestReleaseQuery, { today: osloToday() })
-      .then(setData)
-      .catch((err) => setError(err instanceof Error ? err : new Error(String(err))))
-      .finally(() => setLoading(false))
-  }, [])
-
-  return { data, loading, error }
+  const query = useQuery({
+    queryKey: ['latestRelease'],
+    queryFn: () => sanityFetch<Release | null>(latestReleaseQuery, { today: osloToday() }),
+    ...seededFrom((data) => data.latestRelease),
+  })
+  return { data: query.data ?? null, loading: query.isPending, error: query.error }
 }

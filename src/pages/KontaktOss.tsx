@@ -1,14 +1,23 @@
-import Contact from "../components/ContactForm.tsx"
+import { lazy, Suspense, useEffect, useState } from "react"
 import BookingCard from "../components/BookingCard"
+import { Skeleton } from "@/components/ui/skeleton"
 import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
 
+const Contact = lazy(() => import("../components/ContactForm.tsx"))
+
 export default function KontaktOss() {
+  // The form only works with JavaScript anyway, so it is loaded in the browser after the page is up.
+  // The prebuilt HTML holds a placeholder of the same size.
+  const [inBrowser, setInBrowser] = useState(false)
+  useEffect(() => setInBrowser(true), [])
+  const placeholder = <Skeleton className="h-[520px] w-full rounded-none" />
+
   return (
     <>
       <SEO
         title="Kontakt"
-        description="Kontakt Vågal for booking, presse eller generelle henvendelser."
+        description="Kontakt bygdebandet Vågal for booking, presse eller andre henvendelser – ring bookingagenten eller send oss en melding."
         url="/kontakt-oss"
       />
       <PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />
@@ -26,7 +35,13 @@ export default function KontaktOss() {
             <p className="mb-5 mt-2 text-[15.5px] text-[var(--color-muted)]">
               Fyll ut skjemaet så tar vi kontakt så snart som mulig.
             </p>
-            <Contact />
+            {inBrowser ? (
+              <Suspense fallback={placeholder}>
+                <Contact />
+              </Suspense>
+            ) : (
+              placeholder
+            )}
           </div>
         </div>
       </section>

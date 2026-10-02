@@ -331,19 +331,19 @@ const Contact = () => {
             <SelectContent className="bg-[var(--color-surface)] border-[var(--color-border)]">
               <SelectItem
                 value="booking"
-                className="text-[var(--color-text)] focus:bg-[var(--color-accent)] focus:text-white cursor-pointer"
+                className="text-[var(--color-text)] focus:bg-[var(--color-cta)] focus:text-white cursor-pointer"
               >
                 Booking
               </SelectItem>
               <SelectItem
                 value="presse"
-                className="text-[var(--color-text)] focus:bg-[var(--color-accent)] focus:text-white cursor-pointer"
+                className="text-[var(--color-text)] focus:bg-[var(--color-cta)] focus:text-white cursor-pointer"
               >
                 Presse
               </SelectItem>
               <SelectItem
                 value="generelt"
-                className="text-[var(--color-text)] focus:bg-[var(--color-accent)] focus:text-white cursor-pointer"
+                className="text-[var(--color-text)] focus:bg-[var(--color-cta)] focus:text-white cursor-pointer"
               >
                 Generelt
               </SelectItem>
@@ -402,7 +402,7 @@ const Contact = () => {
           type="submit"
           disabled={!isFormValid || isSubmitting}
           className={cn(
-            "w-full min-h-[48px] text-base bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold rounded-none",
+            "w-full min-h-[48px] text-base bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] text-white font-semibold rounded-none",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
         >

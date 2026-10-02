@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async"
+import { SITE_URL } from "@/lib/band"
 
 interface SEOProps {
   title: string
@@ -9,26 +10,25 @@ interface SEOProps {
   noindex?: boolean
   /** Open Graph type. Song pages use "music.song". */
   type?: string
+  /** Use the title as given instead of adding " | Vågal" (for titles that already lead with the band name) */
+  rawTitle?: boolean
 }
 
 const SITE_NAME = "Vågal"
-const BASE_URL = "https://vaagalband.no"
 const DEFAULT_OG_IMAGE = "/og-image.jpg"
 
-export default function SEO({ title, description, image, url, noindex, type = "website" }: SEOProps) {
-  const fullTitle = `${title} | ${SITE_NAME}`
-  const canonicalUrl = url ? `${BASE_URL}${url}` : undefined
+export default function SEO({ title, description, image, url, noindex, type = "website", rawTitle = false }: SEOProps) {
+  const fullTitle = rawTitle ? title : `${title} | ${SITE_NAME}`
+  const canonicalUrl = url ? `${SITE_URL}${url}` : undefined
   const ogImage = !image
-    ? `${BASE_URL}${DEFAULT_OG_IMAGE}`
+    ? `${SITE_URL}${DEFAULT_OG_IMAGE}`
     : image.startsWith("http")
       ? image
-      : `${BASE_URL}${image}`
+      : `${SITE_URL}${image}`
 
   return (
     <Helmet>
-      {/* Norwegian language targeting */}
       <html lang="nb" />
-      <meta name="language" content="Norwegian" />
 
       {/* Core meta tags */}
       <title>{fullTitle}</title>
@@ -39,7 +39,6 @@ export default function SEO({ title, description, image, url, noindex, type = "w
 
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-      {canonicalUrl && <link rel="alternate" hrefLang="nb" href={canonicalUrl} />}
 
       {/* Open Graph tags */}
       <meta property="og:title" content={fullTitle} />

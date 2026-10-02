@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { Play } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { WidgetErrorBoundary } from '@/components/WidgetErrorBoundary'
+import { imageUrl, type SanityImageSource } from '@/lib/sanity/image'
 import { cn } from '@/lib/utils'
 import { SPOTIFY_ARTIST_URL } from '@/lib/links'
 
@@ -19,10 +21,15 @@ interface SpotifyEmbedProps {
   height?: number
   theme?: 'dark' | 'light'
   className?: string
+  /** Cover shown on the button before the player is loaded */
+  cover?: SanityImageSource | null
 }
 
 /**
- * Raw Spotify embed component with loading state
+ * Spotify player that loads only when tapped. The embed sets Spotify's own
+ * cookies (sp_t, sp_landing) the moment it loads, so it waits for the visitor
+ * to ask for it, the same way the video does. Until then it is a button of the
+ * same size, which also saves about 800 KB on every page view.
  * Use SpotifyWidget for the wrapped version with error boundary
  */
 export function SpotifyEmbed({
@@ -31,7 +38,9 @@ export function SpotifyEmbed({
   height,
   theme = 'dark',
   className,
+  cover,
 }: SpotifyEmbedProps) {
+  const [activated, setActivated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   const embedSrc = `https://open.spotify.com/embed${new URL(url).pathname}?utm_source=generator&theme=${
@@ -52,18 +61,48 @@ export function SpotifyEmbed({
         )}
         style={height === undefined ? undefined : { height }}
       >
-        {isLoading && (
-          <Skeleton className="absolute inset-0 rounded-none bg-card" aria-hidden="true" />
+        {activated ? (
+          <>
+            {isLoading && (
+              <Skeleton className="absolute inset-0 rounded-none bg-card" aria-hidden="true" />
+            )}
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              title={title}
+              src={embedSrc}
+              style={{ border: 0, opacity: isLoading ? 0 : 1 }}
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              onLoad={() => setIsLoading(false)}
+            />
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setActivated(true)}
+            aria-label="Last inn Spotify-spilleren"
+            className="group absolute inset-0 flex h-full w-full items-center gap-4 bg-[#181818] p-3 text-left transition-colors hover:bg-[#202020] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-accent-hover)] lg:flex-col lg:items-start lg:justify-end lg:p-5"
+          >
+            {cover?.asset && (
+              <img
+                src={imageUrl(cover, 256, { ratio: 1 })}
+                alt=""
+                width={128}
+                height={128}
+                loading="lazy"
+                className="h-[128px] w-[128px] flex-none rounded-[6px] object-cover lg:h-[168px] lg:w-[168px]"
+              />
+            )}
+            <span className="min-w-0 flex-1 lg:flex-none">
+              <span className="block text-lg font-bold leading-tight text-white">Vågal på Spotify</span>
+              <span className="mt-1 block text-[13.5px] leading-snug text-[var(--color-muted)]">
+                Trykk for å laste spilleren. Spotify setter egne informasjonskapsler.
+              </span>
+            </span>
+            <span className="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-[#1DB954] text-[#0A0A0A] transition-transform group-hover:scale-105 lg:absolute lg:right-5 lg:top-5">
+              <Play className="h-5 w-5 translate-x-px fill-current" aria-hidden="true" />
+            </span>
+          </button>
         )}
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          title={title}
-          loading="lazy"
-          src={embedSrc}
-          style={{ border: 0, opacity: isLoading ? 0 : 1 }}
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          onLoad={() => setIsLoading(false)}
-        />
       </div>
     </div>
   )
@@ -83,6 +122,7 @@ export default function SpotifyWidget({
   height,
   theme = 'dark',
   className,
+  cover,
   fallbackUrl = SPOTIFY_ARTIST_URL,
 }: SpotifyWidgetProps) {
   return (
@@ -96,6 +136,7 @@ export default function SpotifyWidget({
         title={title}
         height={height}
         theme={theme}
+        cover={cover}
       />
     </WidgetErrorBoundary>
   )

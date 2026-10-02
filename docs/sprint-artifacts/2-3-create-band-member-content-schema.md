@@ -316,13 +316,12 @@ src/
 
 ### Current Band Members (For Test Data)
 
-When testing, create documents for these 5 members in this order:
+When testing, create documents for these 4 members in this order:
 
 1. **Marius Presthaug** - Vokalist, Inspiration: Hellbillies/Plumbo, Hobby: Maling, Food: Fisk
-2. **Sondre Gautefald** (alias: Mr Caravan) - Multiinstrument, Inspiration: Iron Maiden, Hobby: Ski, Food: Taco
-3. **Truls Venmann** - Trommeslager, Inspiration: Vågal, Hobby: Musikk, Food: Pizza
-4. **Torstein Vala** - Gitarist, Inspiration: Vågal, Hobby: Musikk, Food: Pizza
-5. **Tony Portås Moen** - Bassist, Inspiration: Beyoncé, Hobby: Musikk, Food: Pizza
+2. **Truls Vennman** - Trommeslager, Inspiration: Vågal, Hobby: Musikk, Food: Pizza
+3. **Torstein Vala** - Gitarist, Inspiration: Vågal, Hobby: Musikk, Food: Pizza
+4. **Tony Portås** - Bassist, Inspiration: Beyoncé, Hobby: Musikk, Food: Pizza
 
 ### Previous Story Intelligence
 

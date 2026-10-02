@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Mail, Phone } from "lucide-react"
 import { BOOKING } from "@/lib/links"
 import { cn } from "@/lib/utils"
@@ -6,7 +7,16 @@ import { cn } from "@/lib/utils"
  * Booking contact as two real buttons: tap to call, tap to write.
  * What a promoter on a phone came for, so it never hides in body text.
  */
-export default function BookingCard({ className, headingLevel = "h2" }: { className?: string; headingLevel?: "h2" | "h3" }) {
+export default function BookingCard({
+  className,
+  headingLevel = "h2",
+  showMore = true,
+}: {
+  className?: string
+  headingLevel?: "h2" | "h3"
+  /** Link to the booking page under the buttons (off on the booking page itself) */
+  showMore?: boolean
+}) {
   const Heading = headingLevel
 
   return (
@@ -32,6 +42,14 @@ export default function BookingCard({ className, headingLevel = "h2" }: { classN
           {BOOKING.email}
         </a>
       </div>
+      {showMore && (
+        <Link
+          to="/booking"
+          className="mt-3 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-[var(--color-accent-hover)] hover:underline"
+        >
+          Alt om booking og rider &rarr;
+        </Link>
+      )}
     </section>
   )
 }

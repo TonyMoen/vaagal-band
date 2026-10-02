@@ -49,9 +49,6 @@ export function YouTubeEmbed({
 }: YouTubeEmbedProps) {
   const [activated, setActivated] = useState(autoplay)
   const [isLoading, setIsLoading] = useState(true)
-  // sddefault (640px) is missing for some videos; hqdefault (480px) always exists.
-  // YouTube answers a missing size with a 120px grey placeholder, not an error.
-  const [thumb, setThumb] = useState<'sddefault' | 'hqdefault'>('sddefault')
 
   const id = getYouTubeId(url)
   if (!id) return null
@@ -98,13 +95,12 @@ export function YouTubeEmbed({
             aria-label={`Spill av: ${title}`}
             className="group absolute inset-0 h-full w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-accent-hover)]"
           >
+            {/* hqdefault (480 × 360) exists for every video; the larger sizes don't, and a miss is a console error */}
             <img
-              src={`https://i.ytimg.com/vi/${id}/${thumb}.jpg`}
-              onLoad={(event) => {
-                if (event.currentTarget.naturalWidth <= 120) setThumb('hqdefault')
-              }}
-              onError={() => setThumb('hqdefault')}
+              src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
               alt=""
+              width={480}
+              height={360}
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -112,7 +108,7 @@ export function YouTubeEmbed({
               className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
               aria-hidden="true"
             />
-            <span className="absolute left-1/2 top-1/2 flex h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-[var(--color-accent)] text-white transition-colors group-hover:bg-[var(--color-accent-hover)]">
+            <span className="absolute left-1/2 top-1/2 flex h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-[var(--color-cta)] text-white transition-colors group-hover:bg-[var(--color-cta-hover)]">
               <Play className="h-8 w-8 fill-current" aria-hidden="true" />
             </span>
             <span className="absolute inset-x-3.5 bottom-3 font-semibold leading-snug text-white">

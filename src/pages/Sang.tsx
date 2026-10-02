@@ -9,6 +9,8 @@ import { ErrorMessage } from "@/components/ErrorMessage"
 import SEO from "@/components/SEO"
 import ServiceIcon from "@/components/ServiceIcon"
 import NotFoundPage from "@/pages/NotFoundPage"
+import { useToday } from "@/hooks/useToday"
+import { BAND_ID } from "@/lib/schema"
 import {
   BAND_NAME,
   artistNames,
@@ -24,16 +26,15 @@ import {
 import type { Release } from "@/types/sanity"
 
 const BASE_URL = "https://vaagalband.no"
-const SPOTIFY_ARTIST_URL = "https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9"
 
 /**
  * Song page: vaagalband.no/<slug>. One page per release in Sanity with links
  * to every streaming service, made for sharing. Before the release date the
  * same address shows "Kommer <dato>" and the pre-save button.
  *
- * scripts/prerender-songs.mjs writes a static copy of the head (title, Open
- * Graph, JSON-LD) per song at build time, because the apps people share links
- * in do not run JavaScript.
+ * scripts/prerender.mjs renders the whole page to HTML at build time (head,
+ * Open Graph, JSON-LD and the text), because the apps people share links in
+ * and most AI crawlers do not run JavaScript.
  */
 export default function Sang() {
   const { slug = "" } = useParams()
@@ -41,17 +42,17 @@ export default function Sang() {
 
   if (loading) {
     return (
-      <main className="container-page py-16">
+      <div className="container-page py-16">
         <LoadingSpinner size="lg" className="min-h-[50vh]" />
-      </main>
+      </div>
     )
   }
 
   if (error) {
     return (
-      <main className="container-page py-16">
+      <div className="container-page py-16">
         <ErrorMessage message="Kunne ikke laste låta" />
-      </main>
+      </div>
     )
   }
 
@@ -64,7 +65,7 @@ export default function Sang() {
 }
 
 function SongView({ release, more }: { release: Release; more: Release[] }) {
-  const upcoming = isUpcoming(release)
+  const upcoming = isUpcoming(release, useToday())
   const links = services(release)
   const artists = artistNames(release)
   const summary = songSummary(release)
@@ -95,14 +96,21 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
         url,
         name: release.title,
         byArtist: artists.map((name) =>
-          name === BAND_NAME
-            ? { "@type": "MusicGroup", name, url: BASE_URL, sameAs: SPOTIFY_ARTIST_URL }
-            : { "@type": "MusicGroup", name }
+          name === BAND_NAME ? { "@type": "MusicGroup", "@id": BAND_ID, name } : { "@type": "MusicGroup", name }
         ),
         datePublished: release.releaseDate,
         inLanguage: "nb-NO",
         ...(hasCover ? { image: urlFor(release.coverImage).width(1200).height(1200).url() } : {}),
         sameAs: links.map((link) => link.url),
+        ...(release.lyrics
+          ? {
+              recordingOf: {
+                "@type": "MusicComposition",
+                name: release.title,
+                lyrics: { "@type": "CreativeWork", text: release.lyrics },
+              },
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -209,6 +217,28 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
           </div>
         </div>
       </article>
+
+      {(release.lyrics || release.credits) && (
+        <section className="container-page grid gap-10 pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:pb-16">
+          {release.lyrics && (
+            <div aria-labelledby="tekst">
+              <h2 id="tekst" className="section-title mb-4">
+                Tekst
+              </h2>
+              {/* Lyrics keep their own line breaks and verse spacing */}
+              <p className="whitespace-pre-line text-[17px] leading-relaxed text-[var(--color-text)]">{release.lyrics}</p>
+            </div>
+          )}
+          {release.credits && (
+            <div aria-labelledby="kreditering">
+              <h2 id="kreditering" className="section-title mb-4">
+                Kreditering
+              </h2>
+              <p className="whitespace-pre-line text-[16px] leading-relaxed text-[var(--color-muted)]">{release.credits}</p>
+            </div>
+          )}
+        </section>
+      )}
 
       {more.length > 0 && (
         <section className="border-divider py-12 md:py-16" aria-labelledby="flere-later">

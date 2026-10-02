@@ -1,3 +1,6 @@
+# Every crawler is welcome, AI and search crawlers included.
+# /ai and /arrangor are kept out of search results with an X-Robots-Tag header
+# (see vercel.json); they are not blocked here, so crawlers can see that header.
 User-agent: *
 Allow: /
 

@@ -1,14 +1,17 @@
 // GROQ queries for Sanity CMS content
 
 /**
- * Hero content query - fetches the first hero document
- * Returns: { _id, title, subtitle, image }
+ * Hero content query - fetches the most recently edited hero document
+ * (the dataset has two; the one changed last in Studio is the one shown)
+ * Returns: { _id, title, subtitle, image, musicVideoUrl, musicVideoTitle }
  */
-export const heroQuery = `*[_type == "hero"][0] {
+export const heroQuery = `*[_type == "hero"] | order(_updatedAt desc)[0] {
   _id,
   title,
   subtitle,
-  image
+  image,
+  musicVideoUrl,
+  musicVideoTitle
 }`
 
 /**
@@ -49,7 +52,8 @@ export const releasesQuery = `*[_type == "release"] | order(releaseDate desc) {
   tidalUrl,
   deezerUrl,
   amazonMusicUrl,
-  isLatest
+  lyrics,
+  credits
 }`
 
 /**

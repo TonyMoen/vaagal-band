@@ -1,18 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
-  const h1Ref = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    document.title = "404 – Siden finnes ikke";
-    h1Ref.current?.focus();
-  }, []);
 
   return (
     <div className="container-page mx-auto max-w-xl py-16 text-center">
-      <h1 ref={h1Ref} tabIndex={-1} className="text-3xl font-semibold">
+      {/* Never index a "not found" page, also when it is shown with status 200 inside the app */}
+      <Helmet>
+        <title>Siden finnes ikke | Vågal</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <h1 className="text-3xl font-semibold">
         Denne siden eksisterer ikke
       </h1>
       <p className="mt-2 text-sm opacity-70">Gå tilbake til forsiden.</p>

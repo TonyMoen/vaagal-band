@@ -1,17 +1,32 @@
 import ConcertList from "../components/ConcertList"
+import PastConcerts from "../components/PastConcerts"
 import BookingCard from "../components/BookingCard"
+import JsonLd from "../components/JsonLd"
 import { PageHero } from "@/components/PageHero"
 import SEO from "../components/SEO"
+import { useConcerts } from "@/hooks/useConcerts"
 import { BANDSINTOWN_URL } from "@/lib/concerts"
 import { FACEBOOK_URL, INSTAGRAM_URL } from "@/lib/links"
+import { breadcrumbNode, eventNode, graph } from "@/lib/schema"
 
 export default function Konserter() {
+  const { data: concerts } = useConcerts()
+
   return (
     <>
       <SEO
         title="Konserter"
-        description="Se kommende konserter med Vågal. Finn datoer, steder og billettinformasjon."
+        description="Se når og hvor bygdebandet Vågal spiller: kommende konserter med datoer, steder og billetter, og festivalene og bygdefestene vi har spilt på."
         url="/konserter"
+      />
+      <JsonLd
+        data={graph(
+          ...(concerts ?? []).map(eventNode),
+          breadcrumbNode([
+            { name: "Hjem", path: "/" },
+            { name: "Konserter", path: "/konserter" },
+          ])
+        )}
       />
       <PageHero title="KONSERTER" subtitle="Kommende konserter og festivaler" />
       <section className="container-page py-8 md:py-14">
@@ -19,6 +34,13 @@ export default function Konserter() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <ConcertList groupByMonth />
+
+            <section className="mt-12" aria-labelledby="tidligere">
+              <h2 id="tidligere" className="section-title mb-4">
+                Tidligere konserter
+              </h2>
+              <PastConcerts />
+            </section>
           </div>
 
           <aside className="grid min-w-0 content-start gap-4 md:grid-cols-2 lg:grid-cols-1">

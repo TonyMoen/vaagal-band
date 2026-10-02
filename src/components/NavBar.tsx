@@ -25,9 +25,12 @@ const items = [
   { to: "/bandet", label: "Bandet" },
   { to: "/diskografi", label: "Diskografi" },
   { to: "/konserter", label: "Konserter" },
+  { to: "/booking", label: "Booking" },
   { to: "/merch", label: "Merch" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ]
+// The logo already links home on wide screens, which leaves room for Booking
+const desktopItems = items.filter((item) => item.to !== "/")
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
@@ -68,7 +71,7 @@ export default function NavBar() {
         {/* Desktop Navigation - Centered links */}
         <NavigationMenu className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
           <NavigationMenuList className="gap-1 xl:gap-2">
-            {items.map(({ to, label, end }) => (
+            {desktopItems.map(({ to, label, end }) => (
               <NavigationMenuItem key={to}>
                 <NavLink
                   to={to}

@@ -1,32 +1,20 @@
-import { useState, useEffect } from 'react'
-import { sanityClient } from '@/lib/sanity/client'
+import { useQuery } from '@tanstack/react-query'
+import { sanityFetch } from '@/lib/sanity/client'
 import { heroQuery } from '@/lib/sanity/queries'
+import { seededFrom } from '@/lib/initialData'
 import type { HeroContent } from '@/types/sanity'
 
 /**
- * Hook to fetch hero content from Sanity CMS
- * Follows the standard data fetching pattern from architecture
+ * Hero content from Sanity: the background photo and the latest music video.
+ * Starts from the content the page was built with, refreshes in the background.
  *
- * @returns { data, loading, error } - Hero content state
- *
- * @example
- * const { data, loading, error } = useHero()
- * if (loading) return <LoadingSpinner />
- * if (error) return <ErrorMessage message={error.message} />
- * return <Hero data={data} />
+ * @returns { data, loading, error }
  */
 export function useHero() {
-  const [data, setData] = useState<HeroContent | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    sanityClient
-      .fetch<HeroContent>(heroQuery)
-      .then(setData)
-      .catch((err) => setError(err instanceof Error ? err : new Error(String(err))))
-      .finally(() => setLoading(false))
-  }, [])
-
-  return { data, loading, error }
+  const query = useQuery({
+    queryKey: ['hero'],
+    queryFn: () => sanityFetch<HeroContent | null>(heroQuery),
+    ...seededFrom((data) => data.hero),
+  })
+  return { data: query.data ?? null, loading: query.isPending, error: query.error }
 }

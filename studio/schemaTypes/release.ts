@@ -83,6 +83,21 @@ export default defineType({
         'Optional. One or two sentences shown on the song page. Without it the page shows title, artist and release year.',
     }),
     defineField({
+      name: 'lyrics',
+      title: 'Lyrics',
+      type: 'text',
+      rows: 16,
+      description:
+        'Optional. The full song text, one line per line and an empty line between verses. Shown on the song page under "Tekst", and read by search engines and AI tools.',
+    }),
+    defineField({
+      name: 'credits',
+      title: 'Credits',
+      type: 'text',
+      rows: 4,
+      description: 'Optional. Who wrote, produced, mixed and played on it, e.g. "Tekst og musikk: … · Produsent: …".',
+    }),
+    defineField({
       name: 'presaveUrl',
       title: 'Pre-save URL',
       type: 'url',

@@ -39,6 +39,7 @@ npm run lint     # Run ESLint
 | [Source Tree](./source-tree-analysis.md) | Directory structure, file organization |
 | [Component Inventory](./component-inventory.md) | All components with props and usage |
 | [Development Guide](./development-guide.md) | Setup, workflows, deployment |
+| [SEO and AI discoverability](./seo.md) | Build-time rendering, structured data, llms.txt, daily rebuild, search console setup |
 
 ---
 
@@ -80,9 +81,9 @@ Vågal Band Website is a promotional SPA for the Norwegian band "Vågal". It fea
 
 | Task | File(s) |
 |------|---------|
-| Add new page | `src/pages/*.tsx`, `src/routes.tsx`, `src/components/NavBar.tsx` |
+| Add new page | `src/pages/*.tsx`, `src/routes.tsx` (route + `STATIC_PAGES`), `src/components/NavBar.tsx` |
 | Modify styling | `src/styles/global.css`, `tailwind.config.ts` |
-| Update band info | `src/pages/Bandet.tsx` (members array) |
+| Update band info | Facts: `src/lib/band.ts`. Members, releases, hero: Sanity Studio |
 | Update products | `src/components/Products.tsx` (products array) |
 | Change contact form | `src/components/ContactForm.tsx` |
 

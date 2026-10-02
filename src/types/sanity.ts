@@ -11,6 +11,9 @@ export interface HeroContent {
   title: string
   subtitle: string
   image: SanityImageSource
+  /** The music video featured on the homepage */
+  musicVideoUrl?: string | null
+  musicVideoTitle?: string | null
 }
 
 /**
@@ -54,6 +57,10 @@ export interface Release {
   tidalUrl?: string | null
   deezerUrl?: string | null
   amazonMusicUrl?: string | null
+  /** Song lyrics, plain text with line breaks */
+  lyrics?: string | null
+  /** Who wrote, produced and played it, plain text */
+  credits?: string | null
   /** Overrides "newest release" on the homepage hero */
   pinToHero?: boolean
   /** @deprecated Replaced by pinToHero. The hero now follows releaseDate. */

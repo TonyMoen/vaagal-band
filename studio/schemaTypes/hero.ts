@@ -18,6 +18,18 @@ export default defineType({
       description: 'Secondary text below the title',
     }),
     defineField({
+      name: 'musicVideoUrl',
+      title: 'Featured Music Video (YouTube URL)',
+      type: 'url',
+      description: 'The video shown under "Siste musikkvideo" on the homepage. Paste the YouTube link.',
+    }),
+    defineField({
+      name: 'musicVideoTitle',
+      title: 'Featured Music Video Title',
+      type: 'string',
+      description: 'The song title, e.g. "Øst til Vest". Shown as "Vågal – <title> (musikkvideo)".',
+    }),
+    defineField({
       name: 'image',
       title: 'Hero Image',
       type: 'image',

@@ -2,7 +2,7 @@
 
 export const SPOTIFY_ARTIST_URL = "https://open.spotify.com/artist/5M9ZQMR3vvDdLgv1D43MO9"
 export const INSTAGRAM_URL = "https://www.instagram.com/vaagal_band/"
-export const FACEBOOK_URL = "https://www.facebook.com/vaagal.band.no/?locale=nb_NO"
+export const FACEBOOK_URL = "https://www.facebook.com/vaagal.band.no/"
 
 export const BOOKING = {
   agency: "Aronsen Booking & Management",

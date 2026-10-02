@@ -8,6 +8,9 @@ import ReleaseCard from "@/components/ReleaseCard"
 import SEO from "@/components/SEO"
 import { imageSrcSet, imageUrl } from "@/lib/sanity/image"
 import { artistNames, formatDato, isUpcoming, songPath, typeLabel } from "@/lib/songs"
+import { useToday } from "@/hooks/useToday"
+import JsonLd from "@/components/JsonLd"
+import { breadcrumbNode, graph, recordingNode } from "@/lib/schema"
 import type { Release } from "@/types/sanity"
 
 const DESCRIPTION =
@@ -21,14 +24,24 @@ const DESCRIPTION =
  */
 export default function Diskografi() {
   const { data, loading, error } = useReleases()
+  const today = useToday()
 
   const releases = data ?? []
-  const featured = releases.find((release) => !isUpcoming(release))
+  const featured = releases.find((release) => !isUpcoming(release, today))
   const rest = releases.filter((release) => release !== featured)
 
   return (
     <>
       <SEO title="Diskografi" description={DESCRIPTION} url="/diskografi" />
+      <JsonLd
+        data={graph(
+          ...releases.map(recordingNode),
+          breadcrumbNode([
+            { name: "Hjem", path: "/" },
+            { name: "Diskografi", path: "/diskografi" },
+          ])
+        )}
+      />
       <PageHero
         title="DISKOGRAFI"
         subtitle={

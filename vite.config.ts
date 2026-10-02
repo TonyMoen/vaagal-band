@@ -10,4 +10,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  ssr: {
+    // Bundled into the build's server renderer instead of loaded from node_modules:
+    // its package has no "exports" map, so Node would pick the CommonJS file
+    noExternal: ["react-helmet-async"],
+  },
 })

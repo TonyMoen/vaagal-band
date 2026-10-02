@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { imageSrcSet, imageUrl } from "@/lib/sanity/image"
 import { artistNames, formatDato, isUpcoming, songPath, typeLabel, yearOf } from "@/lib/songs"
 import { cn } from "@/lib/utils"
+import { useToday } from "@/hooks/useToday"
 import type { Release } from "@/types/sanity"
 
 type Props = {
@@ -21,7 +22,7 @@ export default function ReleaseCard({
   sizes = "(min-width: 1024px) 280px, (min-width: 768px) 33vw, 50vw",
   className,
 }: Props) {
-  const upcoming = isUpcoming(release)
+  const upcoming = isUpcoming(release, useToday())
   const artists = artistNames(release)
 
   return (

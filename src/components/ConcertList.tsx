@@ -4,8 +4,9 @@ import { cn } from '@/lib/utils'
 import { useConcerts } from '@/hooks/useConcerts'
 import {
   BANDSINTOWN_URL,
-  eventDate,
+  eventParts,
   monthLabel,
+  monthShort,
   ticketUrl,
   venueLabel,
   weekdayAndTime,
@@ -86,9 +87,9 @@ export function ConcertList({
   return (
     <ul className={cn('border-t border-[var(--color-border)]', groupByMonth && 'border-t-0', className)}>
       {events.map((event, index) => {
-        const month = monthLabel(eventDate(event))
+        const month = monthLabel(event)
         const newMonth =
-          groupByMonth && (index === 0 || monthLabel(eventDate(events[index - 1])) !== month)
+          groupByMonth && (index === 0 || monthLabel(events[index - 1]) !== month)
         return (
           <li key={event.id}>
             {newMonth && (
@@ -111,7 +112,7 @@ export function ConcertList({
 
 /** One gig: date block, venue and city, and a 44px action on the right. */
 function ConcertRow({ event }: { event: BandsintownEvent }) {
-  const date = eventDate(event)
+  const { day } = eventParts(event)
   const tickets = ticketUrl(event)
   const name = venueLabel(event)
 
@@ -122,9 +123,9 @@ function ConcertRow({ event }: { event: BandsintownEvent }) {
         className="flex h-14 w-14 flex-col items-center justify-center border border-[var(--color-tertiary)] bg-[var(--color-surface)] lg:h-16 lg:w-16"
       >
         <span className="text-[11px] font-semibold uppercase leading-none tracking-[0.1em] text-[var(--color-muted)]">
-          {date.toLocaleDateString('nb-NO', { month: 'short' }).replace('.', '')}
+          {monthShort(event)}
         </span>
-        <span className="mt-1 text-2xl font-bold leading-none">{date.getDate()}</span>
+        <span className="mt-1 text-2xl font-bold leading-none">{day}</span>
       </time>
 
       <div className="min-w-0">
@@ -132,7 +133,7 @@ function ConcertRow({ event }: { event: BandsintownEvent }) {
           {name}
         </h3>
         <p className="mt-0.5 text-[14.5px] leading-snug text-[var(--color-muted)]">
-          {event.venue.city} · {weekdayAndTime(date)}
+          {event.venue.city} · {weekdayAndTime(event)}
         </p>
       </div>
 
@@ -142,7 +143,7 @@ function ConcertRow({ event }: { event: BandsintownEvent }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Billetter: ${name}, ${event.venue.city} (åpnes i ny fane)`}
-          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-none bg-[var(--color-accent)] px-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-hover)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-none bg-[var(--color-cta)] px-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--color-cta-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-hover)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
         >
           <Ticket className="h-[17px] w-[17px]" aria-hidden="true" />
           Billetter

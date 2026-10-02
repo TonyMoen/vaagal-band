@@ -1,5 +1,5 @@
-import imageUrlBuilder from '@sanity/image-url'
-import { sanityClient } from './client'
+import { createImageUrlBuilder } from '@sanity/image-url'
+import { sanityConfig } from './client'
 
 // Define image source type for Sanity images
 export interface SanityImageSource {
@@ -22,8 +22,7 @@ export interface SanityImageSource {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const builder = imageUrlBuilder(sanityClient as any)
+const builder = createImageUrlBuilder({ projectId: sanityConfig.projectId, dataset: sanityConfig.dataset })
 
 /**
  * Generate optimized image URLs from Sanity image assets

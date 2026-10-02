@@ -95,7 +95,7 @@ export default function Arrangoerer() {
               </p>
               <Button
                 size="touch"
-                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
+                className="bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] text-white"
                 asChild
               >
                 <a href={data.technicalRider} download target="_blank" rel="noopener noreferrer">
@@ -135,7 +135,7 @@ export default function Arrangoerer() {
               </p>
               <Button
                 size="touch"
-                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
+                className="bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] text-white"
                 asChild
               >
                 <a href={data.googleDriveUrl} target="_blank" rel="noopener noreferrer">
@@ -198,7 +198,7 @@ export default function Arrangoerer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Last ned pressebilde ${index + 1}`}
-                      className="absolute bottom-3 right-3 inline-flex h-11 w-11 items-center justify-center rounded-none bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition-colors"
+                      className="absolute bottom-3 right-3 inline-flex h-11 w-11 items-center justify-center rounded-none bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] transition-colors"
                     >
                       <Download className="h-5 w-5 text-white" />
                     </a>
@@ -248,7 +248,7 @@ export default function Arrangoerer() {
                 {data.contactEmail && (
                   <Button
                     size="touch"
-                    className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white"
+                    className="bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] text-white"
                     asChild
                   >
                     <a href={`mailto:${data.contactEmail}`}>

@@ -10,8 +10,12 @@
     --color-muted: #A3A3A3;        /* Text Secondary */
 
     /* Accent colors - UX Spec aligned */
-    --color-accent: #E65C00;       /* Accent Primary */
+    --color-accent: #E65C00;       /* Accent Primary: headings, links, details on dark */
     --color-accent-hover: #FF6B00; /* Accent Hover */
+
+    /* Button orange: white text on it passes WCAG AA (4.7:1; #E65C00 is only 3.6:1) */
+    --color-cta: #C44E00;
+    --color-cta-hover: #A94300;    /* 5.9:1 */
 
     /* Border - use Tertiary */
     --color-border: #2A2A2A;
@@ -32,13 +36,13 @@
            rounded-none px-5 min-h-[48px] transition-colors
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:cursor-not-allowed;
-    background-color: var(--color-accent);
+    background-color: var(--color-cta);
     color: #fff;
     --tw-ring-color: var(--color-accent-hover);
     --tw-ring-offset-color: var(--color-bg);
   }
   .btn:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--color-cta-hover);
   }
 
   /* Secondary action: same size, outlined */

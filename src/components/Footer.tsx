@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom"
 import logo from "../assets/vaagal-logo.webp"
 import SocialIcons from "@/components/SocialIcons"
+import { useToday } from "@/hooks/useToday"
 
 const links = [
   { to: "/", label: "Hjem", end: true },
   { to: "/bandet", label: "Bandet" },
   { to: "/diskografi", label: "Diskografi" },
   { to: "/konserter", label: "Konserter" },
+  { to: "/booking", label: "Booking" },
   { to: "/merch", label: "Merch" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ]
 
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const year = useToday().slice(0, 4)
 
   return (
     <footer className="mt-auto border-t border-[var(--color-border)] bg-[var(--color-bg)]">
@@ -36,7 +38,7 @@ export default function Footer() {
             />
           </NavLink>
 
-          <NavLink to="/kontakt-oss" className="btn md:hidden">
+          <NavLink to="/booking" className="btn md:hidden">
             Book oss
           </NavLink>
         </div>
@@ -60,7 +62,7 @@ export default function Footer() {
 
         <div className="flex items-center justify-between gap-4 md:order-2 md:justify-end lg:order-none">
           <SocialIcons iconSize={24} className="flex-1 justify-between md:flex-none md:justify-end" />
-          <NavLink to="/kontakt-oss" className="btn hidden md:inline-flex">
+          <NavLink to="/booking" className="btn hidden md:inline-flex">
             Book oss
           </NavLink>
         </div>
