@@ -59,7 +59,15 @@ version.
 
 ### 1. Vercel environment variables
 
-In Vercel → the project → Settings:
+Quickest: logged in to the Vercel CLI (`npx vercel login`), run
+
+```bash
+node scripts/setup-daily-rebuild.mjs
+```
+
+It creates the deploy hook, stores `DEPLOY_HOOK_URL` and a random `CRON_SECRET`
+as production secrets without printing them, and rebuilds once. Test the job
+afterwards with `npx vercel crons run /api/cron`. By hand instead, in Vercel → the project → Settings:
 
 1. **Git → Deploy Hooks:** create a hook named `daily-rebuild` for branch `main`. Copy the URL.
 2. **Environment Variables** (Production):
