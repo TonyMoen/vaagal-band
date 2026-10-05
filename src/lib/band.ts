@@ -105,7 +105,7 @@ export const BOOKING_FAQ: Faq[] = [
   },
   {
     question: 'Hva trenger dere av teknikk og bevertning?',
-    answer: 'Alt står i den tekniske rideren og hospitality-rideren, som ligger sammen med pressebilder og logoer i materiellet for arrangører.',
+    answer: 'Alt står i den tekniske rideren og hospitality-rideren. Dem får dere tilsendt sammen med pressebilder og logoer når konserten er booket.',
   },
 ]
 

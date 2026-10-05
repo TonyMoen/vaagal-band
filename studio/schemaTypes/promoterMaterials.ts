@@ -15,11 +15,20 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'hospitalityRiderUrl',
+      title: 'Hospitality Rider (Google Drive-lenke)',
+      type: 'url',
+      description:
+        'Lenke til hospitality-rideren i Google Drive. Del dokumentet som «Alle med linken kan se». Vises som en knapp på den skjulte arrangørsiden.',
+      validation: (Rule) => Rule.uri({scheme: ['https']}),
+    }),
+    defineField({
       name: 'hospitalityRider',
-      title: 'Hospitality Rider',
+      title: 'Hospitality Rider (old text)',
       type: 'array',
       of: [{type: 'block'}],
-      description: 'Catering, dressing room, travel requirements (with formatting)',
+      description: 'Replaced by the Google Drive link above. No longer shown on the site.',
+      hidden: true,
     }),
     defineField({
       name: 'bandBioShort',

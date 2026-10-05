@@ -119,17 +119,15 @@ export default function Booking() {
               <FaqList items={BOOKING_FAQ} />
             </section>
 
+            {/* The organisers' material (/arrangor) is shared only with booked organisers, so no link here */}
             <section className="mt-10" aria-labelledby="materiell">
               <h2 id="materiell" className="section-title mb-3">
                 Rider og pressemateriell
               </h2>
               <p className="max-w-2xl text-[16px] text-[var(--color-muted)]">
-                Teknisk rider, hospitality-rider, pressebilder, logoer og ferdig tekst til arrangementet ligger samlet
-                for arrangører.
+                Teknisk rider, hospitality-rider, pressebilder, logoer og ferdig tekst til arrangementet får dere
+                tilsendt når konserten er booket.
               </p>
-              <Link to="/arrangor" className="btn-outline mt-4">
-                Åpne materiellet for arrangører
-              </Link>
             </section>
           </div>
 

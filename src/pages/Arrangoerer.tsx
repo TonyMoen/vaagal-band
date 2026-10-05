@@ -107,16 +107,26 @@ export default function Arrangoerer() {
           </section>
         )}
 
-        {/* Hospitality Rider Section */}
-        {data.hospitalityRider && data.hospitalityRider.length > 0 && (
+        {/* Hospitality Rider: kept in Google Drive, not written out on the site */}
+        {data.hospitalityRiderUrl && (
           <section className="space-y-6">
             <h2 className="font-condensed text-2xl font-bold text-[var(--color-text)] md:text-3xl">
               HOSPITALITY RIDER
             </h2>
             <div className="rounded-none bg-[var(--color-surface)] p-6 md:p-8">
-              <div className="prose prose-invert max-w-none text-[var(--color-text)] break-words">
-                <PortableText value={data.hospitalityRider} />
-              </div>
+              <p className="mb-6 text-[var(--color-muted)]">
+                Mat, drikke og backstage: alt bandet trenger på konsertdagen.
+              </p>
+              <Button
+                size="touch"
+                className="bg-[var(--color-cta)] hover:bg-[var(--color-cta-hover)] text-white"
+                asChild
+              >
+                <a href={data.hospitalityRiderUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Åpne hospitality-rider i Google Drive
+                </a>
+              </Button>
             </div>
           </section>
         )}
