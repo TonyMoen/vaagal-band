@@ -90,7 +90,8 @@ export interface PortableTextBlock {
 export interface PromoterMaterials {
   _id: string
   technicalRider?: string // URL from asset
-  hospitalityRiderUrl?: string // Google Drive document
+  hospitalityRiderPdf?: string // URL from asset
+  hospitalityRider?: PortableTextBlock[] // shown only while no PDF is uploaded
   bandBioShort?: string
   bandBioLong?: PortableTextBlock[]
   pressPhotos?: SanityImageSource[]

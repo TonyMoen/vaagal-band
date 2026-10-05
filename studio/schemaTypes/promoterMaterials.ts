@@ -15,20 +15,20 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'hospitalityRiderUrl',
-      title: 'Hospitality Rider (Google Drive-lenke)',
-      type: 'url',
-      description:
-        'Lenke til hospitality-rideren i Google Drive. Del dokumentet som «Alle med linken kan se». Vises som en knapp på den skjulte arrangørsiden.',
-      validation: (Rule) => Rule.uri({scheme: ['https']}),
+      name: 'hospitalityRiderFile',
+      title: 'Hospitality Rider (PDF)',
+      type: 'file',
+      description: 'Last opp hospitality-rideren som PDF. Vises som nedlastingsknapp på arrangørsiden, slik som den tekniske rideren.',
+      options: {
+        accept: '.pdf',
+      },
     }),
     defineField({
       name: 'hospitalityRider',
-      title: 'Hospitality Rider (old text)',
+      title: 'Hospitality Rider (tekst)',
       type: 'array',
       of: [{type: 'block'}],
-      description: 'Replaced by the Google Drive link above. No longer shown on the site.',
-      hidden: true,
+      description: 'Vises bare så lenge ingen PDF er lastet opp over.',
     }),
     defineField({
       name: 'bandBioShort',

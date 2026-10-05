@@ -87,7 +87,8 @@ export const latestReleaseQuery = `*[_type == "release" && (pinToHero == true ||
 export const promoterMaterialsQuery = `*[_type == "promoterMaterials"][0] {
   _id,
   "technicalRider": technicalRider.asset->url,
-  hospitalityRiderUrl,
+  "hospitalityRiderPdf": hospitalityRiderFile.asset->url,
+  hospitalityRider,
   bandBioShort,
   bandBioLong,
   pressPhotos,
