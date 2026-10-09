@@ -16,7 +16,7 @@ import { bandNode, breadcrumbNode, faqNode, graph } from "@/lib/schema"
 /**
  * Booking page for organisers: festivals, bygdefester, pubs, company parties,
  * Christmas parties and weddings. Written in the words they search with
- * ("populært bygdeband", "festband", "band til fest", "band til bygdefest").
+ * ("populært bygdeband", "norsk country", "band til fest", "band til bygdefest").
  */
 export default function Booking() {
   const { data: past } = usePastConcerts()
@@ -36,7 +36,7 @@ export default function Booking() {
       <SEO
         title="Book Vågal – populært band til fest, bygdefest og festival"
         rawTitle
-        description="Book Vågal, et populært bygdeband og festband fra Notodden: bygderock og norsk country med allsang, 2 × 45 minutter, over hele Norge. Band til festival, bygdefest, firmafest, julebord og bryllup."
+        description="Book Vågal, et populært norsk bygdeband fra Notodden: bygderock og norsk country med allsang, 2 × 45 minutter, over hele Norge. Band til festival, bygdefest, firmafest, julebord og bryllup."
         url="/booking"
       />
       <JsonLd
@@ -49,14 +49,14 @@ export default function Booking() {
           ])
         )}
       />
-      <PageHero title="BOOK VÅGAL" subtitle="Populært bygdeband og festband til festival, bygdefest og firmafest" />
+      <PageHero title="BOOK VÅGAL" subtitle="Populært bygdeband med norsk country til festival, bygdefest og firmafest" />
 
       <div className="container-page py-6 md:py-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <p className="max-w-3xl text-[16.5px] leading-relaxed md:text-lg">
-              Vågal er et av Norges mest populære nye bygdeband – et festband fra Notodden som spiller bygderock og
-              norsk country, med egne låter, allsang og fullt trøkk. Trenger dere et band til fest? Vi spiller over
+              Vågal er et av Norges mest populære nye bygdeband – fra Notodden i Telemark, med bygderock og norsk
+              country, egne låter, allsang og fullt trøkk. Trenger dere et band til fest? Vi spiller over
               hele Norge, på {BAND.eventTypes.slice(0, -1).join(", ")} og {BAND.eventTypes[BAND.eventTypes.length - 1]}.
             </p>
 
