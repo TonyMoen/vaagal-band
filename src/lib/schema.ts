@@ -81,6 +81,35 @@ export function eventNode(event: BandsintownEvent): Node {
   }
 }
 
+/**
+ * Genre, writers, producers and label of a song, read from its credits text in Sanity
+ * (one "Label: A, B og C" per line), plus the lyrics when they are there.
+ */
+export function recordingCredits(release: Release): Node {
+  const lines = (release.credits ?? '').split('\n')
+  const value = (label: RegExp) => lines.find((line) => label.test(line))?.replace(/^[^:]*:\s*/, '').trim()
+  const names = (text?: string) => (text ? text.split(/,\s*|\s+og\s+/).map((name) => name.trim()).filter(Boolean) : [])
+  const who = (name: string) => (name === BAND.name ? { '@id': BAND_ID } : { '@type': 'Person', name })
+  const writers = names(value(/^Låtskrivere:/))
+  const producers = names(value(/^Produsent/))
+  const label = value(/^Plateselskap/)
+  return {
+    genre: ['Norsk country', 'Bygderock'],
+    ...(producers.length ? { producer: producers.map(who) } : {}),
+    ...(label ? { publisher: { '@type': 'Organization', name: label } } : {}),
+    ...(writers.length || release.lyrics
+      ? {
+          recordingOf: {
+            '@type': 'MusicComposition',
+            name: release.title,
+            ...(writers.length ? { composer: writers.map(who) } : {}),
+            ...(release.lyrics ? { lyrics: { '@type': 'CreativeWork', text: release.lyrics } } : {}),
+          },
+        }
+      : {}),
+  }
+}
+
 export function recordingNode(release: Release): Node {
   const url = `${SITE_URL}${songPath(release)}`
   const isAlbum = release.releaseType === 'album' || release.releaseType === 'EP'
@@ -93,15 +122,7 @@ export function recordingNode(release: Release): Node {
     datePublished: release.releaseDate,
     inLanguage: 'nb-NO',
     ...(release.coverImage?.asset ? { image: imageUrl(release.coverImage, 1200, { ratio: 1 }) } : {}),
-    ...(release.lyrics
-      ? {
-          recordingOf: {
-            '@type': 'MusicComposition',
-            name: release.title,
-            lyrics: { '@type': 'CreativeWork', text: release.lyrics },
-          },
-        }
-      : {}),
+    ...recordingCredits(release),
   }
 }
 

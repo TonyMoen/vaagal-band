@@ -32,7 +32,7 @@ export default function Diskografi() {
 
   return (
     <>
-      <SEO title="Diskografi" description={DESCRIPTION} url="/diskografi" />
+      <SEO title="Diskografi – norsk country og bygderock" description={DESCRIPTION} url="/diskografi" />
       <JsonLd
         data={graph(
           ...releases.map(recordingNode),

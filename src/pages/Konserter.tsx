@@ -15,7 +15,7 @@ export default function Konserter() {
   return (
     <>
       <SEO
-        title="Konserter"
+        title="Konserter – norsk country og bygderock live"
         description="Se når og hvor Vågal spiller bygderock og norsk country live: kommende konserter med datoer, steder og billetter, og festivalene og bygdefestene vi har spilt på."
         url="/konserter"
       />

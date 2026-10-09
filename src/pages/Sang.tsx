@@ -10,7 +10,7 @@ import SEO from "@/components/SEO"
 import ServiceIcon from "@/components/ServiceIcon"
 import NotFoundPage from "@/pages/NotFoundPage"
 import { useToday } from "@/hooks/useToday"
-import { BAND_ID } from "@/lib/schema"
+import { BAND_ID, recordingCredits } from "@/lib/schema"
 import {
   BAND_NAME,
   artistNames,
@@ -102,15 +102,7 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
         inLanguage: "nb-NO",
         ...(hasCover ? { image: urlFor(release.coverImage).width(1200).height(1200).url() } : {}),
         sameAs: links.map((link) => link.url),
-        ...(release.lyrics
-          ? {
-              recordingOf: {
-                "@type": "MusicComposition",
-                name: release.title,
-                lyrics: { "@type": "CreativeWork", text: release.lyrics },
-              },
-            }
-          : {}),
+        ...recordingCredits(release),
       },
       {
         "@type": "BreadcrumbList",
@@ -126,7 +118,8 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
   return (
     <>
       <SEO
-        title={artists.length > 1 ? `${release.title} (${artists.join(", ")})` : release.title}
+        title={`${release.title} – ${artists.join(" og ")} | Norsk country`}
+        rawTitle
         description={description}
         url={path}
         image={shareImage}
