@@ -75,7 +75,7 @@ export default function Create() {
         YOLO Mode
       </h1>
       <p className="mb-8 text-sm text-[var(--color-muted)]">
-        Ein prompt &mdash; full innholdspakke for alle plattformer
+        Ein prompt, full innholdspakke for alle plattformer
       </p>
 
       <form onSubmit={handleSubmit}>

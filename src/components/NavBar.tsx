@@ -29,8 +29,6 @@ const items = [
   { to: "/merch", label: "Merch" },
   { to: "/kontakt-oss", label: "Kontakt oss" },
 ]
-// The logo already links home on wide screens, which leaves room for Booking
-const desktopItems = items.filter((item) => item.to !== "/")
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
@@ -55,7 +53,7 @@ export default function NavBar() {
           to="/"
           end
           className="inline-flex min-h-[44px] items-center"
-          aria-label="Vågal – Hjem"
+          aria-label="Vågal, til forsiden"
         >
           <img
             src={logo}
@@ -68,10 +66,10 @@ export default function NavBar() {
           />
         </NavLink>
 
-        {/* Desktop Navigation - Centered links */}
-        <NavigationMenu className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
+        {/* Desktop navigation, centred in the room between the logo and the social icons */}
+        <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList className="gap-1 xl:gap-2">
-            {desktopItems.map(({ to, label, end }) => (
+            {items.map(({ to, label, end }) => (
               <NavigationMenuItem key={to}>
                 <NavLink
                   to={to}

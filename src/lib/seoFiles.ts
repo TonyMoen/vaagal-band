@@ -51,7 +51,7 @@ export function buildLlmsTxt(data: InitialData): string {
     `- Startet: ${BAND.founded}`,
     ...(members ? [`- Medlemmer: ${members}`] : []),
     `- Konsert: ${BAND.setLength}, bare egne låter`,
-    `- Spiller på: ${BAND.eventTypes.join(', ')} – over ${BAND.coverage}`,
+    `- Spiller på: ${BAND.eventTypes.join(', ')}, i ${BAND.coverage}`,
     `- Booking: ${BAND.booking.agency}, ${BAND.booking.phoneLabel}, ${BAND.booking.email}`,
     `- E-post til bandet: ${BAND.email}`,
     '',

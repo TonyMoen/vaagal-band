@@ -81,7 +81,7 @@ export function eventNode(event: BandsintownEvent): Node {
   const venue = venueLabel(event)
   return {
     '@type': 'MusicEvent',
-    name: `Vågal – ${venue}`,
+    name: `Vågal: ${venue}`,
     startDate: isoWithOsloOffset(event),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',

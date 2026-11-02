@@ -7,11 +7,11 @@ export default function Merch() {
     <>
       <SEO
         title="Merch"
-        description="Vågal merch - t-skjorter, hettegensere og mer. Bestill via kontaktskjemaet, så ordner vi resten."
+        description="Vågal merch: t-skjorter, hettegensere og mer. Bestill via kontaktskjemaet, så ordner vi resten."
         url="/merch"
       />
 
-      <PageHero title="MERCH" subtitle="Støtt bandet - vis fram stilen din" />
+      <PageHero title="MERCH" subtitle="Støtt bandet og vis fram stilen din" />
 
       <section className="container-page py-6 md:py-14">
         <div className="max-w-2xl rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-5 md:p-8">

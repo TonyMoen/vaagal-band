@@ -25,7 +25,7 @@ export default function Footer() {
             to="/"
             end
             className="inline-flex min-h-[48px] items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-none"
-            aria-label="Vågal – Hjem"
+            aria-label="Vågal, til forsiden"
           >
             <img
               src={logo}

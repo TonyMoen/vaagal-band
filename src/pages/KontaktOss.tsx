@@ -17,7 +17,7 @@ export default function KontaktOss() {
     <>
       <SEO
         title="Kontakt"
-        description="Kontakt bygdebandet Vågal for booking, presse eller andre henvendelser – ring bookingagenten eller send oss en melding."
+        description="Kontakt bygdebandet Vågal for booking, presse eller andre henvendelser. Ring bookingagenten eller send oss en melding."
         url="/kontakt-oss"
       />
       <PageHero title="KONTAKT" subtitle="Book Vågal til ditt neste arrangement!" />

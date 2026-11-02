@@ -28,7 +28,7 @@ export default defineType({
       name: 'musicVideoTitle',
       title: 'Featured Music Video Title',
       type: 'string',
-      description: 'The song title, e.g. "Øst til Vest". Shown as "Vågal – <title> (musikkvideo)".',
+      description: 'The song title, e.g. "Øst til Vest". Shown as "Vågal: <title> (musikkvideo)".',
     }),
     defineField({
       name: 'image',

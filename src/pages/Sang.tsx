@@ -118,7 +118,7 @@ function SongView({ release, more }: { release: Release; more: Release[] }) {
   return (
     <>
       <SEO
-        title={`${release.title} – ${artists.join(" og ")} | Norsk country`}
+        title={`${release.title} av ${artists.join(" og ")} | Norsk country`}
         rawTitle
         description={description}
         url={path}

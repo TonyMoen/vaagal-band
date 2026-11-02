@@ -155,7 +155,7 @@ export default function BatchCreate() {
         Batch
       </h1>
       <p className="mb-8 text-sm text-[var(--color-muted)]">
-        Masseproduser innhold &mdash; skriv fleire idear og generer alt på ein gong
+        Masseproduser innhold: skriv fleire idear og generer alt på ein gong
       </p>
 
       {/* Input form */}

@@ -14,7 +14,7 @@ import { breadcrumbNode, graph, recordingNode } from "@/lib/schema"
 import type { Release } from "@/types/sanity"
 
 const DESCRIPTION =
-  "Alle låtene til Vågal, et av Norges mest populære nye bygdeband: bygderock og norsk country med allsang – singler med lenker til Spotify, Apple Music og YouTube."
+  "Alle låtene til Vågal, et av Norges mest populære nye bygdeband: bygderock og norsk country med allsang. Singler med lenker til Spotify, Apple Music og YouTube."
 
 /**
  * Diskografi page - displays all music releases from Sanity CMS
@@ -32,7 +32,7 @@ export default function Diskografi() {
 
   return (
     <>
-      <SEO title="Diskografi – norsk country og bygderock" description={DESCRIPTION} url="/diskografi" />
+      <SEO title="Diskografi: norsk country og bygderock" description={DESCRIPTION} url="/diskografi" />
       <JsonLd
         data={graph(
           ...releases.map(recordingNode),
@@ -46,8 +46,8 @@ export default function Diskografi() {
         title="DISKOGRAFI"
         subtitle={
           releases.length > 0
-            ? `${releases.length} utgivelser – bygderock og norsk country`
-            : "Singler, EP-er og album – bygderock og norsk country"
+            ? `${releases.length} utgivelser med bygderock og norsk country`
+            : "Singler, EP-er og album med bygderock og norsk country"
         }
       />
       <div className="container-page py-6 md:py-12">

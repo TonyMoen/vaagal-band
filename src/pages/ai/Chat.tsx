@@ -52,7 +52,7 @@ export default function Chat() {
               Manuell modus
             </h2>
             <p className="mt-2 max-w-md text-sm text-[var(--color-muted)]">
-              Snakk med Vågal AI steg for steg. Du styrer kvar verktøy &mdash; søk i
+              Snakk med Vågal AI steg for steg. Du styrer kvar verktøy: søk i
               tekstar, vel bilder, legg til filter og tekst.
             </p>
           </div>

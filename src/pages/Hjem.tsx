@@ -42,7 +42,7 @@ export default function Hjem() {
   return (
     <>
       <SEO
-        title="Vågal – populært norsk bygdeband | Norsk country og bygderock"
+        title="Vågal: populært norsk bygdeband | Norsk country og bygderock"
         rawTitle
         description="Vågal er et av Norges mest populære nye bygdeband: bygderock og norsk country med allsang og fullt trøkk. Hør låtene, se konsertene og book oss som band til fest og festival."
         url="/"
@@ -113,7 +113,7 @@ export default function Hjem() {
           {/* Musikkvideo */}
           <section className="min-w-0 pt-9 md:pt-12" aria-labelledby="video-tittel">
             <SectionHeading id="video-tittel" title="Siste musikkvideo" />
-            <YouTubeWidget url={video.url} title={`Vågal – ${video.title} (musikkvideo)`} />
+            <YouTubeWidget url={video.url} title={`Vågal: ${video.title} (musikkvideo)`} />
           </section>
 
           {/* Merch + booking */}
@@ -126,7 +126,7 @@ export default function Hjem() {
                 Offisiell merch
               </h2>
               <p className="mt-2 text-[15.5px] text-[var(--color-muted)]">
-                T-skjorter, hettegensere og mer – bestilles direkte fra oss.
+                T-skjorter, hettegensere og mer. Bestill direkte fra oss.
               </p>
               <Link to="/merch" className="btn-outline mt-4 w-full">
                 Bestill merch
