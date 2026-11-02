@@ -142,27 +142,23 @@ function HeroBackground({
 }
 
 /**
- * Band photos side by side in equal panels, with no divider: the inner edges fade into
- * the dark stage, so a drum kit or a sleeve running into the next photo isn't cut off
- * hard. Each one is cropped on its own around its hotspot (the face), so everyone stays
- * in view from narrow strips on a phone to a wide screen. Below 1024 px the CDN already cuts a
+ * Band photos side by side in equal panels, split by thin dark gray lines. Each one is
+ * cropped on its own around its hotspot (the face), so everyone stays in view from
+ * narrow strips on a phone to a wide screen. Below 1024 px the CDN already cuts a
  * slim portrait around the hotspot, which puts the face in the middle of it.
  * On phones the strips only fill the top of the poster and fade out above the
  * release: at full height the heads would come out wider than the strips.
  */
 function HeroPanels({ panels }: { panels: HeroPanel[] }) {
   return (
-    <div className="absolute inset-x-0 top-0 -z-20 flex h-[60%] bg-black [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:h-full md:[mask-image:none]">
+    <div className="absolute inset-x-0 top-0 -z-20 flex h-[60%] gap-[2px] bg-[#333] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:h-full md:[mask-image:none]">
       {panels.map((panel) => {
         const focus = {
           '--x': `${(panel.hotspot?.x ?? 0.5) * 100}%`,
           '--y': `${(panel.hotspot?.y ?? 0.4) * 100}%`,
         } as CSSProperties
         return (
-          <picture
-            key={panel._key}
-            className="h-full min-w-0 flex-1 [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] first:[mask-image:linear-gradient(to_left,transparent,#000_12%)] last:[mask-image:linear-gradient(to_right,transparent,#000_12%)]"
-          >
+          <picture key={panel._key} className="h-full min-w-0 flex-1">
             <source
               media="(max-width: 1023px)"
               srcSet={imageSrcSet(panel, [200, 300, 400, 600, 800], { ratio: 3 })}
