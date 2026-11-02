@@ -1,4 +1,5 @@
 import {defineType, defineField} from 'sanity'
+import {photoCreditField} from './photoCredit'
 
 export default defineType({
   name: 'bandMember',
@@ -56,6 +57,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [photoCreditField],
       description: 'Band member photo',
     }),
     defineField({

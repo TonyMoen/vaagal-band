@@ -17,7 +17,8 @@ import { useReleases } from "@/hooks/useReleases"
 import { useBandMembers } from "@/hooks/useBandMembers"
 import { SPOTIFY_ARTIST_URL } from "@/lib/links"
 import { ABOUT } from "@/lib/band"
-import { bandNode, eventNode, graph } from "@/lib/schema"
+import { heroPanelSrc, heroPanels } from "@/lib/photos"
+import { bandNode, eventNode, graph, photoNode } from "@/lib/schema"
 
 /** Shown until a music video is set on the Hero document in Sanity */
 const FALLBACK_VIDEO = { url: "https://www.youtube.com/watch?v=5RKw6rMlKwg", title: "Øst til vest" }
@@ -49,6 +50,7 @@ export default function Hjem() {
       <JsonLd
         data={graph(
           bandNode({ members: members ?? [], releases: releases ?? [] }),
+          ...heroPanels(hero).map((panel) => photoNode(panel, heroPanelSrc(panel), panel.alt)),
           ...(concerts ?? []).slice(0, 6).map(eventNode)
         )}
       />

@@ -5,6 +5,7 @@ import { useHero } from '@/hooks/useHero'
 import { useLatestRelease } from '@/hooks/useLatestRelease'
 import { useToday } from '@/hooks/useToday'
 import { BAND } from '@/lib/band'
+import { heroPanelSrc, heroPanels } from '@/lib/photos'
 import { imageSrcSet, imageUrl } from '@/lib/sanity/image'
 import { artistNames, formatDato, isUpcoming, songPath, typeLabel } from '@/lib/songs'
 import { LoadingSpinner } from './LoadingSpinner'
@@ -111,9 +112,9 @@ function HeroBackground({
   alt: string
 }) {
   const className = 'absolute inset-0 -z-20 h-full w-full object-cover object-[center_60%]'
-  const panels = cms?.panels?.filter((panel) => panel?.asset) ?? []
+  const panels = heroPanels(cms)
 
-  if (panels.length > 1) {
+  if (panels.length) {
     return <HeroPanels panels={panels} />
   }
 
@@ -164,7 +165,7 @@ function HeroPanels({ panels }: { panels: HeroPanel[] }) {
               sizes="(max-width: 767px) 33vw, 260px"
             />
             <img
-              src={imageUrl(panel, 600)}
+              src={heroPanelSrc(panel)}
               srcSet={imageSrcSet(panel, [400, 600, 900, 1200])}
               sizes="30vw"
               alt={panel.alt || ''}

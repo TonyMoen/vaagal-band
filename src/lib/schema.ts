@@ -4,10 +4,11 @@
  * its members, its songs and its concerts.
  */
 import { BAND, SITE_URL, type Faq } from '@/lib/band'
+import { portraitSrc } from '@/lib/photos'
 import { imageUrl } from '@/lib/sanity/image'
 import { songPath } from '@/lib/songs'
 import { isoWithOsloOffset, ticketUrl, venueLabel, type BandsintownEvent } from '@/lib/concerts'
-import type { BandMember, Release } from '@/types/sanity'
+import type { BandMember, CreditedImage, Release } from '@/types/sanity'
 
 export const BAND_ID = `${SITE_URL}/#band`
 
@@ -37,7 +38,11 @@ export function bandNode({ members = [], releases = [] }: { members?: BandMember
       ? {
           member: members.map((m) => ({
             '@type': 'OrganizationRole',
-            member: { '@type': 'Person', name: m.name },
+            member: {
+              '@type': 'Person',
+              name: m.name,
+              ...(m.image?.asset ? { image: photoNode(m.image, portraitSrc(m.image)) } : {}),
+            },
             ...(m.instrument ? { roleName: m.instrument } : {}),
           })),
         }
@@ -52,6 +57,22 @@ export function bandNode({ members = [], releases = [] }: { members?: BandMember
           })),
         }
       : {}),
+  }
+}
+
+/**
+ * A photo with its photographer, from the image's credit field in Studio, so Google
+ * Images and others can credit it. contentUrl must be the <img src> the page uses.
+ * A credit like "Stine Heimsvik / Heimsvik foto" also names the studio; the creator
+ * is the person before the slash.
+ */
+export function photoNode(image: CreditedImage, contentUrl: string, caption?: string | null): Node {
+  const credit = image.credit?.trim()
+  return {
+    '@type': 'ImageObject',
+    contentUrl,
+    ...(caption ? { caption } : {}),
+    ...(credit ? { creator: { '@type': 'Person', name: credit.split(' / ')[0] }, creditText: credit } : {}),
   }
 }
 

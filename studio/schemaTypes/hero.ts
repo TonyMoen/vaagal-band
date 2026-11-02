@@ -1,4 +1,5 @@
 import {defineType, defineField, defineArrayMember} from 'sanity'
+import {photoCreditField} from './photoCredit'
 
 export default defineType({
   name: 'hero',
@@ -36,6 +37,7 @@ export default defineType({
       options: {
         hotspot: true, // Enable image cropping/focal point
       },
+      fields: [photoCreditField],
       description: 'Full-bleed background image for the hero section',
     }),
     defineField({
@@ -56,6 +58,7 @@ export default defineType({
               description:
                 'E.g. "Truls Vennman, trommeslager i Vågal, bak trommesettet". Read by search engines and screen readers.',
             }),
+            photoCreditField,
           ],
         }),
       ],

@@ -1,5 +1,6 @@
 import React from "react";
-import { imageSrcSet, imageUrl } from "@/lib/sanity/image";
+import { portraitSrc } from "@/lib/photos";
+import { imageSrcSet } from "@/lib/sanity/image";
 import type { BandMember as BandMemberType } from "@/types/sanity";
 
 type Props = {
@@ -17,7 +18,7 @@ const BandMember: React.FC<Props> = ({ member }) => {
     >
       {member.image && (
         <img
-          src={imageUrl(member.image, 520, { ratio: 1.25 })}
+          src={portraitSrc(member.image)}
           srcSet={imageSrcSet(member.image, [260, 400, 520, 800], { ratio: 1.25 })}
           sizes="(min-width: 1024px) 280px, (min-width: 768px) 25vw, 50vw"
           alt={member.name}

@@ -10,7 +10,7 @@ export interface HeroContent {
   _id: string
   title: string
   subtitle: string
-  image: SanityImageSource
+  image: CreditedImage
   /** Band photos shown side by side instead of `image`, each cropped around its hotspot */
   panels?: HeroPanel[] | null
   /** The music video featured on the homepage */
@@ -18,8 +18,13 @@ export interface HeroContent {
   musicVideoTitle?: string | null
 }
 
+/** An image with its photographer (Studio's credit field), credited in the structured data only */
+export interface CreditedImage extends SanityImageSource {
+  credit?: string | null
+}
+
 /** One photo in the hero's row of band photos */
-export interface HeroPanel extends SanityImageSource {
+export interface HeroPanel extends CreditedImage {
   _key: string
   alt?: string | null
 }
@@ -37,7 +42,7 @@ export interface BandMember {
   hobby?: string
   food?: string
   bio?: string
-  image?: SanityImageSource
+  image?: CreditedImage
   order?: number
 }
 
