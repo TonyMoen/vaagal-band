@@ -142,7 +142,7 @@ function HeroBackground({
 }
 
 /**
- * Band photos side by side in equal panels, split by thin dark gray lines. Each one is
+ * Band photos side by side in equal panels, a thin black gap between them. Each one is
  * cropped on its own around its hotspot (the face), so everyone stays in view from
  * narrow strips on a phone to a wide screen. Below 1024 px the CDN already cuts a
  * slim portrait around the hotspot, which puts the face in the middle of it.
@@ -151,7 +151,7 @@ function HeroBackground({
  */
 function HeroPanels({ panels }: { panels: HeroPanel[] }) {
   return (
-    <div className="absolute inset-x-0 top-0 -z-20 flex h-[60%] gap-[2px] bg-[#333] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:h-full md:[mask-image:none]">
+    <div className="absolute inset-x-0 top-0 -z-20 flex h-[60%] gap-[2px] bg-black [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:h-full md:[mask-image:none]">
       {panels.map((panel) => {
         const focus = {
           '--x': `${(panel.hotspot?.x ?? 0.5) * 100}%`,
