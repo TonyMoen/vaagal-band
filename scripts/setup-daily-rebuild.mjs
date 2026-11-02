@@ -62,10 +62,10 @@ if (!hookUrl) {
 }
 
 console.log('2/4 DEPLOY_HOOK_URL …')
-vercel(['env', 'add', 'DEPLOY_HOOK_URL', 'production', '--sensitive', '--force', '--yes'], hookUrl)
+vercel(['env', 'add', 'DEPLOY_HOOK_URL', '--environment', 'production', '--sensitive', '--force', '--yes'], hookUrl)
 
 console.log('3/4 CRON_SECRET …')
-vercel(['env', 'add', 'CRON_SECRET', 'production', '--sensitive', '--force', '--yes'], randomBytes(32).toString('hex'))
+vercel(['env', 'add', 'CRON_SECRET', '--environment', 'production', '--sensitive', '--force', '--yes'], randomBytes(32).toString('hex'))
 
 console.log('4/4 Rebuilding production so the cron job sees them …')
 const response = await fetch(hookUrl, { method: 'POST' })

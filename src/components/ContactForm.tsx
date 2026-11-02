@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { BAND } from "@/lib/band";
 
 /* KILDE: How to Make Working Contact Form in React JS https://www.youtube.com/watch?v=94_6JPDi13g */
 
@@ -196,12 +197,22 @@ const Contact = () => {
         throw new Error(data.message || "Submission failed");
       }
     } catch (error) {
-      // Error toast (AC4) - form data preserved
+      // Error toast (AC4) - form data preserved. The form service sits behind Cloudflare, which can
+      // block some visitors (VPNs, strict privacy settings), so always offer the band's e-mail instead.
       console.error("Form submission error:", error);
       console.error("API Key present:", !!import.meta.env.VITE_WEB3FORMS_KEY);
       toast({
-        title: "Noe gikk galt. Prøv igjen.",
-        duration: 5000,
+        title: "Meldingen ble ikke sendt.",
+        description: (
+          <>
+            Prøv igjen, eller send en e-post til{" "}
+            <a href={`mailto:${BAND.email}`} className="font-semibold underline">
+              {BAND.email}
+            </a>
+            .
+          </>
+        ),
+        duration: 15000,
         variant: "destructive",
       });
     } finally {
@@ -409,6 +420,15 @@ const Contact = () => {
           {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {isSubmitting ? "Sender..." : "Send melding"}
         </Button>
+        <p className="text-center text-sm text-[var(--color-muted)]">
+          Eller send en e-post til{" "}
+          <a
+            href={`mailto:${BAND.email}`}
+            className="inline-flex min-h-[44px] items-center font-semibold text-[var(--color-accent-hover)] hover:underline"
+          >
+            {BAND.email}
+          </a>
+        </p>
       </form>
     </section>
   );
