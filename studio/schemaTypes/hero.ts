@@ -1,4 +1,4 @@
-import {defineType, defineField} from 'sanity'
+import {defineType, defineField, defineArrayMember} from 'sanity'
 
 export default defineType({
   name: 'hero',
@@ -37,6 +37,29 @@ export default defineType({
         hotspot: true, // Enable image cropping/focal point
       },
       description: 'Full-bleed background image for the hero section',
+    }),
+    defineField({
+      name: 'panels',
+      title: 'Band Photos Side by Side',
+      type: 'array',
+      description:
+        'Optional: photos shown in equal panels across the top of the homepage, in this order (four looks best). Set the hotspot on each face. When there are photos here, they are used instead of the Hero Image.',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Who is in the photo',
+              type: 'string',
+              description:
+                'E.g. "Truls Vennman, trommeslager i Vågal, bak trommesettet". Read by search engines and screen readers.',
+            }),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.max(4),
     }),
   ],
   preview: {

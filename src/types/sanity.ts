@@ -11,9 +11,17 @@ export interface HeroContent {
   title: string
   subtitle: string
   image: SanityImageSource
+  /** Band photos shown side by side instead of `image`, each cropped around its hotspot */
+  panels?: HeroPanel[] | null
   /** The music video featured on the homepage */
   musicVideoUrl?: string | null
   musicVideoTitle?: string | null
+}
+
+/** One photo in the hero's row of band photos */
+export interface HeroPanel extends SanityImageSource {
+  _key: string
+  alt?: string | null
 }
 
 /**

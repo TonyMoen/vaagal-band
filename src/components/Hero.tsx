@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { Play } from 'lucide-react'
 import { useHero } from '@/hooks/useHero'
@@ -9,7 +10,7 @@ import { artistNames, formatDato, isUpcoming, songPath, typeLabel } from '@/lib/
 import { LoadingSpinner } from './LoadingSpinner'
 import ServiceIcon from './ServiceIcon'
 import heroImg from '../assets/hero-1920.jpg'
-import type { HeroContent, Release } from '@/types/sanity'
+import type { HeroContent, HeroPanel, Release } from '@/types/sanity'
 
 type Props = {
   /** Override image source (fallback if CMS unavailable) */
@@ -110,6 +111,11 @@ function HeroBackground({
   alt: string
 }) {
   const className = 'absolute inset-0 -z-20 h-full w-full object-cover object-[center_60%]'
+  const panels = cms?.panels?.filter((panel) => panel?.asset) ?? []
+
+  if (panels.length > 1) {
+    return <HeroPanels panels={panels} />
+  }
 
   if (!cms?.image) {
     return <img src={fallbackSrc} alt={alt} className={className} fetchPriority="high" />
@@ -131,6 +137,45 @@ function HeroBackground({
         fetchPriority="high"
       />
     </picture>
+  )
+}
+
+/**
+ * Band photos side by side in equal panels, split by thin accent lines. Each one is
+ * cropped on its own around its hotspot (the face), so everyone stays in view from
+ * narrow strips on a phone to a wide screen. Below 1024 px the CDN already cuts a
+ * slim portrait around the hotspot, which puts the face in the middle of it.
+ * On phones the strips only fill the top of the poster and fade out above the
+ * release: at full height the heads would come out wider than the strips.
+ */
+function HeroPanels({ panels }: { panels: HeroPanel[] }) {
+  return (
+    <div className="absolute inset-x-0 top-0 -z-20 flex h-[60%] gap-[2px] bg-[var(--color-accent)] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:h-full md:[mask-image:none]">
+      {panels.map((panel) => {
+        const focus = {
+          '--x': `${(panel.hotspot?.x ?? 0.5) * 100}%`,
+          '--y': `${(panel.hotspot?.y ?? 0.4) * 100}%`,
+        } as CSSProperties
+        return (
+          <picture key={panel._key} className="h-full min-w-0 flex-1">
+            <source
+              media="(max-width: 1023px)"
+              srcSet={imageSrcSet(panel, [200, 300, 400, 600, 800], { ratio: 3 })}
+              sizes="(max-width: 767px) 33vw, 260px"
+            />
+            <img
+              src={imageUrl(panel, 600)}
+              srcSet={imageSrcSet(panel, [400, 600, 900, 1200])}
+              sizes="30vw"
+              alt={panel.alt || ''}
+              style={focus}
+              className="h-full w-full bg-black object-cover [object-position:50%_var(--y)] lg:[object-position:var(--x)_var(--y)]"
+              fetchPriority="high"
+            />
+          </picture>
+        )
+      })}
+    </div>
   )
 }
 

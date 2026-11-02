@@ -3,13 +3,14 @@
 /**
  * Hero content query - fetches the most recently edited hero document
  * (the dataset has two; the one changed last in Studio is the one shown)
- * Returns: { _id, title, subtitle, image, musicVideoUrl, musicVideoTitle }
+ * Returns: { _id, title, subtitle, image, panels, musicVideoUrl, musicVideoTitle }
  */
 export const heroQuery = `*[_type == "hero"] | order(_updatedAt desc)[0] {
   _id,
   title,
   subtitle,
   image,
+  panels,
   musicVideoUrl,
   musicVideoTitle
 }`
